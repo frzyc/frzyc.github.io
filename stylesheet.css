@@ -1,6 +1,14 @@
 #progressbar{
 	background-color:#0000FF;
-	height:5px;
+	height:20px;
 	width:200px;
 	visibility:hidden;
+}
+#terminal{
+	border-style: double;
+	border-color: black;
+	visibility: hidden;
+}
+.codeBtns{
+	visibility: hidden;
 }

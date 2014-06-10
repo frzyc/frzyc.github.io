@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 	<html>
-	<!--
+	<!-- HIPSTER PANDA
 .....  .   ..... .......... . .... ........   ... ..... .. . . .. .. .. ........
 ................................................................................
 ........................................8=.,.~:~,:..............................
@@ -91,16 +91,21 @@
 			<link type="text/css" rel="stylesheet" href="stylesheet.css"/>	<!--link the css file-->
 			<script src="script.js"></script>
 			<title>
-				Code, Compile, Debug...
+				Hello, World!
 			</title>
 		</head>
-		<body>
+		<body onload="load()">
+        <div id="wrapper">
         	<p id="printCode">Just an empty terminal window...</p>
-            <p id="status"></p>
+            <ul id="status"></ul>
+            <p id="progressbarStatus"></p>
             <div id="progressbar"></div>
-            <button id="codeBtn" type="button" onclick="code()">Code</button>
-            <button id="compileBtn" type="button" onclick="compile()">Compile</button>
-            <button id="runBtn" type="button" onclick="run()">Run</button>
+            <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
+            <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
+            <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
+            <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
+            <div id="terminal"></div>
+        </div>
 		</body>
 	</html>
 	
