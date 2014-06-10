@@ -12,3 +12,6 @@
 .codeBtns{
 	visibility: hidden;
 }
+ul li{
+	list-style-type: none;
+}
