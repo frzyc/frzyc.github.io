@@ -37,27 +37,27 @@ function printCode(){
 }
 function code() {
 	console.log("CODE");//debugbing
-	//document.getElementsByClassName("codeBtns").disabled = true;//disable the codebuttons
-	console.log("disable buttons");
-	document.getElementById("debugBtn").disabled = false;//enable debug button
-	
-				document.getElementById("codeBtn").disabled = false;//enable code button
-				document.getElementById("compileBtn").disabled = false;//enable compile button
-				document.getElementById("runBtn").disabled = false;//enable run button
-	progressBarDown(codeSpeed,"code");
+	document.getElementById("debugBtn").disabled = true;//disable debug button
+	document.getElementById("codeBtn").disabled = true;//disable code button
+	document.getElementById("compileBtn").disabled = true;//disable compile button
+	document.getElementById("runBtn").disabled = true;//disable run button
+	progressBarDown(codeSpeed,"Coding...");
 	setTimeout(function(){
 		status("You wrote one line of code!");
 		if(!compileBtnIni){//initiate the compile button after first code
 			setTimeout(function(){
 				status("Maybe try compiling this code?");
 				document.getElementById("compileBtn").style.visibility="visible";//enable compile button
-				/*document.getElementById("compileBtn").disabled = false;//enable compile button
-				document.getElementById("codeBtn").disabled = false;//enable code button*/
+				document.getElementById("compileBtn").disabled = false;//enable compile button
+				document.getElementById("codeBtn").disabled = true;//disable code button
 				compileBtnIni=true;
 			},
 			transTime);	
 		}else{
-			//document.getElementsByClassName("codeBtns").disabled = false;//enable the codebuttons
+			document.getElementById("debugBtn").disabled = true;//disable debug button
+			document.getElementById("codeBtn").disabled = true;//disable code button
+			document.getElementById("compileBtn").disabled = true;//disable compile button
+			document.getElementById("runBtn").disabled = true;//disable run button
 		}
 		codeLine++;
 	},
@@ -65,8 +65,11 @@ function code() {
 }
 function compile(){
 	console.log("COMPILE");//debugbing
-	//document.getElementsByClassName("codeBtns").disabled = true;//disable the codebuttons
-	progressBarDown(compileSpeed*codeLine,"compile");
+	document.getElementById("debugBtn").disabled = true;//disable debug button
+	document.getElementById("codeBtn").disabled = true;//disable code button
+	document.getElementById("compileBtn").disabled = true;//disable compile button
+	document.getElementById("runBtn").disabled = true;//disable run button
+	progressBarDown(compileSpeed*codeLine,"Compiling...");
 	setTimeout(function(){
 		status("You compiled your code!");
 		if(!runBtnIni){//initiate the run button after first code
@@ -74,35 +77,40 @@ function compile(){
 				//document.getElementById("status").innerHTML = "Maybe try running this code?";
 				status("Maybe try running this code?");
 				document.getElementById("runBtn").style.visibility="visible";//enable compile button
-				/*document.getElementById("runBtn").disabled = false;//enable compile button
-				document.getElementById("codeBtn").disabled = false;//enable code button
-				document.getElementById("compileBtn").disabled = false;//enable compile button*/
+				document.getElementById("runBtn").disabled = false;//enable compile button
+				document.getElementById("codeBtn").disabled = true;//disable code button
+				document.getElementById("compileBtn").disabled = true;//disable compile button
 				runBtnIni=true;
 			},
 			transTime);	
 		}else{
-			//document.getElementsByClassName("codeBtns").disabled = false;//enable the codebuttons
+			document.getElementById("debugBtn").disabled = true;//disable debug button
+			document.getElementById("codeBtn").disabled = true;//disable code button
+			document.getElementById("compileBtn").disabled = true;//disable compile button
+			document.getElementById("runBtn").disabled = true;//disable run button
 		}
 	},
 	compileSpeed*codeLine*1000);
 }
 function run(){
 	console.log("RUN");//debugbing
-	//document.getElementsByClassName("codeBtns").disabled = true;//disable the codebuttons
-	progressBarDown(runSpeed*codeLine,"run");
+	document.getElementById("debugBtn").disabled = true;//disable debug button
+	document.getElementById("codeBtn").disabled = true;//disable code button
+	document.getElementById("compileBtn").disabled = true;//disable compile button
+	document.getElementById("runBtn").disabled = true;//disable run button
+	progressBarDown(runSpeed*codeLine,"Running...");
 	setTimeout(function(){
 		status("Running code...");
 		if(!debugBtnIni){//initiate the debug button after first code
 			setTimeout(function(){
 				document.getElementById("terminal").style.visibility = "visible";//shows the terminal
 				document.getElementById("terminal").innerHTML = "Hallo Wurld!";
-				//document.getElementById("status").innerHTML = "Hmph... may needs some tweaking...";
 				status("Hmph... may needs some tweaking...");
 				document.getElementById("debugBtn").style.visibility="visible";//enable debug button
-				/*document.getElementById("debugBtn").disabled = false;//enable debug button
-				document.getElementById("codeBtn").disabled = false;//enable code button
-				document.getElementById("compileBtn").disabled = false;//enable compile button
-				document.getElementById("runBtn").disabled = false;//enable run button*/
+				document.getElementById("debugBtn").disabled = false;//enable debug button
+				document.getElementById("codeBtn").disabled = true;//disable code button
+				document.getElementById("compileBtn").disabled = true;//disable compile button
+				document.getElementById("runBtn").disabled = true;//disable run button
 				runBtnIni=true;
 			},
 			transTime);	
@@ -116,9 +124,11 @@ function run(){
 function debug(){
 	var debugTime= 3;//will be random
 	console.log("DEBUG");//debugging
-	//document.getElementsByClassName("codeBtns").disabled = true;//disable the codebuttons
-
-	progressBarDown(debugTime,"debug");
+	document.getElementById("debugBtn").disabled = true;//disable debug button
+	document.getElementById("codeBtn").disabled = true;//disable code button
+	document.getElementById("compileBtn").disabled = true;//disable compile button
+	document.getElementById("runBtn").disabled = true;//disable run button
+	progressBarDown(debugTime,"Debugging...");
 	setTimeout(function(){
 		status("Debugging code...");
 		if(!firstCodeIni){//initiate the debug button after first code
@@ -129,7 +139,10 @@ function debug(){
 			},
 			transTime);	
 		}else{
-			//document.getElementsByClassName("codeBtns").disabled = false;//enable the codebuttons
+			document.getElementById("debugBtn").disabled = true;//disable debug button
+			document.getElementById("codeBtn").disabled = true;//disable code button
+			document.getElementById("compileBtn").disabled = true;//disable compile button
+			document.getElementById("runBtn").disabled = true;//disable run button
 			runCode(lines);
 		}
 	},
@@ -162,7 +175,7 @@ function progressBarDown(totalTime,operation){
 	var countDown = totalTime;
 	var countDowner = setInterval(function(){
 		countDown-=0.1;
-		document.getElementById("progressbarStatus").innerHTML = "Writing "+operation+"(" + countDown.toFixed(1) + ")...";
+		document.getElementById("progressbarStatus").innerHTML = operation+"(" + countDown.toFixed(1) + ")...";
 		var progresspx=((countDown/totalTime)*200).toFixed(0);
 		document.getElementById("progressbar").style.width = progresspx+"px";
 	},
