@@ -54,10 +54,10 @@ function code() {
 			},
 			transTime);	
 		}else{
-			document.getElementById("debugBtn").disabled = true;//disable debug button
-			document.getElementById("codeBtn").disabled = true;//disable code button
-			document.getElementById("compileBtn").disabled = true;//disable compile button
-			document.getElementById("runBtn").disabled = true;//disable run button
+			document.getElementById("debugBtn").disabled = false;//enable debug button
+			document.getElementById("codeBtn").disabled = false;//enable code button
+			document.getElementById("compileBtn").disabled = false;//enable compile button
+			document.getElementById("runBtn").disabled = false;//enable run button
 		}
 		codeLine++;
 	},
@@ -84,10 +84,10 @@ function compile(){
 			},
 			transTime);	
 		}else{
-			document.getElementById("debugBtn").disabled = true;//disable debug button
-			document.getElementById("codeBtn").disabled = true;//disable code button
-			document.getElementById("compileBtn").disabled = true;//disable compile button
-			document.getElementById("runBtn").disabled = true;//disable run button
+			document.getElementById("debugBtn").disabled = false;//enable debug button
+			document.getElementById("codeBtn").disabled = false;//enable code button
+			document.getElementById("compileBtn").disabled = false;//enable compile button
+			document.getElementById("runBtn").disabled = false;//enable run button
 		}
 	},
 	compileSpeed*codeLine*1000);
@@ -111,12 +111,15 @@ function run(){
 				document.getElementById("codeBtn").disabled = true;//disable code button
 				document.getElementById("compileBtn").disabled = true;//disable compile button
 				document.getElementById("runBtn").disabled = true;//disable run button
-				runBtnIni=true;
+				debugBtnIni=true;
 			},
 			transTime);	
 		}else{
-			//document.getElementsByClassName("codeBtns").disabled = false;//enable the codebuttons
-			runCode(lines);
+			runCode(codeLine);
+			document.getElementById("debugBtn").disabled = false;//enable debug button
+			document.getElementById("codeBtn").disabled = false;//enable code button
+			document.getElementById("compileBtn").disabled = false;//enable compile button
+			document.getElementById("runBtn").disabled = false;//enable run button
 		}
 	},
 	runSpeed*codeLine*1000);
@@ -133,17 +136,20 @@ function debug(){
 		status("Debugging code...");
 		if(!firstCodeIni){//initiate the debug button after first code
 			setTimeout(function(){
-				document.getElementById("status").innerHTML = "Some quick spell-checking...";
+				status("Some quick spell-checking...");
 				document.getElementById("terminal").innerHTML = "Hello World!";
 				firstCodeIni=true;
+				document.getElementById("debugBtn").disabled = false;//enable debug button
+				document.getElementById("codeBtn").disabled = false;//enable code button
+				document.getElementById("compileBtn").disabled = false;//enable compile button
+				document.getElementById("runBtn").disabled = false;//enable run button
 			},
 			transTime);	
 		}else{
-			document.getElementById("debugBtn").disabled = true;//disable debug button
-			document.getElementById("codeBtn").disabled = true;//disable code button
-			document.getElementById("compileBtn").disabled = true;//disable compile button
-			document.getElementById("runBtn").disabled = true;//disable run button
-			runCode(lines);
+			document.getElementById("debugBtn").disabled = false;//enable debug button
+			document.getElementById("codeBtn").disabled = false;//enable code button
+			document.getElementById("compileBtn").disabled = false;//enable compile button
+			document.getElementById("runBtn").disabled = false;//enable run button
 		}
 	},
 	debugTime*1000);
@@ -154,7 +160,6 @@ function status(strStatus){
 	node.appendChild(textnode);
 	var list = document.getElementById("status");
 	list.insertBefore(node,list.childNodes[0]);
-	console.log(list.childNodes.length);
 	if(list.childNodes[statusSize]!=null)
 		list.removeChild(list.childNodes[statusSize]);
 	var grad=0; 
