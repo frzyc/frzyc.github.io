@@ -1,0 +1,6 @@
+#progressbar{
+	background-color:#0000FF;
+	height:5px;
+	width:200px;
+	visibility:hidden;
+}

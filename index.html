@@ -19,13 +19,13 @@
   ..  . .  ... .MNNMNDDZZZ~OMMD,:$ZMI8. .:M  . IZI7ODM ,.M88O$$ZMD8IZ7N ..    ..
 ..........  . ..M8DNND$IIID   .D=,IMO8. ..M....I7I8OM    .N7:~DZM?+:NZ$?...    .
 .....  ... .....M.. N8ZI::8   .DM+?M$   . M.  .DZ$+ZN.  ..MZ?$7+M?7?=8  .     ..
-       ..   .  .M~. N87+=?INDNNMI~M$$     OM.  77OZ+7DMONDDI$+7NO$I?,?,        .
+       ......  .M~. N87+=?INDNNMI~M$$     OM.  77OZ+7DMONDDI$+7NO$I?,?,        .
   .     .   .  ..M ZO7++~+$?I=~++OMO.      M:   M8ZZ=I+7,$I~Z=MMI$7?$:Z.       .
  .          . .. NMN$O7II?+~:Z:7IM..MM7N8   M,.  D8?ZIZ=I~?7IMMOZ$?I7+D.       .
       . .. .....  8M7=++I++ODN8MM..NMD$?$$   M? . .$ONNN?+,:MMII7$IO$7O .   .  .
  ........  ..... .::=MNOI$DMMMM  ...MNMNM  .. 7MMMO?MMMMMM?MM=$O8MD~+I7I~..    . 
        ..   .     ~=.. ...  .        .7..  . .  .. ,=+~IZ.        . DD=$       .
-   .  . .  .. .. .:+,,. .  .D= ..+NN7..8887....       . .    .   .     M . .   .
+   .  . .  .. .. .:+,,. .  .D= ..+NN7..8887....  A    . .    .   .     M . .   .
 ....    .   . .....Z~, .. . DNO?78O+7?ZNO+ZD78OZM.     .     .   .. . .N   ... .
  ...  . .  ........M~:.  ..  :NMMMNDM. OMNNMMMN . .. ..  . . . .  .   .N....  ..
  . .. ..............O==,..  . ..... . . ... .... . . .    ........    .N,. .  ..
@@ -89,16 +89,18 @@
 -->
 		<head>
 			<link type="text/css" rel="stylesheet" href="stylesheet.css"/>	<!--link the css file-->
-			<script type="text/javascript" src="script.js"></script>
+			<script src="script.js"></script>
 			<title>
 				Code, Compile, Debug...
 			</title>
 		</head>
 		<body>
-        	<p id="demo">Write code here...</p>
-            
-            <button type="button" onclick="code()">Code!</button>
-            
+        	<p id="printCode">Just an empty terminal window...</p>
+            <p id="status"></p>
+            <div id="progressbar"></div>
+            <button id="codeBtn" type="button" onclick="code()">Code</button>
+            <button id="compileBtn" type="button" onclick="compile()">Compile</button>
+            <button id="runBtn" type="button" onclick="run()">Run</button>
 		</body>
 	</html>
 	
