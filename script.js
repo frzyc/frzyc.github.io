@@ -1,8 +1,8 @@
 var codeLine=0;
-var codeSpeed=0.2;//should be 10 seconds
+var codeSpeed=10;//should be 10 seconds
 var codeExp=5;
-var compileSpeed=0.1;//shoule be 0.5 seconds
-var debugSpeed=1.0;//should be 10 seconds
+var compileSpeed=0.5;//shoule be 0.5 seconds
+var debugSpeed=10;//should be 10 seconds
 var runSpeed=0.5;
 var lastCompiledLines=0;
 var bugs=0;
