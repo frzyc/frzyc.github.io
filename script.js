@@ -176,6 +176,7 @@ function debug(){
 		if(!firstCodeIni){//initiate the debug button after first code
 			setTimeout(function(){
 				status("Some quick spell-checking...");
+				document.getElementById("codeTermWin").style.display="block";
 				document.getElementById("codeTerminal").innerHTML = "Hello World!";
 				firstCodeIni=true;
 				document.getElementById("debugBtn").disabled = false;//enable debug button
