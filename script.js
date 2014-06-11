@@ -1,9 +1,18 @@
+
+var codeLine=0;
+var codeSpeed=10;//should be 10 seconds
+var codeExp=5;
+var compileSpeed=0.5;//shoule be 0.5 seconds
+var debugSpeed=10;//should be 10 seconds
+var runSpeed=0.5;
+/*
 var codeLine=0;
 var codeSpeed=0.2;//should be 10 seconds
 var codeExp=5;
 var compileSpeed=0.1;//shoule be 0.5 seconds
 var debugSpeed=1.0;//should be 10 seconds
 var runSpeed=0.5;
+*/
 var lastCompiledLines=0;
 var bugs=0;
 var debugged=false;
@@ -44,11 +53,11 @@ function gameTick(){
 function printCode(){
 	var line="ERROR"//error by default
 	if(compiled)
-		line="You have "+codeLine+" lines of COMPILED code";
+		line="You have "+codeLine+" lines of COMPILED code, feel free to RUN code.";
 	else if(bugs!=0)
 		line="You have " + codeLine + " lines of code, with "+ bugs + " compilation errors." 
 	else if(debugged)
-		line="You have "+codeLine+" lines of DEBUGGED code";
+		line="You have "+codeLine+" lines of DEBUGGED code, needs to be reCOMPILED.";
 	
 	else
 		line="You have written " + codeLine + " lines of code.";
@@ -75,7 +84,7 @@ function code() {
 		codeLine++;
 		if(codeLine>=codeExp && (codeSpeed-0.2)>0){
 			codeExp*=2;
-			status("You seem to be getting this coding thing, your coding speeding increased!");
+			status("You seem to be getting this coding thing, your coding speed increased!");
 			codeSpeed-=0.2;	
 		}
 		bugs=0;
@@ -254,9 +263,9 @@ function progressBarDown(totalTime,operation){
 	var countDown = totalTime;
 	var countDowner = setInterval(function(){
 		countDown-=0.1;
-		document.getElementById("progressbarStatus").innerHTML = operation+"(" + countDown.toFixed(1) + ")...";
-		var progresspx=((countDown/totalTime)*200).toFixed(0);
-		document.getElementById("progressbar").style.width = progresspx+"px";
+		document.getElementById("progressbarStatus").innerHTML = operation+"(" + countDown.toFixed(1) + ")";
+		var progresspx=((countDown/totalTime)*100);
+		document.getElementById("progressbar").style.width = progresspx+"%";
 	},
 	100);
 	setTimeout(function(){
