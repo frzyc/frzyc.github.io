@@ -90,21 +90,34 @@
 		<head>
 			<link type="text/css" rel="stylesheet" href="stylesheet.css"/>	<!--link the css file-->
 			<script src="script.js"></script>
+            <script src="termWin.js"></script>
 			<title>
 				Hello, World!
 			</title>
 		</head>
 		<body onload="load()">
         <div id="wrapper">
-        	<p id="printCode">Just an empty terminal window...</p>
-            <ul id="status"></ul>
-            <p id="progressbarStatus"></p>
-            <div id="progressbar"></div>
-            <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
-            <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
-            <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
-            <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
-            <div id="terminal"></div>
+        	<div id="mainCode">
+                <p id="printCode">Just an empty terminal window...</p>
+                <ul id="status"></ul>
+                <div id="progress">
+                    <p id="progressbarStatus"></p>
+                    <div id="progressbar"></div>
+                </div>
+                <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
+                <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
+                <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
+                <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
+            </div>    
+           	<div class="terminalWindow" id="codeTermWin">
+            	<div class="taskBar" id="codeTaskBar">
+                	Terminal
+                	<div class="taskBtn" id="codeTermx" type="button" onclick="closeTerm('codeTermWin')">x</div>
+                    <div class="taskBtn" id="codeTerm_" type="button" onclick="minimizeTerm('codeTerm_','codeTerminal')">_</div>
+                </div>
+                <div class="terminal" id="codeTerminal"></div>
+            </div>
+            
         </div>
 		</body>
 	</html>

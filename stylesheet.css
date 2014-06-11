@@ -1,18 +1,68 @@
+#printCode{
+	margin:0;	
+}
+#status li{
+	list-style-type: none;
+}
+#status{
+	display:compact;	
+	margin:0;
+}
+#progress{
+	height:20px;
+	display:compact;
+	margin:0;
+}
 #progressbar{
-	background-color:#0000FF;
+	background-color:#66FFFF;
 	height:20px;
 	width:200px;
 	visibility:hidden;
+	position:relative;
+	top:-50px;
+	z-index:-1;
 }
-#terminal{
+#progressbarStatus{
+	position:relative;
+	position:relative;
+	top:-15px;
+}
+.codeBtns{
+	background-color:rbg(250,250,250);
+	display:inline-block;
+	border:2px solid;
+	border-radius:5px;
+	border-color:grey;
+	visibility: hidden;
+	width:100px;
+	text-align:center;
+	margin-bottom:5px;
+}
+.terminalWindow{
 	width:400px;
+	border-radius:5px;
 	border-style: double;
 	border-color: black;
 	visibility: hidden;
 }
-.codeBtns{
-	visibility: hidden;
+.taskBar{
+	width:100%;	
+	text-align:center;
+	display:inline-block;
+	border-bottom:1px solid;
+	border-color:black;
 }
-ul li{
-	list-style-type: none;
+.taskBtn{
+	width:20px;
+	text-align:center;
+	margin:2px;
+	display:inline-block;
+	float:right;
+	border-color: black;
+	border-radius:5px;
+	border: 1px solid;	
 }
+.taskBtn:hover{
+	background-color:rgb(220,220,220);	
+}
+
