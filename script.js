@@ -5,6 +5,8 @@ var codeExp=5;
 var compileSpeed=0.5;//shoule be 0.5 seconds
 var debugSpeed=10;//should be 10 seconds
 var runSpeed=0.5;
+var transTime=5000;//should be 5000
+var statusSize=5;//5 lines of status
 /*
 var codeLine=0;
 var codeSpeed=0.2;//should be 10 seconds
@@ -12,6 +14,8 @@ var codeExp=5;
 var compileSpeed=0.1;//shoule be 0.5 seconds
 var debugSpeed=1.0;//should be 10 seconds
 var runSpeed=0.5;
+var transTime=1000;//should be 5000
+var statusSize=5;//5 lines of status
 */
 var lastCompiledLines=0;
 var bugs=0;
@@ -20,11 +24,6 @@ var runtimeErr=false;
 var bugsSquashed=0;
 var debugExp=4;
 var compiled=false;
-//CONSTANTS
-var transTime=1000;//should be 5000
-var statusSize=5;//5 lines of status
-
-
 var compileBtnIni=false;//bool to initiate the button at beginning
 var runBtnIni=false;//bool to initiate the button at beginning
 var debugBtnIni=false;//bool to initiate the button at beginning
