@@ -1,14 +1,15 @@
 var codeLine=0;
 var codeSpeed=0.2;//should be 10 seconds
 var codeExp=5;
-var compileSpeed=0.5;//shoule be 0.5 seconds
+var compileSpeed=0.1;//shoule be 0.5 seconds
 var debugSpeed=1.0;//should be 10 seconds
 var runSpeed=0.5;
 var lastCompiledLines=0;
 var bugs=0;
 var debugged=false;
+var runtimeError=false;
 var bugsSquashed=0;
-var debugExp=4;
+var debugExp=5;
 var compiled=false;
 //CONSTANTS
 var transTime=1000;//should be 5000
@@ -43,11 +44,11 @@ function gameTick(){
 function printCode(){
 	var line="ERROR"//error by default
 	if(compiled)
-		line="You have "+codeLine+" lines of COMPILED code";
+		line="You have "+codeLine+" lines of COMPILED code, feel free to RUN code.";
 	else if(bugs!=0)
 		line="You have " + codeLine + " lines of code, with "+ bugs + " compilation errors." 
 	else if(debugged)
-		line="You have "+codeLine+" lines of DEBUGGED code";
+		line="You have "+codeLine+" lines of DEBUGGED code, needs to be reCOMPILED.";
 	
 	else
 		line="You have written " + codeLine + " lines of code.";
@@ -74,8 +75,9 @@ function code() {
 		codeLine++;
 		if(codeLine>=codeExp && (codeSpeed-0.2)>0){
 			codeExp*=2;
-			status("You seem to be getting this coding thing, your coding speeding increased!");
+			status("You seem to be getting this coding thing, your coding speed increased!");
 			codeSpeed-=0.2;	
+			console.log("codeSpeed improvement: " + codeSpeed);
 		}
 		bugs=0;
 		debugged=false;
@@ -157,61 +159,66 @@ function run(){
 	runSpeed*codeLine*1000);
 }
 function debug(){
-	var debugTime= Math.random()*debugSpeed+debugSpeed;
-	console.log("debugTime: " +debugTime);
-	console.log("DEBUG");//debugging
-	disableButton();
-	progressBarDown(debugTime,"Debugging...");
-	setTimeout(function(){
-		if(bugs>0){
-			var debugChance=50+bugsSquashed;
-			if((Math.random()*100+1)<=debugChance){
-				var debugPower = Math.random()*100+1;
-				if(debugPower<=5){
-					status("No error removed...");
-				}else if(debugPower<=15 && bugs>=3){
-					bugs-=3;
-					bugsSquashed+=3;
-					status("Three errors removed...");
-				}else if(debugPower<=30 && bugs>=2){
-					bugs-=2;
-					bugsSquashed+=2;
-					status("Two errors removed...");
-				}else{
-					bugs-=1;
-					bugsSquashed+=1;
-					status("One error removed...");	
-				}
+	if(bugs>0||runtimeError||!firstCodeIni){
+		var debugTime= Math.random()*debugSpeed+debugSpeed;
+		console.log("debugTime: " +debugTime);
+		console.log("DEBUG");//debugging
+		disableButton();
+		progressBarDown(debugTime,"Debugging...");
+		setTimeout(function(){
+			if(!firstCodeIni){//initiate the debug button after first code
+				setTimeout(function(){
+					status("Some quick spell-checking...");
+					document.getElementById("terminal").innerHTML = "Hello World!";
+					firstCodeIni=true;
+					document.getElementById("debugBtn").disabled = false;//enable debug button
+					document.getElementById("codeBtn").disabled = false;//enable code button
+					document.getElementById("compileBtn").disabled = false;//enable compile button
+					document.getElementById("runBtn").disabled = false;//enable run button
+				},
+				transTime);	
 			}else{
-				status("No error removed...");	
+				if(bugs>0){
+					var debugChance=50+bugsSquashed;
+					if((Math.random()*100+1)<=debugChance){
+						var debugPower = Math.random()*100+1;
+						if(debugPower<=5){
+							status("No error removed...");
+						}else if(debugPower<=15 && bugs>=3){
+							bugs-=3;
+							bugsSquashed+=3;
+							status("Three errors removed...");
+						}else if(debugPower<=30 && bugs>=2){
+							bugs-=2;
+							bugsSquashed+=2;
+							status("Two errors removed...");
+						}else{
+							bugs-=1;
+							bugsSquashed+=1;
+							status("One error removed...");	
+						}
+					}else{
+						status("No error removed...");	
+					}
+					if(bugs==0)
+						debugged=true;
+				}else if(runtimeError){
+					status("FIXING RUNTIME ERROR...");//to be implemented	
+				}
+				printCode();
+				enableButton();
+				if(bugsSquashed>=debugExp && (debugSpeed-0.2)>0){
+					debugExp*=2;
+					status("You are faster at debugging your code now!");
+					debugSpeed-=0.2;
+					console.log("debugSpeed improvement: " + debugSpeed);
+				}
 			}
-			if(bugs==0)
-				debugged=true;
-		}else{
-			status("No error to be removed...");	
-		}
-		if(!firstCodeIni){//initiate the debug button after first code
-			setTimeout(function(){
-				status("Some quick spell-checking...");
-				document.getElementById("terminal").innerHTML = "Hello World!";
-				firstCodeIni=true;
-				document.getElementById("debugBtn").disabled = false;//enable debug button
-				document.getElementById("codeBtn").disabled = false;//enable code button
-				document.getElementById("compileBtn").disabled = false;//enable compile button
-				document.getElementById("runBtn").disabled = false;//enable run button
-			},
-			transTime);	
-		}else{
-			printCode();
-			enableButton();
-			if(bugsSquashed>=debugExp && (debugSpeed-0.2)>0){
-				debugExp*=2;
-				status("You are faster at debugging your code now!");
-				debugSpeed-=0.2;
-			}
-		}
-	},
-	debugTime*1000);
+		},
+		debugTime*1000);
+	}else{
+		status("No error to be removed...");	
+	}
 }
 function status(strStatus){
 	var node=document.createElement("LI");
