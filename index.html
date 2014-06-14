@@ -86,38 +86,38 @@
 ................ .................... ..........................................
 ................................................................................
 ................................................................................
--->
+There. now doesn't this HTML page looks a lot more full?-->
 		<head>
 			<link type="text/css" rel="stylesheet" href="stylesheet.css"/>	<!--link the css file-->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 			<script src="script.js"></script>
             <script src="termWin.js"></script>
+            <script src="programs.js"></script>
+            <script src="events.js"></script>
 			<title>
-				Hello, World!
+				Hello, world!(WIP)
 			</title>
 		</head>
-		<body onload="load()">
+		<body>
         <div id="wrapper">
+        	<div id="right"></div> 
         	<div id="mainCode">
                 <p id="printCode">Just an empty terminal window...</p>
                 <ul id="status"></ul>
                 <div id="progress">
-                    <p id="progressbarStatus"></p>
-                    <div id="progressbar"></div>
+                    <p class="progressbarStatus" id="codeProgressBarStatus"></p>
+                    <div class="progressBar" id="codeProgressBar"></div>
                 </div>
-                <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
-                <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
-                <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
-                <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
-            </div>    
-           	<div class="terminalWindow" id="codeTermWin">
-            	<div class="taskBar" id="codeTaskBar">
-                	Terminal
-                	<div class="taskBtn" id="codeTermx" type="button" onclick="closeTerm('codeTermWin')">x</div>
-                    <div class="taskBtn" id="codeTerm_" type="button" onclick="minimizeTerm('codeTerm_','codeTerminal')">_</div>
-                </div>
-                <div class="terminal" id="codeTerminal"></div>
-            </div>
-            
+                <div id="codeBtns">
+                    <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
+                    <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
+                    <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
+                    <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
+            	</div>
+                <div id="codeProgram"></div>
+                <div id="events"></div>
+            </div> 
+              
         </div>
 		</body>
 	</html>

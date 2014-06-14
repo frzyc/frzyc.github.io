@@ -1,3 +1,12 @@
+#wrapper{
+	width:800px;
+	margin-left: auto;
+ 	margin-right: auto;
+}
+#right{
+	width:300px;	
+	float:right;
+}
 #printCode{
 	margin:0;	
 }
@@ -5,6 +14,8 @@
 	list-style-type: none;
 }
 #status{
+	padding: 0;
+    list-style-type: none;
 	display:compact;	
 	margin:0;
 }
@@ -14,7 +25,7 @@
 	display:compact;
 	margin:0;
 }
-#progressbar{
+.progressBar{
 	background-color:#66FFFF;
 	height:20px;
 	width:100%;
@@ -23,29 +34,31 @@
 	top:-50px;
 	z-index:-1; 
 }
-#progressbarStatus{
+.progressbarStatus{
 	position:relative;
 	position:relative;
 	top:-15px;
 	text-align:center;
 }
 .codeBtns{
-	background-color:rbg(250,250,250);
 	display:inline-block;
 	border:2px solid;
 	border-radius:5px;
 	border-color:grey;
-	visibility: hidden;
+	display:none;
 	width:100px;
 	text-align:center;
-	margin-bottom:5px;
 }
 .terminalWindow{
+	margin-top:5px;
 	width:400px;
 	border-radius:5px;
 	border-style: double;
 	border-color: black;
-	visibility: hidden;
+}
+.terminal p{
+	padding:0px;	
+	margin:1px;
 }
 .taskBar{
 	width:100%;	
@@ -54,8 +67,13 @@
 	border-bottom:1px solid;
 	border-color:black;
 }
+.taskBarTitle{
+	margin:0;	
+	display:inline;
+}
 .taskBtn{
 	width:20px;
+	height:20px;
 	text-align:center;
 	margin:2px;
 	display:inline-block;
