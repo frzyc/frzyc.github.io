@@ -6,7 +6,7 @@ var bugsSquashed=0;
 var debugExp=4;
 var compiled=false;
 
-var transTime=100;//should be 3000
+var transTime=3000;//should be 3000
 var statusSize=20;//lines of status to save
 
 
