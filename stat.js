@@ -49,10 +49,10 @@ var stat = {
 				$("#statTitle").text(this.titles[this.titles.length-1]);	
 			}		
 		}
-		if(this.nameUpdate && !this.stat.moneyUpdate){
-			if(stat.money>0 && !this.stat.moneyUpdate){
+		if(this.nameUpdate && !this.moneyUpdate){
+			if(stat.money>0 && !this.moneyUpdate){
 				$("<p id=statstat.money>stat.money: "+stat.money+"<p>").hide().appendTo("#right").fadeIn("Slow");
-				this.stat.moneyUpdate=true;
+				this.moneyUpdate=true;
 			}else{
 				$("#statstat.money").text(stat.money);
 			}
