@@ -23,7 +23,9 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, closeBtnId, terminalId
 			click: function() {
 				console.log('clicked appept id: '+ this.id);
 				$(this).hide();
-				$(eve+'Decline').hide();
+				$("#"+eve+'Decline').fadeOut();
+				$("#"+eve+"Reward").remove();
+				$("#"+eve+"Penalty").remove();
 				events[eve].accept();
 			},
 			mouseenter: function(){
@@ -34,7 +36,6 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, closeBtnId, terminalId
 				console.log("mouseleave");
 				$("#"+eve+"Reward").hide("fast");
 			}
-			
 		});
 		this.$declineBtn = $('<button/>', {
 			type: 'button',
@@ -44,10 +45,11 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, closeBtnId, terminalId
 			click: function() {
 				console.log("clicked decline id: "+this.id);
 				$(this).hide();
-				$(eve+'Accept').hide();
+				$("#"+eve+'Accept').fadeOut("fast");
+				$("#"+eve+"Reward").remove();
+				$("#"+eve+"Penalty").remove();
 				events[eve].decline();
 				closeTerm(eve);
-				console.log("declinging id:"+eve);
 			},
 			mouseenter: function(){
 				console.log("mouseover");
@@ -73,10 +75,10 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, closeBtnId, terminalId
 		document.getElementById(this.closeBtnId).disabled = false;//enable close button
 	}
 	this.hideCloseBtn = function(){
-		document.getElementById(this.closeBtnId).style.display="none";
+		$("#"+this.closeBtnId).hide();
 	}
 	this.showCloseBtn = function(){
-		document.getElementById(this.closeBtnId).style.display="inline-block";
+		$("#"+this.closeBtnId).show();
 	}
 }
 

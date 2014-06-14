@@ -1,30 +1,3 @@
-//actual timing
-var codeLine=0;
-var programsWritten=0;
-var money=0.0;
-var codeSpeed=5;//should be 5 seconds
-var codeExp=5;
-var compileSpeed=0.5;//shoule be 0.5 seconds
-var debugSpeed=5;//should be 5 seconds
-var runSpeed=0.5;//should be 0.5 seconds
-var transTime=3000;//should be 3000
-var statusSize=5;//5 lines of status
-
-/*/testing timings
-var codeLine=0;
-var programsWritten=0;
-var money=0.0;
-var codeSpeed=0.2;//should be 5 seconds
-var codeExp=5;
-var compileSpeed=0.1;//shoule be 0.5 seconds
-var debugSpeed=0.1;//should be 5 seconds
-var runSpeed=0.1;//should be 0.5 seconds
-var transTime=100;//should be 3000
-var statusSize=5;//5 lines of status
-*/
-
-var eventsList=[];
-var codeTermWin;
 var lastCompiledLines=0;
 var bugs=0;
 var debugged=false;
@@ -32,12 +5,21 @@ var runtimeErr=false;
 var bugsSquashed=0;
 var debugExp=4;
 var compiled=false;
+
+var transTime=100;//should be 3000
+var statusSize=20;//lines of status to save
+
+
+var eventsList=[];
+var codeTermWin;
+//initiation bools
 var compileBtnIni=false;//bool to initiate the button at beginning
 var runBtnIni=false;//bool to initiate the button at beginning
 var debugBtnIni=false;//bool to initiate the button at beginning
 var firstCodeIni=false;//bool to go through the first code
 
 $(document).ready(function(){
+	//runCode(0); //testing only
 	setInterval(function(){
 		gameTick();
 	},
@@ -58,39 +40,48 @@ function gameTick(){
 	gameTickCount++;
 	if(gameTickCount%10==0)
 		gameTickSec();
+	if(gameTickCount%100==0){
+		gameTick10Sec();
+		gameTickCount=0
+	}
 }
 function gameTickSec(){//triggers ever 10 ticks= 1 second
 
 	for(var eve in events){//going through events to trigger them
 		if(events[eve].active||!events[eve].condition()||!events[eve].chance())//check against active bool, event pre-conditions, and pass the pass the chance evaluation
 			continue;
-		status("Event: "+events[eve].title);//status alert
+		status("Event: "+events[eve].title,5);//status alert
 		var newTermWin = new TermWin(eve,eve+"TaskBar",eve+"TaskBarTitle",events[eve].title,eve+"Btn_",eve+"Btnx",eve+"Terminal");
 		eventsList.push(newTermWin);
 		events[eve].active=true;
 		newTermWin.create("#events");
 		newTermWin.eventContent(eve);
 	}
+	stat.update();
+}
+function gameTick10Sec(){//triggers ever 10 ticks= 1 second
+	if(compileBtnIni && runBtnIni && debugBtnIni && firstCodeIni)
+		save();
 }
 function printCode(){
 	var line="ERROR"//error by default
 	if(compiled)
-		line="You have "+codeLine+" lines of COMPILED code, feel free to RUN code.";
+		line="You have "+stat.codeLine+" lines of COMPILED code, feel free to RUN code.";
 	else if(bugs!=0)
-		line="You have " + codeLine + " lines of code, with "+ bugs + " compilation errors." 
+		line="You have " + stat.codeLine + " lines of code, with "+ bugs + " compilation errors." 
 	else if(debugged)
-		line="You have "+codeLine+" lines of DEBUGGED code, needs to be reCOMPILED.";
+		line="You have "+stat.codeLine+" lines of DEBUGGED code, needs to be reCOMPILED.";
 	else
-		line="You have written " + codeLine + " lines of code.";
+		line="You have written " + stat.codeLine + " lines of code.";
 	document.getElementById("printCode").innerHTML = line;
 }
 function code() {
 	console.log("CODE");
 	disableButton();
-	progressBarDown(codeSpeed,"Coding...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(stat.codeSpeed,"Coding...","codeProgressBar","codeProgressBarStatus");
 	setTimeout(function(){
 		status("You wrote one line of code!");
-		codeLine++;
+		stat.codeLine++;
 		if(!compileBtnIni){//initiate the compile button after first code
 			setTimeout(function(){
 				status("Maybe try compiling this code?");
@@ -103,26 +94,26 @@ function code() {
 			transTime);
 			return;	
 		}
-		if(codeLine>=codeExp){
-			codeExp*=2;
-			status("You seem to be getting this coding thing, your coding speed increased!");
-			if((codeSpeed-0.2)>=0.2)
-				codeSpeed-=0.2;	
+		if(stat.codeLine>=stat.codeExp){
+			stat.codeExp*=2;
+			status("You seem to be getting this coding thing, your coding speed increased!",3);
+			if((stat.codeSpeed-0.2)>=0.2)
+				stat.codeSpeed-=0.2;	
 		}
 		bugs=0;
 		debugged=false;
 		compiled=false;
-		if(codeLine>=programs.programLineList[programsWritten])
-			status("Your wrote enough lines for a new program!");
+		if(stat.codeLine>=programs.programLineList[stat.programsWritten])
+			status("Your wrote enough lines for a new program!",5);
 		printCode();
 		enableButton();
 	},
-	codeSpeed*1000);
+	stat.codeSpeed*1000);
 }
 function compile(){
 	console.log("COMPILE");
 	disableButton();
-	progressBarDown(compileSpeed*codeLine,"Compiling...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(stat.compileSpeed*stat.codeLine,"Compiling...","codeProgressBar","codeProgressBarStatus");
 	setTimeout(function(){
 		status("You compiled your code!");
 		if(!runBtnIni){//initiate the run button after first code
@@ -141,7 +132,7 @@ function compile(){
 			return;
 		}
 		if(bugs==0&&!debugged){
-			var dbugs=Math.random()*(codeLine-lastCompiledLines*0.9);
+			var dbugs=Math.random()*(stat.codeLine-lastCompiledLines*0.9);
 			bugs=Math.floor(dbugs);//refresh code not compiled
 			console.log("compiler dbugs:"+dbugs);
 		}
@@ -150,7 +141,7 @@ function compile(){
 			if(bugsSquashed>(80*5))
 				experienceMod=0.03;
 			console.log("experienceMod:"+experienceMod);
-			var ddbugs =Math.random()*codeLine*0.1*experienceMod;
+			var ddbugs =Math.random()*stat.codeLine*0.1*experienceMod;
 			bugs=Math.floor(ddbugs);//debugged code, still may have bugs\
 			console.log("recompile ddbugs:"+ddbugs);
 			console.log("bugs:"+bugs);
@@ -158,17 +149,17 @@ function compile(){
 		}
 		if(bugs==0){
 			compiled=true;
-			lastCompiledLines=codeLine;
+			lastCompiledLines=stat.codeLine;
 		}
 		printCode();
 		enableButton();
 	},
-	compileSpeed*codeLine*1000);
+	stat.compileSpeed*stat.codeLine*1000);
 }
 function run(){
 	console.log("RUN");
 	disableButton();
-	progressBarDown(runSpeed*codeLine,"Running...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(stat.runSpeed*stat.codeLine,"Running...","codeProgressBar","codeProgressBarStatus");
 	setTimeout(function(){
 		if(!debugBtnIni){//initiate the debug button after first code
 			setTimeout(function(){
@@ -186,16 +177,16 @@ function run(){
 			},
 			transTime);	
 		}else{
-			programsWritten++;
-			runCode(codeLine);
+			stat.programsWritten++;
+			runCode();
 			printCode();
 			enableButton();
 		}
 	},
-	runSpeed*codeLine*1000);
+	stat.runSpeed*stat.codeLine*1000);
 }
 function debug(){
-	var debugTime= Math.random()*debugSpeed+debugSpeed;
+	var debugTime= Math.random()*stat.debugSpeed+stat.debugSpeed;
 	console.log("debugTime: " +debugTime);
 	console.log("DEBUG");//debugging
 	disableButton();
@@ -221,15 +212,15 @@ function debug(){
 				}else if(debugPower<=15 && bugs>=3){
 					bugs-=3;
 					bugsSquashed+=3;
-					status("Three errors removed...");
+					status("Three errors removed...",3);
 				}else if(debugPower<=30 && bugs>=2){
 					bugs-=2;
 					bugsSquashed+=2;
-					status("Two errors removed...");
+					status("Two errors removed...",2);
 				}else{
 					bugs-=1;
 					bugsSquashed+=1;
-					status("One error removed...");	
+					status("One error removed...",1);	
 				}
 			}else{
 				status("No error removed...");	
@@ -238,9 +229,9 @@ function debug(){
 				debugged=true;
 			if(bugsSquashed>=debugExp){
 				debugExp*=2;
-				status("You are faster at debugging your code now!");
-				if((debugSpeed-0.2)>=0.2)
-					debugSpeed-=0.2;
+				status("You are faster at debugging your code now!",4);
+				if((stat.debugSpeed-0.2)>=0.2)
+					stat.debugSpeed-=0.2;
 			}
 			printCode();
 			enableButton();
@@ -248,7 +239,7 @@ function debug(){
 	},
 	debugTime*1000);
 }
-function status(strStatus){
+function status(strStatus, importance){
 	var list = document.getElementById("status");
 	if(list.firstChild && list.firstChild.innerHTML.search(strStatus)!=-1){
 		if(list.firstChild.innerHTML==strStatus){
@@ -262,15 +253,18 @@ function status(strStatus){
 			list.firstChild.innerHTML = strStatus+"(x"+(repnum+1)+")";
 		}
 	}else{
-		$("<li>"+strStatus+"</li>").hide().prependTo("#status").fadeIn();
+		if(!importance)
+			importance=0;
+		$("<li>"+strStatus+"</li>").css("color","rgb("+importance*51+",0,0)").hide().prependTo("#status").fadeIn();
+		
 		if($("#status li:nth-child("+(statusSize+1)+")")){
 			$("#status li:nth-child("+(statusSize+1)+")").remove();
 		}
-		for(var i =0, grad=0; i<statusSize;i++,grad+=40){
-			if(grad>255)
-				grad=255;
+		for(var i =0, grad=1; i<statusSize;i++,grad-=0.8/statusSize){
+			if(grad<0)
+				grad=0;
 			if($("#status li:nth-child("+i+")"))
-				$("#status li:nth-child("+i+")").css("color","rgb("+grad+","+grad+","+grad+")");
+				$("#status li:nth-child("+i+")").css({opacity:grad});
 		}
 	}
 }
@@ -281,7 +275,7 @@ function disableButton(){
 	document.getElementById("runBtn").disabled = true;//disable run button
 }
 function enableButton(){
-	if(!(codeLine>=programs.programLineList[programsWritten])){
+	if(!(stat.codeLine>=programs.programLineList[stat.programsWritten])){
 		document.getElementById("codeBtn").disabled = false;//enable code button
 	}
 	if(!compiled&&bugs==0)
@@ -307,21 +301,30 @@ function progressBarDown(totalTime,operation,barId,statusId){
 		document.getElementById(statusId).style.visibility="hidden";//hides the progressbarstatus
 	},totalTime*1000);
 }
-function runCode(lines){
+function runCode(){
 	if(codeTermWin){
 		closeTerm(codeTermWin.id);
 		delete codeTermWin;	
 	}
 	var programLineIndex;
 	for(var ind in programs.programLineList){
-		if(codeLine>=programs.programLineList[ind])
+		if(stat.codeLine>=programs.programLineList[ind])
 			programLineIndex = programs.programLineList[ind];
 		else
 			break;
 	}//once break out of the loop, the program would be the one the code can run
+	console.log("running program index:"+programLineIndex);
+	console.log("running program:"+programs.programz["p"+programLineIndex].title);
 	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+programLineIndex].title,"codeBtn_","codeBtnx","codeTerminal");
 	codeTermWin.create("#codeProgram");
 	programs.programz["p"+programLineIndex].elements();
+	status("Running code...");
+}
+function runCodeIndex(programIndex){//used for testing only
+	var pline = programs.programLineList[programIndex];
+	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+pline].title,"codeBtn_","codeBtnx","codeTerminal");
+	codeTermWin.create("#codeProgram");
+	programs.programz["p"+pline].elements();
 	status("Running code...");
 }
 

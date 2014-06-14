@@ -1,12 +1,23 @@
+/*GENERAL WRAPPER*/
 #wrapper{
-	width:800px;
+	width:820px;
 	margin-left: auto;
  	margin-right: auto;
 }
+
+/*STAT BAR*/
 #right{
-	width:300px;	
+	width:400px;	
 	float:right;
 }
+#right p{
+	margin:0px;
+}
+#statTitle{
+	color:grey;
+}
+
+/*STATUS $ CODENUM*/
 #printCode{
 	margin:0;	
 }
@@ -14,11 +25,16 @@
 	list-style-type: none;
 }
 #status{
+	height:100px;
+	width:400px;
 	padding: 0;
     list-style-type: none;
 	display:compact;	
 	margin:0;
+	overflow:auto;
 }
+
+/*PROGRESSBARS*/
 #progress{
 	height:20px;
 	width:400px;
@@ -40,6 +56,8 @@
 	top:-15px;
 	text-align:center;
 }
+
+/*CODE BUTTONS*/
 .codeBtns{
 	display:inline-block;
 	border:2px solid;
@@ -49,6 +67,8 @@
 	width:100px;
 	text-align:center;
 }
+
+/*TERMINAL*/
 .terminalWindow{
 	margin-top:5px;
 	width:400px;

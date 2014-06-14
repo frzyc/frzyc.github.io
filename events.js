@@ -6,13 +6,14 @@ var events = {
 		reward:"$50 and a plate of sloppy spaghetti",
 		penalty:"Passive-aggressively reminded that you should probably have moved out by now...",
 		condition:function(){
-			 return codeLine>4;
+			 return stat.codeLine>3;
 		},
 		chance:function(){ 
 			return (Math.random()*100+1)<40;
 		},
 		accept:function(){ 
 			console.log("ACCEPT EVENT");
+			money+=50.0;
 		},
 		decline:function(){ 
 			console.log("DECLINE EVENT");
@@ -26,10 +27,10 @@ var events = {
 		reward:"10 bitcoins, 3% share of gold farmed, and some very rare donations on the game forums",
 		penalty:"\"duude, you are such a noob...\"",
 		condition:function(){
-			 return codeLine>16;
+			 return stat.codeLine>16;
 		},
 		chance:function(){ 
-			return (Math.random()*100+1)<(10+codeLine*0.5);
+			return (Math.random()*100+1)<(10+stat.codeLine*0.5);
 		},
 		accept:function(){ 
 			console.log("ACCEPT EVENT");
