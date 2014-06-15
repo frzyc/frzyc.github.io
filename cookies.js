@@ -33,7 +33,7 @@ function createCookie(name, value, expires, path, domain) {
 		}else
 			expires = new Date(new Date().getTime() + parseInt(expires) * 1000 * 60 * 60 * 24);
 	}else
-		expires = new Date(new Date().getTime() + 1000 * 1000 * 60 * 60 * 24);
+		expires = new Date(new Date().getTime() + 100 * 1000 * 60 * 60 * 24);
 	cookie += "expires=" + expires.toGMTString() + ";";
  	if (path)
     	cookie += "path=" + path + ";";
