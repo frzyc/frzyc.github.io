@@ -1,5 +1,5 @@
 var stat = {
-	//actual timing
+	/*/actual timing
 	codeLine:0,
 	programsWritten:0,
 	money:0.0,
@@ -8,9 +8,9 @@ var stat = {
 	compileSpeed:0.5,//shoule be 0.5 seconds
 	debugSpeed:5,//should be 5 seconds
 	runSpeed:0.5,//should be 0.5 seconds
+	*/
 	
-	
-	/*/testing timings
+	//testing timings
 	codeLine:0,
 	programsWritten:0,
 	money:0.0,
@@ -19,10 +19,10 @@ var stat = {
 	compileSpeed:0.1,
 	debugSpeed:0.1,
 	runSpeed:0.1,
-	*/
+	
 	name:"Player",
 	gender:"male",
-	titles:["Basement Dweller"],
+	titles:["Basement Dweller","stuff"],
 	ini:false,
 	nameUpdate:false,
 	moneyUpdate:false,
