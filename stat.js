@@ -20,7 +20,7 @@ var stat = {
 	compileSpeed:0.1,
 	debugSpeed:0.1,
 	runSpeed:0.1,
-	//
+	*/
 	name:"Player",
 	gender:"male",
 	titles:["Basement Dweller"],
