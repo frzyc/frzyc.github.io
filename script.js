@@ -19,8 +19,7 @@ var debugBtnIni=false;//bool to initiate the button at beginning
 var firstCodeIni=false;//bool to go through the first code
 
 $(document).ready(function(){
-	//runCode(0); //testing only
-	stat.createRight();
+	//runCodeIndex(1); //testing only
 	setInterval(function(){
 		gameTick();
 	},
@@ -67,16 +66,23 @@ function gameTick10Sec(){//triggers ever 10 ticks= 1 second
 	}
 }
 function printCode(){
-	var line="ERROR"//error by default
-	if(compiled)
-		line="You have "+stat.codeLine+" lines of COMPILED code, feel free to RUN code.";
-	else if(bugs!=0)
-		line="You have " + stat.codeLine + " lines of code, with "+ bugs + " compilation errors." 
-	else if(debugged)
-		line="You have "+stat.codeLine+" lines of DEBUGGED code, needs to be reCOMPILED.";
-	else
+	var line="ERROR";//error by default
+	var tit="ERROR";
+	if(compiled){
+		line="You have "+stat.codeLine+" lines of COMPILED code.";
+		tit="Feel free to RUN code!";
+	}else if(bugs!=0){
+		line="You have " + stat.codeLine + " lines of code, with "+ bugs + " compilation errors.";
+		tit="DEBUG to squash bugs!";
+	}else if(debugged){
+		line="You have "+stat.codeLine+" lines of DEBUGGED code.";
+		tit="Needs to be reCOMPILED.";
+	}else{
 		line="You have written " + stat.codeLine + " lines of code.";
-	document.getElementById("printCode").innerHTML = line;
+		tit="Write more code or compile for errors.";
+	}
+	$("#printCode").text(line);
+	$("#printCode").attr("title",tit);
 }
 function code() {
 	console.log("CODE");
@@ -305,17 +311,20 @@ function progressBarDown(totalTime,operation,barId,statusId){
 	},totalTime*1000);
 }
 function runCode(){
-	if(codeTermWin){
-		closeTerm(codeTermWin.id);
-		delete codeTermWin;	
-	}
-	var programLineIndex;
+	
+	var programLineIndex=-1;
 	for(var ind in programs.programLineList){
 		if(stat.codeLine>=programs.programLineList[ind])
 			programLineIndex = programs.programLineList[ind];
 		else
 			break;
 	}//once break out of the loop, the program would be the one the code can run
+	if(programLineIndex==-1)
+		return;//except if its below the threshold line value of the first program
+	if(codeTermWin){
+		closeTerm(codeTermWin.id);
+		delete codeTermWin;	
+	}//close the old program first
 	console.log("running program index:"+programLineIndex);
 	console.log("running program:"+programs.programz["p"+programLineIndex].title);
 	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+programLineIndex].title,"codeBtn_","codeBtnx","codeTerminal");

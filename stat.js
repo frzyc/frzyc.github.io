@@ -20,7 +20,7 @@ var stat = {
 	compileSpeed:0.1,
 	debugSpeed:0.1,
 	runSpeed:0.1,
-	*/
+	//
 	name:"Player",
 	gender:"male",
 	titles:["Basement Dweller"],
@@ -53,11 +53,12 @@ var stat = {
 			$("#statBitCoin").fadeIn("Slow");				
 
 	},
-	createRight:function(){
-		$("<p id=statName>"+this.name+"</p>").hide().appendTo("#right");
-		$("<p id=statTitle>"+this.titles[this.titles.length-1]+"</p>").hide().appendTo("#right");
-		$("<p id=statMoney>Money: "+stat.money+"</p>").hide().appendTo("#right");
-		$("<p id=statBitCoin>BitCoins: "+stat.bitCoin+"</p>").hide().appendTo("#right");
+	addTitle:function(str){
+		for(s in stat.titles){
+			if(stat.titles[s]===str)
+				return;	
+		}
+		stat.titles.push(str);
 	}
 	
 };

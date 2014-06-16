@@ -43,6 +43,8 @@
 }
 .progressBar{
 	background-color:#66FFFF;
+	border:2px solid #0066FF;
+	border-radius:3px;
 	height:20px;
 	width:100%;
 	visibility:hidden;
@@ -53,7 +55,7 @@
 .progressbarStatus{
 	position:relative;
 	position:relative;
-	top:-15px;
+	top:-13px;
 	text-align:center;
 }
 
