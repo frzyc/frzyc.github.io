@@ -3,17 +3,18 @@ var events = {
 		title:"Momma's little helper",
 		description:"Living in your parent's basement makes you very easy to be interrupted by your loved ones. Your mother needs your help typing up her new novel.",
 		risk:"None... you can't possibly fail this... can you?",
-		reward:"$50 and a plate of sloppy spaghetti",
+		reward:"$50 and a cupcake",
 		penalty:"Passive-aggressively reminded that you should probably have moved out by now...",
 		condition:function(){
-			 return stat.codeLine>3;
+			 return stat.codeLine>5;
 		},
 		chance:function(){ 
 			return (Math.random()*100+1)<40;
 		},
 		accept:function(){ 
 			console.log("ACCEPT EVENT");
-			money+=50.0;
+			$("#event0Terminal")
+			stat.money+=50.0;
 		},
 		decline:function(){ 
 			console.log("DECLINE EVENT");
@@ -34,6 +35,7 @@ var events = {
 		},
 		accept:function(){ 
 			console.log("ACCEPT EVENT");
+			stat.bitCoin+=10.0;
 		},
 		decline:function(){ 
 			console.log("DECLINE EVENT");

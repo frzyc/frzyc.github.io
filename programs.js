@@ -1,6 +1,6 @@
 var programs = {
 	currentProgram:0,
-	programLineList:[2,4],
+	programLineList:[4,9],
 	programz:{
 		/*TEMPLATE
 		p[numoflines]:{
@@ -13,7 +13,7 @@ var programs = {
 			}
 		}
 		*/
-		p2:{
+		p4:{
 			title:"NameCaller",
 			elements: function(){
 				var $ele = $("<form id='nameForm'><div>Name:<input type='text'><br><input type='radio' name='gender' value='male' checked='checked'>Male<br><input type='radio' name='gender' value='female'>Female<button type='button'>Submit</button></div></form>");
@@ -34,7 +34,7 @@ var programs = {
 				});
 			}
 		},
-		p4:{
+		p9:{
 			title:"BirthdayCountDown",
 			elements: function(){
 				var $ele = $("<p>Sorry, no program here yet!</p>");

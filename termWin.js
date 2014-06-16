@@ -85,10 +85,10 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, closeBtnId, terminalId
 function minimizeTerm(btn,terminal){
 	console.log("MIN");
 	if($("#"+btn).text() === "_"){
-		$("#"+terminal).fadeOut("fast");
+		$("#"+terminal).hide("fast");
 		$("#"+btn).text("o");
 	}else{
-		$("#"+terminal).fadeIn("fast");
+		$("#"+terminal).show("fast");
 		$("#"+btn).text("_");
 	}	
 }

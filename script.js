@@ -6,7 +6,7 @@ var bugsSquashed=0;
 var debugExp=4;
 var compiled=false;
 
-var transTime=100;//should be 3000
+var transTime=3000;//should be 3000
 var statusSize=20;//lines of status to save
 
 
@@ -20,7 +20,7 @@ var firstCodeIni=false;//bool to go through the first code
 
 $(document).ready(function(){
 	//runCode(0); //testing only
-	save();
+	stat.createRight();
 	setInterval(function(){
 		gameTick();
 	},
@@ -62,8 +62,9 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 }
 function gameTick10Sec(){//triggers ever 10 ticks= 1 second
 	console.log("SAVEEEEEEEE");
-	if(compileBtnIni && runBtnIni && debugBtnIni && firstCodeIni)
-		save();
+	if(compileBtnIni && runBtnIni && debugBtnIni && firstCodeIni){
+		//save();
+	}
 }
 function printCode(){
 	var line="ERROR"//error by default

@@ -1,26 +1,41 @@
-function save(){	
-	
-	//console.log("test typeof string:"+typeof stat.name+";");
-	//console.log("test typeof int:"+typeof stat.codeLine+";");
-	//console.log("test typeof double:"+typeof stat.codeSpeed+";");
-	//console.log("test typeof array:"+typeof stat.titles+";");
-	
+function saveCookie(){	
 	for(prop in stat){
 		if(typeof stat[prop]==="object"){
-			
-		}else if(typeof stat[prop]==="string"){
-			console.log("SAVING prop:"+prop);
+			for(p in stat[prop]){
+				console.log("SAVING stat."+prop+"."+p);
+				createCookie("stat."+prop+"."+p,stat[prop][p]);	
+				console.log("SAVED stat."+prop+"."+p+": "+readCookie("stat."+prop+"."+p));
+			}
+		}else if(typeof stat[prop]==="string" ||typeof stat[prop]==="number"||typeof stat[prop]==="boolean"){
+			console.log("SAVING stat."+prop);
 			createCookie("stat."+prop,stat[prop]);	
-			console.log("SAVED stat."+prop+": "+readCookie("stat."+prop,stat[prop]));
-			console.log("SAVED stat."+prop+"typeof: "+typeof readCookie("stat."+prop,stat[prop]));
-		}else if(typeof stat[prop]==="number"){
-			
-		}
-			
+			console.log("SAVED stat."+prop+": "+readCookie("stat."+prop));
+		}	
 	}
 	
 }
-
+function loadCookie(){
+	for(prop in stat){
+		if(typeof stat[prop]==="object"){
+			var i=0;
+			while(readCookie("stat."+prop+"."+i)){
+				stat[prop].push(readCookie("stat."+prop+"."+i))
+				i++
+			}
+		}else if(typeof stat[prop]==="string"){
+			stat[prop]=readCookie("stat."+prop);
+		}else if(typeof stat[prop]==="number"){
+			stat[prop]=Number(readCookie("stat."+prop));
+		}else if(typeof stat[prop]==="boolean"){
+			if(readCookie("stat."+prop)==="true")
+				stat[prop]=true;
+			else
+				stat[prop]=false;
+			
+		}
+	}
+}
+//http://www.quirksmode.org/js/cookies.html
 function createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();
