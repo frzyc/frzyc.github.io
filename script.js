@@ -20,6 +20,7 @@ var firstCodeIni=false;//bool to go through the first code
 
 $(document).ready(function(){
 	//runCodeIndex(1); //testing only
+	//runEventIndex(0); //testing only
 	setInterval(function(){
 		gameTick();
 	},
@@ -264,7 +265,7 @@ function status(strStatus, importance){
 	}else{
 		if(!importance)
 			importance=0;
-		$("<li>"+strStatus+"</li>").css("color","rgb("+importance*51+",0,0)").hide().prependTo("#status").fadeIn();
+		$("<li>"+strStatus+"</li>").css("color","rgb("+importance*51+",0,0)").prependTo("#status");
 		
 		if($("#status li:nth-child("+(statusSize+1)+")")){
 			$("#status li:nth-child("+(statusSize+1)+")").remove();
@@ -295,23 +296,22 @@ function enableButton(){
 		document.getElementById("runBtn").disabled = false;//enable run button
 }
 function progressBarDown(totalTime,operation,barId,statusId){
-	$("#"+barId).css('width','100%');
-	document.getElementById(barId).style.visibility="visible";//make the progressbar visible
+	$("#"+barId).css('width','400px');
+	$("#"+barId).show();
 	document.getElementById(statusId).style.visibility="visible";//make the progressbarStatus visible
 	var countDown = totalTime;
-	$("#"+barId).animate({width:'0%'},totalTime*1000-1);
+	$("#"+barId).animate({width:'0px'},totalTime*1000-1);
 	var countDowner = setInterval(function(){
 		countDown-=0.02;
 		document.getElementById(statusId).innerHTML = operation+"(" + countDown.toFixed(2) + ")";
 	},20);
 	setTimeout(function(){
 		clearInterval(countDowner);
-		document.getElementById(barId).style.visibility="hidden";//hides the progressbar
+		$("#"+barId).hide();
 		document.getElementById(statusId).style.visibility="hidden";//hides the progressbarstatus
 	},totalTime*1000);
 }
 function runCode(){
-	
 	var programLineIndex=-1;
 	for(var ind in programs.programLineList){
 		if(stat.codeLine>=programs.programLineList[ind])
@@ -338,6 +338,16 @@ function runCodeIndex(programIndex){//used for testing only
 	codeTermWin.create("#codeProgram");
 	programs.programz["p"+pline].elements();
 	status("Running code...");
+}
+function runEventIndex(eventid){//testing only
+	var eventname = "event"+eventid;
+	status("Event: "+events[eventname].title,5);//status alert
+	var newTermWin = new TermWin(eventname,eventname+"TaskBar",eventname+"TaskBarTitle",events[eventname].title,eventname+"Btn_",eventname+"Btnx",eventname+"Terminal");
+	eventsList.push(newTermWin);
+	events[eventname].active=true;
+	newTermWin.create("#events");
+	newTermWin.eventContent(eventname);
+	stat.update();
 }
 
 

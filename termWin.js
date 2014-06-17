@@ -94,7 +94,7 @@ function minimizeTerm(btn,terminal){
 }
 function closeTerm(termWinId){
 	console.log("CLOSE id:"+termWinId);
-	status("Terminal Terminated.");
+	//status("Terminal Terminated.");
 	$("#"+termWinId).fadeOut("slow",function(){
 		this.remove();	
 	});

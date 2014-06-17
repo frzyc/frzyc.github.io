@@ -172,15 +172,15 @@ There. now doesn't this HTML page looks a lot more full?-->
         <div id="wrapper">
         	<div id="right">
             	<p id="statName" style="display: none;">Player(M)</p>
-                <p id="statTitle" style="display: none;">Basement Dweller</p>
-                <p id="statMoney" style="display: none;">BitCoins: 0</p>
-                <p id="statBitCoin" style="display: none;">Money: 0</p></div>
+                <p id="statTitle" style="display: none;">PlayerTitle</p>
+                <p id="statMoney" style="display: none;">Money: -1</p>
+                <p id="statBitCoin" style="display: none;">BitCoins: -1</p></div>
         	<div id="mainCode">
                 <p id="printCode">Just an empty terminal window...</p>
                 <ul id="status"></ul>
                 <div id="progress">
+              	  	<div class="progressBar" id="codeProgressBar" ></div>
                     <p class="progressbarStatus" id="codeProgressBarStatus"></p>
-                    <div class="progressBar" id="codeProgressBar"></div>
                 </div>
                 <div id="codeBtns">
                     <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>

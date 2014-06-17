@@ -9,17 +9,52 @@ var events = {
 			 return stat.codeLine>5;
 		},
 		chance:function(){ 
-			return (Math.random()*100+1)<40;
+			return (Math.random()*100+1)<30;
 		},
 		accept:function(){ 
 			console.log("ACCEPT EVENT");
-			$("#event0Terminal")
-			stat.money+=50.0;
+			$("#event0Terminal").empty();
+			$("<div><div class='progressBar' id='eventProgressBar'></div><p class='progressbarStatus' id='eventProgressBarStatus'>0%</p></div><form><label for='target'>Start mashing your keys:</label><input id='target' type='text'></form>").appendTo("#event0Terminal");
+			var triggered=0;
+			var lastkey=0;
+			var keys=500;
+			$("#target").keydown(function(){
+					$("#eventProgressBar").show();
+					if (event.which == 13)
+						event.preventDefault();
+					if(event.which != lastkey)
+						triggered++	
+					lastkey = event.which;
+					$("#eventProgressBar").width(triggered/keys*400+"px");
+					$("#eventProgressBarStatus").text((triggered/keys*100).toFixed()+"%");
+					if(triggered==keys){
+						events.event0.end();	
+					}
+					console.log("KEYDOWN:"+event.which);	
+				});
+			
 		},
 		decline:function(){ 
 			console.log("DECLINE EVENT");
 		},
-		active: false//true if it is currently active, or have been actived
+		end:function(){
+			$("#event0Terminal").empty();
+			$("<p>Nice mashing! Here's your cupcake, and $50</p>").appendTo("#event0Terminal");
+			$('<button/>', {
+				type: 'button',
+				'class': 'codeBtns',
+				id: 'event0Collect',
+				text: 'Collect',
+				click: function() {
+					closeTerm("event0");
+					stat.money+=50.0;
+					//ADD CUPCAKES HERE
+					stat.addTitle("Mama's Boy");
+					$(this).hide();
+				}
+			}).appendTo("#event0Terminal").fadeIn("slow");
+		},
+		active: false//true if it is currently active, or have been actived. set it to off if its a reoccuring event
 	},
 	event1:{
 		title:"Gold farming simulator 2014",
@@ -40,6 +75,6 @@ var events = {
 		decline:function(){ 
 			console.log("DECLINE EVENT");
 		},
-		active: false//true if it is currently active, or have been actived
+		active: false//true if it is currently active, or have been actived. set it to off if its a reoccuring event
 	}
 };

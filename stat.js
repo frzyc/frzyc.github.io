@@ -40,8 +40,8 @@ var stat = {
 				this.canEditTitles=true;
 			$("#statTitle").text(this.titles[this.titles.length-1]);	
 		}	
-		$("#statBitCoin").text("Money: "+stat.bitCoin);
-		$("#statMoney").text("BitCoins: "+stat.money);
+		$("#statMoney").text("Money: "+stat.money);
+		$("#statBitCoin").text("BitCoins: "+stat.money);
 				
 		if(this.name!="Player" && $("#statName").is(":hidden")){
 			$("#statName").fadeIn("Slow");
