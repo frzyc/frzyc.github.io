@@ -1,5 +1,4 @@
 var stat = {
-	//actual timing
 	codeLine:0,
 	programsWritten:0,
 	money:0.0,
@@ -9,37 +8,32 @@ var stat = {
 	debugSpeed:5,//should be 5 seconds
 	runSpeed:0.5,//should be 0.5 seconds
 	
+	rpsWins:0,
 	
-	/*/testing timings
-	codeLine:0,
-	programsWritten:0,
-	money:0.0,
-	bitCoin:0,
-	codeSpeed:0.2,
-	codeExp:5,
-	compileSpeed:0.1,
-	debugSpeed:0.1,
-	runSpeed:0.1,
-	*/
 	name:"Player",
 	gender:"male",
 	titles:["Basement Dweller"],
 	ini:false,
-	canEditTitles:false,
 	update: function(){
 		if(this.gender==="male")
 			$("#statName").text(this.name+"(M)");
 		else if(this.gender==="female")
 			$("#statName").text(this.name+"(F)");
-		if(this.canEditTitles){
-			//manual title selecter, code below is a placeholder
-			//click on current title to change to a dropdown menu
-			$("#statTitle").text(this.titles[this.titles.length-1]);	
-		}else{
-			if(this.titles.length>10)
-				this.canEditTitles=true;
-			$("#statTitle").text(this.titles[this.titles.length-1]);	
-		}	
+		if(this.titles.length>10){//manual title selecter, click on current title to change to a dropdown menu
+			$("#statTitle").unbind().click(function(){//only allow it to be clicked once
+				$(this).replaceWith($("<select id = 'titleSel' name='titles'></select>"));
+				for(t in stat.titles){
+					$("<option value="+stat.titles[t]+">"+stat.titles[t]+"</option>").appendTo("#titleSel");
+				}
+				$("#titleSel").change(function(event){//Click event on Select has occurred
+					$("option:selected", $(this)).each(function(){
+						var obj = document.getElementById('titleSel').value;
+						$("#titleSel").replaceWith("<p id='statTitle' >"+obj+"</p>");
+					});
+          		});
+			});
+		}else
+			$("#statTitle").text(this.titles[this.titles.length-1]);		
 		$("#statMoney").text("Money: "+stat.money);
 		$("#statBitCoin").text("BitCoins: "+stat.money);
 				

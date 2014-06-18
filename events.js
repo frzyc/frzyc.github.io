@@ -9,10 +9,10 @@ var events = {
 			 return stat.codeLine>5;
 		},
 		chance:function(){ 
-			return (Math.random()*100+1)<30;
+			return (Math.random()*100+1)<10;
 		},
 		accept:function(){ 
-			console.log("ACCEPT EVENT");
+			console.log("ACCEPT EVENT0");
 			$("#event0Terminal").empty();
 			$("<div><div class='progressBar' id='eventProgressBar'></div><p class='progressbarStatus' id='eventProgressBarStatus'>0%</p></div><form><label for='target'>Start mashing your keys:</label><input id='target' type='text'></form>").appendTo("#event0Terminal");
 			var triggered=0;
@@ -35,7 +35,7 @@ var events = {
 			
 		},
 		decline:function(){ 
-			console.log("DECLINE EVENT");
+			console.log("DECLINE EVENT0");
 		},
 		end:function(){
 			$("#event0Terminal").empty();
@@ -69,11 +69,11 @@ var events = {
 			return (Math.random()*100+1)<(10+stat.codeLine*0.5);
 		},
 		accept:function(){ 
-			console.log("ACCEPT EVENT");
+			console.log("ACCEPT EVENT1");
 			stat.bitCoin+=10.0;
 		},
 		decline:function(){ 
-			console.log("DECLINE EVENT");
+			console.log("DECLINE EVENT1");
 		},
 		active: false//true if it is currently active, or have been actived. set it to off if its a reoccuring event
 	}

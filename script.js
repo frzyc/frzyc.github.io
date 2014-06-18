@@ -19,7 +19,8 @@ var debugBtnIni=false;//bool to initiate the button at beginning
 var firstCodeIni=false;//bool to go through the first code
 
 $(document).ready(function(){
-	//runCodeIndex(1); //testing only
+	//testingTime();//testing only
+	//runCodeIndex(2); //testing only
 	//runEventIndex(0); //testing only
 	setInterval(function(){
 		gameTick();
@@ -173,10 +174,9 @@ function run(){
 	setTimeout(function(){
 		if(!debugBtnIni){//initiate the debug button after first code
 			setTimeout(function(){
-				codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle","Terminal","codeBtn_","codeBtnx","codeTerminal");
-				codeTermWin.create("#codeProgram");
+				stat.programsWritten++;
+				runCode();
 				codeTermWin.hideCloseBtn();
-				$("#codeTerminal").text("Hallo Wurld!");
 				status("Hmph... may needs some tweaking...");
 				$("#debugBtn").fadeIn("slow");
 				document.getElementById("debugBtn").disabled = false;//enable debug button
@@ -319,8 +319,6 @@ function runCode(){
 		else
 			break;
 	}//once break out of the loop, the program would be the one the code can run
-	if(programLineIndex==-1)
-		return;//except if its below the threshold line value of the first program
 	if(codeTermWin){
 		closeTerm(codeTermWin.id);
 		delete codeTermWin;	
@@ -348,6 +346,20 @@ function runEventIndex(eventid){//testing only
 	newTermWin.create("#events");
 	newTermWin.eventContent(eventname);
 	stat.update();
+}
+function testingTime(){
+	stat.codeLine=0;
+	stat.programsWritten=0;
+	stat.money=0.0;
+	stat.bitCoin=0;
+	stat.codeSpeed=0.2;
+	stat.codeExp=5;
+	stat.compileSpeed=0.1;
+	stat.debugSpeed=0.1;
+	stat.runSpeed=0.1;
+	transTime=100;
+	
+	
 }
 
 
