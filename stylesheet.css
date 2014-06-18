@@ -71,6 +71,7 @@
 
 /*TERMINAL*/
 .terminalWindow{
+	background-color:white;
 	margin-top:5px;
 	width:400px;
 	border-radius:5px;

@@ -53,7 +53,7 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 		if(events[eve].active||!events[eve].condition()||!events[eve].chance())//check against active bool, event pre-conditions, and pass the pass the chance evaluation
 			continue;
 		status("Event: "+events[eve].title,5);//status alert
-		var newTermWin = new TermWin(eve,eve+"TaskBar",eve+"TaskBarTitle",events[eve].title,eve+"Btn_",eve+"Btnx",eve+"Terminal");
+		var newTermWin = new TermWin(eve,eve+"TaskBar",eve+"TaskBarTitle",events[eve].title,eve+"Btn_",eve+"Btn[]",eve+"Btnx",eve+"Terminal");
 		eventsList.push(newTermWin);
 		events[eve].active=true;
 		newTermWin.create("#events");
@@ -177,6 +177,7 @@ function run(){
 				stat.programsWritten++;
 				runCode();
 				codeTermWin.hideCloseBtn();
+				codeTermWin.hideMaxBtn();
 				status("Hmph... may needs some tweaking...");
 				$("#debugBtn").fadeIn("slow");
 				document.getElementById("debugBtn").disabled = false;//enable debug button
@@ -325,14 +326,14 @@ function runCode(){
 	}//close the old program first
 	console.log("running program index:"+programLineIndex);
 	console.log("running program:"+programs.programz["p"+programLineIndex].title);
-	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+programLineIndex].title,"codeBtn_","codeBtnx","codeTerminal");
+	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+programLineIndex].title,"codeBtn_","codeBtnMx","codeBtnx","codeTerminal");
 	codeTermWin.create("#codeProgram");
 	programs.programz["p"+programLineIndex].elements();
 	status("Running code...");
 }
 function runCodeIndex(programIndex){//used for testing only
 	var pline = programs.programLineList[programIndex];
-	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+pline].title,"codeBtn_","codeBtnx","codeTerminal");
+	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+pline].title,"codeBtn_","codeBtnMx","codeBtnx","codeTerminal");
 	codeTermWin.create("#codeProgram");
 	programs.programz["p"+pline].elements();
 	status("Running code...");
