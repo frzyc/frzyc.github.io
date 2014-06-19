@@ -1,38 +1,36 @@
-function saveCookie(){	
-	for(prop in stat){
-		if(typeof stat[prop]==="object"){
-			for(p in stat[prop]){
-				console.log("SAVING stat."+prop+"."+p);
-				createCookie("stat."+prop+"."+p,stat[prop][p]);	
-				console.log("SAVED stat."+prop+"."+p+": "+readCookie("stat."+prop+"."+p));
-			}
+function saveCookie(ob,obname){	
+	for(prop in ob){
+		if(typeof ob[prop]==="object"){
+			console.log("SAVING OBJECT"+obname+"."+prop);
+			saveCookie(ob[prop],obname+"."+prop);
 		}else if(typeof stat[prop]==="string" ||typeof stat[prop]==="number"||typeof stat[prop]==="boolean"){
-			console.log("SAVING stat."+prop);
-			createCookie("stat."+prop,stat[prop]);	
-			console.log("SAVED stat."+prop+": "+readCookie("stat."+prop));
+			console.log("SAVING "+obname+"."+prop);
+			createCookie(obname+"."+prop,ob[prop]);	
+			console.log("SAVED "+obname+"."+prop+": "+readCookie(obname+"."+prop));
 		}	
 	}
 	
 }
-function loadCookie(){
-	for(prop in stat){
-		if(typeof stat[prop]==="object"){
+function loadCookie(ob,obname){
+	for(prop in ob){
+		if(typeof ob[prop]==="object"){
 			var i=0;
-			while(readCookie("stat."+prop+"."+i)){
-				stat[prop].push(readCookie("stat."+prop+"."+i))
-				i++
+			while(readCookie(obname+"."+prop+"."+i)){
+				ob[prop][i] = readCookie(obname+"."+prop+"."+i);
+				i++;
 			}
-		}else if(typeof stat[prop]==="string"){
-			stat[prop]=readCookie("stat."+prop);
-		}else if(typeof stat[prop]==="number"){
-			stat[prop]=Number(readCookie("stat."+prop));
-		}else if(typeof stat[prop]==="boolean"){
-			if(readCookie("stat."+prop)==="true")
-				stat[prop]=true;
+			loadCookie(ob[prop],obname+"."+prop)
+		}else if(typeof ob[prop]==="string"){
+			ob[prop]=readCookie(obname+"."+prop);
+		}else if(typeof ob[prop]==="number"){
+			ob[prop]=Number(readCookie(obname+"."+prop));
+		}else if(typeof ob[prop]==="boolean"){
+			if(readCookie(obname+"."+prop)==="true")
+				ob[prop]=true;
 			else
-				stat[prop]=false;
-			
+				ob[prop]=false;
 		}
+		console.log("LOADING "+obname+"."+prop+" VALUE: "+ob[prop]);
 	}
 }
 //http://www.quirksmode.org/js/cookies.html

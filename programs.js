@@ -39,147 +39,6 @@ var programs = {
 			}
 		},
 		p9:{
-			title:"Rock Paper Scissors",
-			upgrade:false,
-			elements:function(){
-				$("<button class='codeBtns' id='rock' type='button' onclick='programs.programz.p9.rps(1)'>Rock</button>").css("width","75px").fadeIn(1000).appendTo("#codeTerminal");	
-				$("<button class='codeBtns' id='paper' type='button' onclick='programs.programz.p9.rps(2)'>Paper</button>").css("width","75px").fadeIn(2000).appendTo("#codeTerminal");	
-				$("<button class='codeBtns' id='scissor' type='button' onclick='programs.programz.p9.rps(3)'>Scissor</button>").css("width","75px").fadeIn(3000).appendTo("#codeTerminal");	
-				$("<button class='codeBtns' id='lizard' type='button' onclick='programs.programz.p9.rps(4)'>Lizard</button>").css("width","75px").appendTo("#codeTerminal");	
-				$("<button class='codeBtns' id='spock' type='button' onclick='programs.programz.p9.rps(5)'>Spock</button>").css("width","75px").appendTo("#codeTerminal");
-				$("<p id='rpsResult'>Roshambo!</p>").fadeIn(4000).appendTo("#codeTerminal");	
-			},
-			rps:function(i){
-				var compChoice=Math.floor(Math.random()*3+1);
-				if(programs.programz.p9.upgrade){
-					compChoice=Math.floor(Math.random()*3+1);
-				}
-				var li="ERROR";
-				if(i==compChoice){
-					switch(i){
-						case 1://Rock
-							li = "<strong>ROCK</strong> vs <strong>ROCK</strong>, a TIE...";
-							break;	
-						case 2://Paper
-							li = "<strong>PAPER</strong> vs <strong>PAPER</strong>, a TIE...";
-							break;
-						case 3://Scissors
-							li = "<strong>SCISSORS</strong> vs <strong>SCISSORS</strong>, a TIE...";
-							break;
-						case 4://Lizard
-							li = "<strong>LIZARD</strong> vs <strong>LIZARD</strong>, a TIE...";
-							break;
-						case 5://Spock
-							li = "<strong>SPOCK</strong> vs <strong>SPOCK</strong>, a TIE...";
-							break;
-					}
-				}else{
-					switch(i){
-						case 1://Rock
-							switch(compChoice){
-								case 2://Paper
-									li = "<strong>PAPER</strong> covers <strong>ROCK</strong>, you LOSE!";
-									break;
-								case 3://Scissors
-									li = "<strong>ROCK</strong> crushes <strong>SCISSORS</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 4://Lizard
-									li = "<strong>ROCK</strong> crushes <strong>LIZARD</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 5://Spock
-									li = "<strong>SPOCK</strong> vaporizes <strong>ROCK</strong>, you LOSE!";
-									break;
-							}
-							break;
-						case 2://Paper
-							switch(compChoice){
-								case 1://Rock
-									li = "<strong>PAPER</strong> covers <strong>ROCK</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 3://Scissors
-									li = "<strong>SCISSORS</strong> cuts <strong>PAPER</strong>, you LOSE!";
-									break;
-								case 4://Lizard
-									li = "<strong>LIZARD</strong> eats <strong>PAPER</strong>, you LOSE!";
-									break;
-								case 5://Spock
-									li = "<strong>PAPER</strong> disproves <strong>SPOCK</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-							}
-							break;
-						case 3://Scissors
-							switch(compChoice){
-								case 1://Rock
-									li = "<strong>PAPER</strong> covers <strong>ROCK</strong>, you LOSE!";
-									break;
-								case 2://Paper
-									li = "<strong>SCISSORS</strong> cuts <strong>PAPER</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 4://Lizard
-									li = "<strong>SCISSORS</strong> decapitates <strong>LIZARD</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 5://Spock
-									li = "<strong>SPOCK</strong> smashes <strong>SCISSORS</strong>, you LOSE!";
-									break;
-							}
-							break;
-						case 4://Lizard
-							switch(compChoice){
-								case 1://Rock
-									li = "<strong>ROCK</strong> crushes <strong>LIZARD</strong>, you LOSE!";
-									break;
-								case 2://Paper
-									li = "<strong>LIZARD</strong> eats <strong>PAPER</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 3://Scissors
-									li = "<strong>SCISSORS</strong> decapitates <strong>LIZARD</strong>, you LOSE!";
-									break;
-								case 5://Spock
-									li = "<strong>LIZARD</strong> poisons <strong>SPOCK</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-							}
-							break;
-						case 5://Spock
-							switch(compChoice){
-								case 1://Rock
-									li = "<strong>SPOCK</strong> vaporizes <strong>ROCK</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 2://Paper
-									li = "<strong>PAPER</strong> disproves <strong>SPOCK</strong>, you LOSE!";
-									break;
-								case 3://Scissors
-									li = "<strong>SPOCK</strong> smashes <strong>SCISSORS</strong>, you WIN!";
-									stat.rpsWins++;
-									break;
-								case 4://Lizard
-									li = "<strong>LIZARD</strong> poisons <strong>SPOCK</strong>, you LOSE!";
-									break;
-							}
-							break;
-					}
-				}
-				if(stat.rpsWins>=10 && !programs.programz.p9.upgrade){
-					programs.programz.p9.upgrade=true;
-					stat.addTitle("Roshambo Master");
-					$("#codeTaskBarTitle").text("Rock Paper Scissors Lizard Spock");
-					$("#lizard").fadeIn(1000);
-					$("#spock").fadeIn(2000);
-					$("#rpsResult").html(li+" You game have been upgraded!");
-				}else{
-					$("#rpsResult").html(li+" You have "+stat.rpsWins+" wins.");
-				}
-			}
-		},
-		p16:{
 			title:"Magic8Ball",
 			
 			elements: function(){
@@ -245,7 +104,181 @@ var programs = {
 					}
 				});
 			}	
+		},
+		p16:{
+			title:"Rock Paper Scissors",
+			upgrade:false,
+			rpsWins:0,
+			elements:function(){
+				$("<button class='codeBtns' id='rock' type='button' onclick='programs.programz.p9.rps(1)'>Rock</button>").css("width","75px").fadeIn(1000).appendTo("#codeTerminal");	
+				$("<button class='codeBtns' id='paper' type='button' onclick='programs.programz.p9.rps(2)'>Paper</button>").css("width","75px").fadeIn(2000).appendTo("#codeTerminal");	
+				$("<button class='codeBtns' id='scissor' type='button' onclick='programs.programz.p9.rps(3)'>Scissor</button>").css("width","75px").fadeIn(3000).appendTo("#codeTerminal");	
+				$("<button class='codeBtns' id='lizard' type='button' onclick='programs.programz.p9.rps(4)'>Lizard</button>").css("width","75px").appendTo("#codeTerminal");	
+				$("<button class='codeBtns' id='spock' type='button' onclick='programs.programz.p9.rps(5)'>Spock</button>").css("width","75px").appendTo("#codeTerminal");
+				$("<p id='rpsResult'>Roshambo!</p>").fadeIn(4000).appendTo("#codeTerminal");	
+			},
+			rps:function(i){
+				var compChoice=Math.floor(Math.random()*3+1);
+				if(programs.programz.p9.upgrade){
+					compChoice=Math.floor(Math.random()*3+1);
+				}
+				var li="ERROR";
+				if(i==compChoice){
+					switch(i){
+						case 1://Rock
+							li = "<strong>ROCK</strong> vs <strong>ROCK</strong>, a TIE...";
+							break;	
+						case 2://Paper
+							li = "<strong>PAPER</strong> vs <strong>PAPER</strong>, a TIE...";
+							break;
+						case 3://Scissors
+							li = "<strong>SCISSORS</strong> vs <strong>SCISSORS</strong>, a TIE...";
+							break;
+						case 4://Lizard
+							li = "<strong>LIZARD</strong> vs <strong>LIZARD</strong>, a TIE...";
+							break;
+						case 5://Spock
+							li = "<strong>SPOCK</strong> vs <strong>SPOCK</strong>, a TIE...";
+							break;
+					}
+				}else{
+					switch(i){
+						case 1://Rock
+							switch(compChoice){
+								case 2://Paper
+									li = "<strong>PAPER</strong> covers <strong>ROCK</strong>, you LOSE!";
+									break;
+								case 3://Scissors
+									li = "<strong>ROCK</strong> crushes <strong>SCISSORS</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 4://Lizard
+									li = "<strong>ROCK</strong> crushes <strong>LIZARD</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 5://Spock
+									li = "<strong>SPOCK</strong> vaporizes <strong>ROCK</strong>, you LOSE!";
+									break;
+							}
+							break;
+						case 2://Paper
+							switch(compChoice){
+								case 1://Rock
+									li = "<strong>PAPER</strong> covers <strong>ROCK</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 3://Scissors
+									li = "<strong>SCISSORS</strong> cuts <strong>PAPER</strong>, you LOSE!";
+									break;
+								case 4://Lizard
+									li = "<strong>LIZARD</strong> eats <strong>PAPER</strong>, you LOSE!";
+									break;
+								case 5://Spock
+									li = "<strong>PAPER</strong> disproves <strong>SPOCK</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+							}
+							break;
+						case 3://Scissors
+							switch(compChoice){
+								case 1://Rock
+									li = "<strong>PAPER</strong> covers <strong>ROCK</strong>, you LOSE!";
+									break;
+								case 2://Paper
+									li = "<strong>SCISSORS</strong> cuts <strong>PAPER</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 4://Lizard
+									li = "<strong>SCISSORS</strong> decapitates <strong>LIZARD</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 5://Spock
+									li = "<strong>SPOCK</strong> smashes <strong>SCISSORS</strong>, you LOSE!";
+									break;
+							}
+							break;
+						case 4://Lizard
+							switch(compChoice){
+								case 1://Rock
+									li = "<strong>ROCK</strong> crushes <strong>LIZARD</strong>, you LOSE!";
+									break;
+								case 2://Paper
+									li = "<strong>LIZARD</strong> eats <strong>PAPER</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 3://Scissors
+									li = "<strong>SCISSORS</strong> decapitates <strong>LIZARD</strong>, you LOSE!";
+									break;
+								case 5://Spock
+									li = "<strong>LIZARD</strong> poisons <strong>SPOCK</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+							}
+							break;
+						case 5://Spock
+							switch(compChoice){
+								case 1://Rock
+									li = "<strong>SPOCK</strong> vaporizes <strong>ROCK</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 2://Paper
+									li = "<strong>PAPER</strong> disproves <strong>SPOCK</strong>, you LOSE!";
+									break;
+								case 3://Scissors
+									li = "<strong>SPOCK</strong> smashes <strong>SCISSORS</strong>, you WIN!";
+									this.rpsWins++;
+									break;
+								case 4://Lizard
+									li = "<strong>LIZARD</strong> poisons <strong>SPOCK</strong>, you LOSE!";
+									break;
+							}
+							break;
+					}
+				}
+				document.getElementById("rock").disabled = true;
+				document.getElementById("paper").disabled = true;
+				document.getElementById("scissors").disabled = true;
+				document.getElementById("lizard").disabled = true;
+				document.getElementById("spock").disabled = true;
+				setTimeout(function(){
+					document.getElementById("rock").disabled = false;
+					document.getElementById("paper").disabled = false;
+					document.getElementById("scissors").disabled = false;
+					document.getElementById("lizard").disabled = false;
+					document.getElementById("spock").disabled = false;
+				},1500);
+				if(this.rpsWins>=10 && !this.upgrade){
+					this.upgrade=true;
+					stat.addTitle("Roshambo Master");
+					this.title="Rock Paper Scissors Lizard Spock";
+					$("#codeTaskBarTitle").text(this.title);
+					$("#lizard").fadeIn(1000);
+					$("#spock").fadeIn(2000);
+					$("#rpsResult").html(li+" You game have been upgraded!");
+				}else{
+					$("#rpsResult").html(li+" You have "+this.rpsWins+" wins.");
+				}
+			}
+		},
+		p25:{
+			title:"Calculator",
+			elements:function(){
+				$("<div id='calcKeys'></div>")
+			},
+			extrafunctions:function(){
+				
+			}
 		}
+		/*TEMPLATE
+		p[numoflines]:{
+			title:"",
+			elements:function(){
+				//function to add elements	
+			},
+			extrafunctions:function(){
+				
+			}
+		}*/
 	},
 	pottyMouth:function(str){
 		if(str.match(/fuck/i)||str.match(/shit/i)||str.match(/cunt/i)||str.match(/faggot/i)||str.match(/dick/i)||str.match(/asshole/i)||str.match(/dipstick/i)||str.match(/bastard/i)||str.match(/bitch/i)||str.match(/cock/i)){

@@ -1,14 +1,6 @@
-var lastCompiledLines=0;
-var bugs=0;
-var debugged=false;
 var runtimeErr=false;
-var bugsSquashed=0;
-var debugExp=4;
-var compiled=false;
-
 var transTime=3000;//should be 3000
 var statusSize=20;//lines of status to save
-
 
 var eventsList=[];
 var codeTermWin;
@@ -19,33 +11,32 @@ var debugBtnIni=false;//bool to initiate the button at beginning
 var firstCodeIni=false;//bool to go through the first code
 
 $(document).ready(function(){
+	//console.log("EVAL TEST:"+eval("4-+5"));
+	//console.log("typeof stat.titles: "+ typeof stat.titles);
 	//testingTime();//testing only
-	//runCodeIndex(2); //testing only
-	//runEventIndex(0); //testing only
+	//runProgramIndex(2); //testing only
+	//runEventIndex(1); //testing only
 	setInterval(function(){
 		gameTick();
 	},
 	100);
 	setTimeout(function(){
-		document.getElementById("printCode").innerHTML = "...Maybe write some code?";
+		$("#printCode").text("...Maybe write some code?");
 	},
-	transTime);//should be 5000
+	transTime);
 	setTimeout(function(){
 		status("Comon, just try it..."); 
 		$("#codeBtn").fadeIn("slow");
 		
 	},
-	transTime*2);//should be 10000
+	transTime*2);
 });
-var gameTickCount=0;
 function gameTick(){
-	gameTickCount++;
-	if(gameTickCount%10==0)
+	stat.gameTickCount++;
+	if(stat.gameTickCount%10==0)
 		gameTickSec();
-	if(gameTickCount%100==0){
+	if(stat.gameTickCount%100==0)
 		gameTick10Sec();
-		gameTickCount=0
-	}
 }
 function gameTickSec(){//triggers ever 10 ticks= 1 second
 
@@ -53,7 +44,7 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 		if(events[eve].active||!events[eve].condition()||!events[eve].chance())//check against active bool, event pre-conditions, and pass the pass the chance evaluation
 			continue;
 		status("Event: "+events[eve].title,5);//status alert
-		var newTermWin = new TermWin(eve,eve+"TaskBar",eve+"TaskBarTitle",events[eve].title,eve+"Btn_",eve+"Btn[]",eve+"Btnx",eve+"Terminal");
+		var newTermWin = new TermWin(eve,eve+"TaskBar",eve+"TaskBarTitle",events[eve].title,eve+"Btn_",eve+"BtnMx",eve+"Btnx",eve+"Terminal");
 		eventsList.push(newTermWin);
 		events[eve].active=true;
 		newTermWin.create("#events");
@@ -70,13 +61,13 @@ function gameTick10Sec(){//triggers ever 10 ticks= 1 second
 function printCode(){
 	var line="ERROR";//error by default
 	var tit="ERROR";
-	if(compiled){
+	if(stat.compiled){
 		line="You have "+stat.codeLine+" lines of COMPILED code.";
 		tit="Feel free to RUN code!";
-	}else if(bugs!=0){
-		line="You have " + stat.codeLine + " lines of code, with "+ bugs + " compilation errors.";
+	}else if(stat.bugs!=0){
+		line="You have " + stat.codeLine + " lines of code, with "+ stat.bugs + " compilation errors.";
 		tit="DEBUG to squash bugs!";
-	}else if(debugged){
+	}else if(stat.debugged){
 		line="You have "+stat.codeLine+" lines of DEBUGGED code.";
 		tit="Needs to be reCOMPILED.";
 	}else{
@@ -89,7 +80,7 @@ function printCode(){
 function code() {
 	console.log("CODE");
 	disableButton();
-	progressBarDown(stat.codeSpeed,"Coding...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(stat.codeSpeed,"Coding...","code");
 	setTimeout(function(){
 		status("You wrote one line of code!");
 		stat.codeLine++;
@@ -111,9 +102,9 @@ function code() {
 			if((stat.codeSpeed-0.2)>=0.2)
 				stat.codeSpeed-=0.2;	
 		}
-		bugs=0;
-		debugged=false;
-		compiled=false;
+		stat.bugs=0;
+		stat.debugged=false;
+		stat.compiled=false;
 		if(stat.codeLine>=programs.programLineList[stat.programsWritten])
 			status("Your wrote enough lines for a new program!",5);
 		printCode();
@@ -124,7 +115,7 @@ function code() {
 function compile(){
 	console.log("COMPILE");
 	disableButton();
-	progressBarDown(stat.compileSpeed*stat.codeLine,"Compiling...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(stat.compileSpeed*stat.codeLine,"Compiling...","code");
 	setTimeout(function(){
 		status("You compiled your code!");
 		if(!runBtnIni){//initiate the run button after first code
@@ -136,31 +127,31 @@ function compile(){
 				document.getElementById("codeBtn").disabled = true;//disable code button
 				document.getElementById("compileBtn").disabled = true;//disable compile button
 				runBtnIni=true;
-				compiled=true;
+				stat.compiled=true;
 				printCode();
 			},
 			transTime);	
 			return;
 		}
-		if(bugs==0&&!debugged){
-			var dbugs=Math.random()*(stat.codeLine-lastCompiledLines*0.9);
-			bugs=Math.floor(dbugs);//refresh code not compiled
+		if(stat.bugs==0&&!stat.debugged){
+			var dbugs=Math.random()*(stat.codeLine-stat.lastCompiledLines*0.9);
+			stat.bugs=Math.floor(dbugs);//refresh code not compiled
 			console.log("compiler dbugs:"+dbugs);
 		}
-		else if(bugs==0&&debugged){
-			var experienceMod=(85-bugsSquashed*0.2)/100;
-			if(bugsSquashed>(80*5))
+		else if(stat.bugs==0&&stat.debugged){
+			var experienceMod=(85-stat.bugsSquashed*0.2)/100;
+			if(stat.bugsSquashed>(80*5))
 				experienceMod=0.03;
 			console.log("experienceMod:"+experienceMod);
 			var ddbugs =Math.random()*stat.codeLine*0.1*experienceMod;
-			bugs=Math.floor(ddbugs);//debugged code, still may have bugs\
+			stat.bugs=Math.floor(ddbugs);//debugged code, still may have bugs\
 			console.log("recompile ddbugs:"+ddbugs);
-			console.log("bugs:"+bugs);
-			debugged=false;
+			console.log("bugs:"+stat.bugs);
+			stat.debugged=false;
 		}
-		if(bugs==0){
-			compiled=true;
-			lastCompiledLines=stat.codeLine;
+		if(stat.bugs==0){
+			stat.compiled=true;
+			stat.lastCompiledLines=stat.codeLine;
 		}
 		printCode();
 		enableButton();
@@ -170,7 +161,7 @@ function compile(){
 function run(){
 	console.log("RUN");
 	disableButton();
-	progressBarDown(stat.runSpeed*stat.codeLine,"Running...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(stat.runSpeed*stat.codeLine,"Running...","code");
 	setTimeout(function(){
 		if(!debugBtnIni){//initiate the debug button after first code
 			setTimeout(function(){
@@ -201,7 +192,7 @@ function debug(){
 	console.log("debugTime: " +debugTime);
 	console.log("DEBUG");//debugging
 	disableButton();
-	progressBarDown(debugTime,"Debugging...","codeProgressBar","codeProgressBarStatus");
+	progressBarDown(debugTime,"Debugging...","code");
 	setTimeout(function(){
 		if(!firstCodeIni){//initiate the debug button after first code
 			setTimeout(function(){
@@ -210,36 +201,39 @@ function debug(){
 				codeTermWin.showCloseBtn();
 				firstCodeIni=true;
 				document.getElementById("codeBtn").disabled = false;//enable code button
+				$("#mainCode").addClass("terminalWindow");
+				$("#mainTitle").addClass("taskBar");
+				$("#mainTerm").addClass("terminal");
 			},
 			transTime);	
 		}else if(runtimeErr){
 				status("RUNTIME ERROR");//to be implemented	
 		}else{
-			var debugChance=50+bugsSquashed;
+			var debugChance=50+stat.bugsSquashed;
 			if((Math.random()*100+1)<=debugChance){
 				var debugPower = Math.random()*100+1;
 				if(debugPower<=5){
 					status("No error removed...");
-				}else if(debugPower<=15 && bugs>=3){
-					bugs-=3;
-					bugsSquashed+=3;
+				}else if(debugPower<=15 && stat.bugs>=3){
+					stat.bugs-=3;
+					stat.bugsSquashed+=3;
 					status("Three errors removed...",3);
-				}else if(debugPower<=30 && bugs>=2){
-					bugs-=2;
-					bugsSquashed+=2;
+				}else if(debugPower<=30 && stat.bugs>=2){
+					stat.bugs-=2;
+					stat.bugsSquashed+=2;
 					status("Two errors removed...",2);
 				}else{
-					bugs-=1;
-					bugsSquashed+=1;
+					stat.bugs-=1;
+					stat.bugsSquashed+=1;
 					status("One error removed...",1);	
 				}
 			}else{
 				status("No error removed...");	
 			}
-			if(bugs==0)
-				debugged=true;
-			if(bugsSquashed>=debugExp){
-				debugExp*=2;
+			if(stat.bugs==0)
+				stat.debugged=true;
+			if(stat.bugsSquashed>=stat.debugExp){
+				stat.debugExp*=2;
 				status("You are faster at debugging your code now!",4);
 				if((stat.debugSpeed-0.2)>=0.2)
 					stat.debugSpeed-=0.2;
@@ -250,8 +244,10 @@ function debug(){
 	},
 	debugTime*1000);
 }
-function status(strStatus, importance){
-	var list = document.getElementById("status");
+function status(strStatus, importance,id){
+	if(!id)
+		id="status";
+	var list = document.getElementById(id);
 	if(list.firstChild && list.firstChild.innerHTML.search(strStatus)!=-1){
 		if(list.firstChild.innerHTML==strStatus){
 			list.firstChild.innerHTML = strStatus+"(x2)";
@@ -289,28 +285,12 @@ function enableButton(){
 	if(!(stat.codeLine>=programs.programLineList[stat.programsWritten])){
 		document.getElementById("codeBtn").disabled = false;//enable code button
 	}
-	if(!compiled&&bugs==0)
+	if(!stat.compiled&&stat.bugs==0)
 		document.getElementById("compileBtn").disabled = false;//enable compile button
-	if(bugs>0||runtimeErr||!firstCodeIni)
+	if(stat.bugs>0||runtimeErr||!firstCodeIni)
 		document.getElementById("debugBtn").disabled = false;//enable debug button
-	if(bugs==0 && compiled)
+	if(stat.bugs==0 && stat.compiled)
 		document.getElementById("runBtn").disabled = false;//enable run button
-}
-function progressBarDown(totalTime,operation,barId,statusId){
-	$("#"+barId).css('width','400px');
-	$("#"+barId).show();
-	document.getElementById(statusId).style.visibility="visible";//make the progressbarStatus visible
-	var countDown = totalTime;
-	$("#"+barId).animate({width:'0px'},totalTime*1000-1);
-	var countDowner = setInterval(function(){
-		countDown-=0.02;
-		document.getElementById(statusId).innerHTML = operation+"(" + countDown.toFixed(2) + ")";
-	},20);
-	setTimeout(function(){
-		clearInterval(countDowner);
-		$("#"+barId).hide();
-		document.getElementById(statusId).style.visibility="hidden";//hides the progressbarstatus
-	},totalTime*1000);
 }
 function runCode(){
 	var programLineIndex=-1;
@@ -331,7 +311,7 @@ function runCode(){
 	programs.programz["p"+programLineIndex].elements();
 	status("Running code...");
 }
-function runCodeIndex(programIndex){//used for testing only
+function runProgramIndex(programIndex){//used for testing only
 	var pline = programs.programLineList[programIndex];
 	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+pline].title,"codeBtn_","codeBtnMx","codeBtnx","codeTerminal");
 	codeTermWin.create("#codeProgram");
@@ -341,12 +321,19 @@ function runCodeIndex(programIndex){//used for testing only
 function runEventIndex(eventid){//testing only
 	var eventname = "event"+eventid;
 	status("Event: "+events[eventname].title,5);//status alert
-	var newTermWin = new TermWin(eventname,eventname+"TaskBar",eventname+"TaskBarTitle",events[eventname].title,eventname+"Btn_",eventname+"Btnx",eventname+"Terminal");
+	var newTermWin = new TermWin(eventname,eventname+"TaskBar",eventname+"TaskBarTitle",events[eventname].title,eventname+"Btn_",eventname+"BtnMx",eventname+"Btnx",eventname+"Terminal");
 	eventsList.push(newTermWin);
 	events[eventname].active=true;
 	newTermWin.create("#events");
 	newTermWin.eventContent(eventname);
 	stat.update();
+}
+function saveGame(){
+	saveCookie(stat,"stat");
+	loadCookie(stat,"stat");
+}
+function loadGame(){
+		
 }
 function testingTime(){
 	stat.codeLine=0;
@@ -362,7 +349,5 @@ function testingTime(){
 	
 	
 }
-
-
 
 

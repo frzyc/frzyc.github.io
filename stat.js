@@ -1,19 +1,34 @@
 var stat = {
+	gameTickCount:0,
+	
 	codeLine:0,
 	programsWritten:0,
 	money:0.0,
-	codeSpeed:5,//should be 5 seconds
+	bitCoin:0,
+	codeSpeed:5,
 	codeExp:5,
-	compileSpeed:0.5,//shoule be 0.5 seconds
-	debugSpeed:5,//should be 5 seconds
-	runSpeed:0.5,//should be 0.5 seconds
+	compileSpeed:0.5,
+	debugSpeed:5,
+	runSpeed:0.5,
 	
-	rpsWins:0,
+	lastCompiledLines:0,
+	bugs:0,
+	debugged:false,
+	bugsSquashed:0,
+	debugExp:4,
+	compiled:false,
 	
 	name:"Player",
 	gender:"male",
-	titles:["Basement Dweller"],
+	titles:["Basement Dweller","stuff"],
 	ini:false,
+	skill:{
+		game:0,
+		software:0,
+		web:0,
+		userInterface:0,
+		graphics:0	
+	},
 	update: function(){
 		if(this.gender==="male")
 			$("#statName").text(this.name+"(M)");
@@ -35,7 +50,7 @@ var stat = {
 		}else
 			$("#statTitle").text(this.titles[this.titles.length-1]);		
 		$("#statMoney").text("Money: "+stat.money);
-		$("#statBitCoin").text("BitCoins: "+stat.money);
+		$("#statBitCoin").text("BitCoins: "+stat.bitCoin);
 				
 		if(this.name!="Player" && $("#statName").is(":hidden")){
 			$("#statName").fadeIn("Slow");
