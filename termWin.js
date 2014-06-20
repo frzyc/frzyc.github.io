@@ -14,7 +14,8 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, maxBtnId, closeBtnId, 
 	this.eventContent=function(eve){
 		var content = $("<p><strong>Description: </strong>"+events[eve].description+"</p><p><strong>Risk: </strong>"+events[eve].risk+"</p>");
 		var $reward = $("<p id="+eve+"Reward><strong>Reward: </strong>"+events[eve].reward+"</p>");
-		var $penalty = $("<p id="+eve+"Penalty><strong>Penalty: </strong>"+events[eve].penalty+"</p>");
+		if(events[eve].declineBtn)
+			var $penalty = $("<p id="+eve+"Penalty><strong>Penalty: </strong>"+events[eve].penalty+"</p>");
 		$("#"+eve+"Terminal").append(content);
 		this.$acceptBtn = $('<button/>', {
 			type: 'button',
@@ -38,35 +39,40 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, maxBtnId, closeBtnId, 
 				$("#"+eve+"Reward").hide("fast");
 			}
 		});
-		this.$declineBtn = $('<button/>', {
-			type: 'button',
-			'class': 'codeBtns',
-			id: eve+'Decline',
-			text: 'Decline',
-			click: function() {
-				console.log("clicked decline id: "+this.id);
-				$(this).hide();
-				$("#"+eve+'Accept').fadeOut("fast");
-				$("#"+eve+"Reward").remove();
-				$("#"+eve+"Penalty").remove();
-				events[eve].decline();
-				closeTerm(eve);
-			},
-			mouseenter: function(){
-				console.log("mouseover");
-				$("#"+eve+"Penalty").show("fast");
-			},
-			mouseleave: function(){
-				console.log("mouseleave");
-				$("#"+eve+"Penalty").hide("fast");
-			}
-		});
+		if(events[eve].declineBtn){
+			this.$declineBtn = $('<button/>', {
+				type: 'button',
+				'class': 'codeBtns',
+				id: eve+'Decline',
+				text: 'Decline',
+				click: function() {
+					console.log("clicked decline id: "+this.id);
+					$(this).hide();
+					$("#"+eve+'Accept').fadeOut("fast");
+					$("#"+eve+"Reward").remove();
+					$("#"+eve+"Penalty").remove();
+					events[eve].decline();
+					closeTerm(eve);
+				},
+				mouseenter: function(){
+					console.log("mouseover");
+					$("#"+eve+"Penalty").show("fast");
+				},
+				mouseleave: function(){
+					console.log("mouseleave");
+					$("#"+eve+"Penalty").hide("fast");
+				}
+			});
+		}
 		$("#"+eve+"Terminal").append(this.$acceptBtn);
+		if(events[eve].declineBtn)
 		$("#"+eve+"Terminal").append(this.$declineBtn);
 		$reward.hide().appendTo("#"+eve+"Terminal");
-		$penalty.hide().appendTo("#"+eve+"Terminal");
+		if(events[eve].declineBtn)
+			$penalty.hide().appendTo("#"+eve+"Terminal");
 		$("#"+eve+"Accept").fadeIn();
-		$("#"+eve+"Decline").fadeIn("slow");
+		if(events[eve].declineBtn)
+			$("#"+eve+"Decline").fadeIn("slow");
 		
 	}
 	this.hideMinBtn = function(){

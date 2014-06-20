@@ -20,7 +20,7 @@ var stat = {
 	
 	name:"Player",
 	gender:"male",
-	titles:["Basement Dweller","stuff"],
+	titles:["Basement Dweller"],
 	ini:false,
 	skill:{
 		game:0,
@@ -29,7 +29,17 @@ var stat = {
 		userInterface:0,
 		graphics:0	
 	},
+	computer:{
+		computerCase:0,
+		cpu:1,	
+		storage:1,
+		graphics:0,
+		api:1,
+		ram:1,
+		keyboard:1
+	},
 	update: function(){
+		//update values
 		if(this.gender==="male")
 			$("#statName").text(this.name+"(M)");
 		else if(this.gender==="female")
@@ -51,7 +61,8 @@ var stat = {
 			$("#statTitle").text(this.titles[this.titles.length-1]);		
 		$("#statMoney").text("Money: "+stat.money);
 		$("#statBitCoin").text("BitCoins: "+stat.bitCoin);
-				
+		
+		//show as values change		
 		if(this.name!="Player" && $("#statName").is(":hidden")){
 			$("#statName").fadeIn("Slow");
 			$("#statTitle").fadeIn("Slow");
@@ -59,8 +70,15 @@ var stat = {
 		if(this.money>0 && $("#statMoney").is(":hidden"))
 			$("#statMoney").fadeIn("Slow");
 		if(this.bitCoin>0 && $("#statBitCoin").is(":hidden"))
-			$("#statBitCoin").fadeIn("Slow");				
-
+			$("#statBitCoin").fadeIn("Slow");
+		if(!$( "#rightWin" ).hasClass("terminalWindow")&&($("#statName").is(":visible")||$("#statMoney").is(":visible")||$("#statBitCoin").is(":visible"))){
+			$("#rightWin").fadeOut("fast", function(){
+				$(this).addClass("terminalWindow").fadeIn("slow");
+				$("#rightBar").addClass("taskBar");
+				$("#statName").addClass("taskBarTitle");
+				$("#rightTerminal").addClass("terminal");
+			});	
+		}		
 	},
 	addTitle:function(str){
 		for(s in stat.titles){

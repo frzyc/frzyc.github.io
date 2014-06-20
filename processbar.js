@@ -1,5 +1,5 @@
 function progressBarDown(totalTime,operation,id){
-	$("#"+id+"ProgressBar").css('width','400px');
+	$("#"+id+"ProgressBar").css('width','390px');
 	$("#"+id+"ProgressBar").show();
 	document.getElementById(id+"ProgressBarStatus").style.visibility="visible";//make the progressbarStatus visible
 	var countDown = totalTime;

@@ -14,8 +14,8 @@ $(document).ready(function(){
 	//console.log("EVAL TEST:"+eval("4-+5"));
 	//console.log("typeof stat.titles: "+ typeof stat.titles);
 	//testingTime();//testing only
-	//runProgramIndex(2); //testing only
-	//runEventIndex(1); //testing only
+	//runProgramIndex(1); //testing only
+	//runEventIndex(0); //testing only
 	setInterval(function(){
 		gameTick();
 	},
@@ -92,6 +92,7 @@ function code() {
 				document.getElementById("codeBtn").disabled = true;//disable code button
 				compileBtnIni=true;
 				printCode();
+				$("#progress").hide().css({"border":"2px solid grey","border-radius":"5px"}).fadeIn("slow");
 			},
 			transTime);
 			return;	
@@ -176,14 +177,15 @@ function run(){
 				document.getElementById("compileBtn").disabled = true;//disable compile button
 				document.getElementById("runBtn").disabled = true;//disable run button
 				debugBtnIni=true;
+				$("#status").css("border-bottom","1px solid black");
 			},
 			transTime);	
-		}else{
-			stat.programsWritten++;
-			runCode();
-			printCode();
-			enableButton();
+			return;
 		}
+		stat.programsWritten++;
+		runCode();
+		printCode();
+		enableButton();
 	},
 	stat.runSpeed*stat.codeLine*1000);
 }
@@ -201,46 +203,53 @@ function debug(){
 				codeTermWin.showCloseBtn();
 				firstCodeIni=true;
 				document.getElementById("codeBtn").disabled = false;//enable code button
-				$("#mainCode").addClass("terminalWindow");
-				$("#mainTitle").addClass("taskBar");
-				$("#mainTerm").addClass("terminal");
+				$("#mainCode").fadeOut("fast",function(){
+					$(this).addClass("terminalWindow").fadeIn("slow");
+					$("#mainTitle").addClass("taskBar");
+					$("#printCode").addClass("taskBarTitle");
+					$("mainTerm").addClass("terminal");
+					$("#status li").css("border-bottom","1px solid #CCCCCC");
+				});
+              	
 			},
 			transTime);	
-		}else if(runtimeErr){
-				status("RUNTIME ERROR");//to be implemented	
-		}else{
-			var debugChance=50+stat.bugsSquashed;
-			if((Math.random()*100+1)<=debugChance){
-				var debugPower = Math.random()*100+1;
-				if(debugPower<=5){
-					status("No error removed...");
-				}else if(debugPower<=15 && stat.bugs>=3){
-					stat.bugs-=3;
-					stat.bugsSquashed+=3;
-					status("Three errors removed...",3);
-				}else if(debugPower<=30 && stat.bugs>=2){
-					stat.bugs-=2;
-					stat.bugsSquashed+=2;
-					status("Two errors removed...",2);
-				}else{
-					stat.bugs-=1;
-					stat.bugsSquashed+=1;
-					status("One error removed...",1);	
-				}
-			}else{
-				status("No error removed...");	
-			}
-			if(stat.bugs==0)
-				stat.debugged=true;
-			if(stat.bugsSquashed>=stat.debugExp){
-				stat.debugExp*=2;
-				status("You are faster at debugging your code now!",4);
-				if((stat.debugSpeed-0.2)>=0.2)
-					stat.debugSpeed-=0.2;
-			}
-			printCode();
-			enableButton();
+			return;
 		}
+		if(runtimeErr){
+			status("RUNTIME ERROR");//to be implemented	
+			return;
+		}
+		var debugChance=50+stat.bugsSquashed;
+		if((Math.random()*100+1)<=debugChance){
+			var debugPower = Math.random()*100+1;
+			if(debugPower<=5){
+				status("No error removed...");
+			}else if(debugPower<=15 && stat.bugs>=3){
+				stat.bugs-=3;
+				stat.bugsSquashed+=3;
+				status("Three errors removed...",3);
+			}else if(debugPower<=30 && stat.bugs>=2){
+				stat.bugs-=2;
+				stat.bugsSquashed+=2;
+				status("Two errors removed...",2);
+			}else{
+				stat.bugs-=1;
+				stat.bugsSquashed+=1;
+				status("One error removed...",1);	
+			}
+		}else{
+			status("No error removed...");	
+		}
+		if(stat.bugs==0)
+			stat.debugged=true;
+		if(stat.bugsSquashed>=stat.debugExp){
+			stat.debugExp*=2;
+			status("You are faster at debugging your code now!",4);
+			if((stat.debugSpeed-0.2)>=0.2)
+				stat.debugSpeed-=0.2;
+		}
+		printCode();
+		enableButton();
 	},
 	debugTime*1000);
 }
@@ -330,10 +339,9 @@ function runEventIndex(eventid){//testing only
 }
 function saveGame(){
 	saveCookie(stat,"stat");
-	loadCookie(stat,"stat");
 }
 function loadGame(){
-		
+	loadCookie(stat,"stat");
 }
 function testingTime(){
 	stat.codeLine=0;
@@ -346,8 +354,6 @@ function testingTime(){
 	stat.debugSpeed=0.1;
 	stat.runSpeed=0.1;
 	transTime=100;
-	
-	
 }
 
 

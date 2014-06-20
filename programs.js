@@ -21,10 +21,9 @@ var programs = {
 		p4:{
 			title:"NameCaller",
 			elements: function(){
-				var $ele = $("<form id='nameForm'><div>Name:<input type='text'><br><input type='radio' name='gender' value='male' checked='checked'>Male<br><input type='radio' name='gender' value='female'>Female<button type='button'>Submit</button></div></form>");
+				var $ele = $("<div id='nameForm'><div>Name:<input type='text'><br><input type='radio' name='gender' value='male' checked='checked'>Male<br><input type='radio' name='gender' value='female'>Female<button type='button'>Submit</button></div></div>");
 				$("#codeTerminal").append($ele);
 				$("<p></p>").hide().appendTo("#nameForm");
-				$("#nameForm").submit(function() { return false; });//disable pressing enter and refreshing the page
 				$("#nameForm button").click(function( event ) {
 					if($("#nameForm input").val()==="")
 						$( "#nameForm p" ).text( "Invalid input" ).show();
@@ -42,7 +41,7 @@ var programs = {
 			title:"Magic8Ball",
 			
 			elements: function(){
-				var $ele = $("<form id='questionForm'><div>Question:<input type='text'><button type='button'>Ask the Magic 8 Ball</button></form>");
+				var $ele = $("<div id='questionForm'><div>Question:<input type='text'><button type='button'>Ask the Magic 8 Ball</button></div>");
 				$("#codeTerminal").append($ele);	
 				$("<p></p>").hide().appendTo("#questionForm");
 				$("#questionForm").submit(function() { return false; });//disable pressing enter and refreshing the page

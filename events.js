@@ -14,7 +14,7 @@ var events = {
 		accept:function(){ 
 			console.log("ACCEPT EVENT0");
 			$("#event0Terminal").empty();
-			$("<div><div class='progressBar' id='eventProgressBar'></div><p class='progressbarStatus' id='eventProgressBarStatus'>0%</p></div><form><label for='target'>Start mashing your keys:</label><input id='target' type='text'></form>").appendTo("#event0Terminal");
+			$("<div><div class='progressBar' id='eventProgressBar'></div><p class='progressbarStatus' id='eventProgressBarStatus'>0%</p></div><label for='target'>Start mashing your keys:</label><input id='target' type='text'>").appendTo("#event0Terminal");
 			var triggered=0;
 			var lastkey=0;
 			var keys=500;
@@ -57,8 +57,31 @@ var events = {
 		active: false
 	},
 	event1:{
+		title:"Package delivery",
+		description:"A slightly wet box covered in duct tape arrived at your door. The note: \"ah heard fum yer parents yo' been in thet basement makin' them programs doohikies, so gotcha one of them calculato' computers off a yardsale. Hope this done make up fo' a dozen o' so missed birthdates. --Yer uncle & cousin Billy Bob Jo'\"",
+		risk:"Box cutters.",
+		reward:"A less-crappy computer than you have right here, FREE UPGRADE! Also, a bag of loose change.",
+		declineBtn:false,
+		condition:function(){
+			 return stat.codeLine>=10;
+		},
+		chance:function(){ 
+			return (Math.random()*100+1)<30;
+		},
+		accept:function(){ 
+			console.log("ACCEPT EVENT1");
+			$("#event1").remove();
+			stat.computer.computerCase++;
+			stat.money+=34.87;
+		},
+		decline:function(){ 
+			console.log("DECLINE EVENT1");
+		},
+		active: false
+	},
+	event2:{
 		title:"Gold farming simulator 2014",
-		description:"Your experience with online video games and your brief introduction to coding have made you... not very desirable at all. But they want a program that exploits the game for gold and you are the one they asked for.",
+		description:"Your experience with online video games and your brief introduction to coding have made you... not very desirable at all. But they want a program that exploits the game for gold and you are the one they asked for the task.",
 		risk:"Future game patch that breaks your program, and potential banhammer--Say goodbye to your lvl 78 paladin.",
 		reward:"10 bitcoins, 3% share of gold farmed, and some very infrequent donations on the game forums",
 		penalty:"\"duude, you are such a noob...\"",
@@ -66,21 +89,21 @@ var events = {
 			 return stat.codeLine>16;
 		},
 		chance:function(){ 
-			return (Math.random()*100+1)<(stat.codeLine*0.3);
+			return (Math.random()*100+1)<(stat.codeLine*0.2);
 		},
 		accept:function(){ 
-			console.log("ACCEPT EVENT1");
+			console.log("ACCEPT EVENT2");
 			$("#event1Terminal").empty();
-			$("#event1Btnx").hide();
-			$("<p id='event1Report'></p><br>").hide().appendTo("#event1Terminal").fadeIn(1000);
-			$("<ul id='event1status'></ul>").hide().appendTo("#event1Terminal").fadeIn(2000);
-			createProgressbar("event0").appendTo("#event1Terminal");
-			$("<button class='codeBtns' id='event0Btn' type='button' >Program</button>").hide().appendTo("#event1Terminal").fadeIn(2000);
+			$("#event2Btnx").hide();
+			$("<p id='event2Report'></p><br>").hide().appendTo("#event2Terminal").fadeIn(1000);
+			$("<ul id='event2status'></ul>").hide().appendTo("#event2Terminal").fadeIn(2000);
+			createProgressbar("event2").appendTo("#event2Terminal");
+			$("<button class='codeBtns' id='event2Btn' type='button' >Program</button>").hide().appendTo("#event2Terminal").fadeIn(2000);
 			
 			stat.bitCoin+=10.0;
 		},
 		decline:function(){ 
-			console.log("DECLINE EVENT1");
+			console.log("DECLINE EVENT2");
 			stat.addTitle("Paladin Noob");
 			active:true;
 		},

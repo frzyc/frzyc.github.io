@@ -25,10 +25,7 @@ function loadCookie(ob,obname){
 		}else if(typeof ob[prop]==="number"){
 			ob[prop]=Number(readCookie(obname+"."+prop));
 		}else if(typeof ob[prop]==="boolean"){
-			if(readCookie(obname+"."+prop)==="true")
-				ob[prop]=true;
-			else
-				ob[prop]=false;
+			ob[prop] = (readCookie(obname+"."+prop)==="true") ? true : false;
 		}
 		console.log("LOADING "+obname+"."+prop+" VALUE: "+ob[prop]);
 	}
