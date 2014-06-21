@@ -61,6 +61,11 @@ var stat = {
 			$("#statTitle").text(this.titles[this.titles.length-1]);		
 		$("#statMoney").text("Money: "+stat.money);
 		$("#statBitCoin").text("BitCoins: "+stat.bitCoin);
+		if($("#skills li").length==0){
+			for(s in stat.skill)
+				$("<li id='skill"+s+"'>"+s+": "+stat.skill[s]+"</li>").hide().appendTo("#skills");
+			console.log("skills list generated");
+		}
 		
 		//show as values change		
 		if(this.name!="Player" && $("#statName").is(":hidden")){
@@ -78,7 +83,19 @@ var stat = {
 				$("#statName").addClass("taskBarTitle");
 				$("#rightTerminal").addClass("terminal");
 			});	
-		}		
+		}	
+		for(s in stat.skill){
+			$("#skill"+s).text(s+": "+stat.skill[s]);
+			if(stat.skill[s]>0 && $("#skill"+s).is(":hidden")){
+				$("#skill"+s).fadeIn("slow");
+				if($("#skillsBtn").is(":hidden")){
+					$("#skillsBtn").fadeIn("slow");
+					$("#skillsBtn").click(function(){
+						$("#skills").toggle("slow");
+					});
+				}
+			}
+		}
 	},
 	addTitle:function(str){
 		for(s in stat.titles){

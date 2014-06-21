@@ -63,7 +63,7 @@ var events = {
 		reward:"A less-crappy computer than you have right here, FREE UPGRADE! Also, a bag of loose change.",
 		declineBtn:false,
 		condition:function(){
-			 return stat.codeLine>=10;
+			 return stat.codeLine>15;
 		},
 		chance:function(){ 
 			return (Math.random()*100+1)<30;
@@ -73,6 +73,7 @@ var events = {
 			$("#event1").remove();
 			stat.computer.computerCase++;
 			stat.money+=34.87;
+			graphics(1);
 		},
 		decline:function(){ 
 			console.log("DECLINE EVENT1");

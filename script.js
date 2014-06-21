@@ -92,7 +92,7 @@ function code() {
 				document.getElementById("codeBtn").disabled = true;//disable code button
 				compileBtnIni=true;
 				printCode();
-				$("#progress").hide().css({"border":"2px solid grey","border-radius":"5px"}).fadeIn("slow");
+				$("#progress").hide().css({"border":"1px solid grey"}).fadeIn("slow");
 			},
 			transTime);
 			return;	
@@ -354,6 +354,35 @@ function testingTime(){
 	stat.debugSpeed=0.1;
 	stat.runSpeed=0.1;
 	transTime=100;
+}
+function graphics(level){
+	if(level==1){
+		$(".progress").hide().css({
+			"border":"2px solid grey",
+			"border-radius":"5px"
+		}).fadeIn("slow");
+		$(".progressBar").hide().css({
+			"border":"2px solid #666666",
+			"border-radius":"5px" 
+		});
+		$(".codeBtns").hide().css({
+			"border":"2px solid",
+			"border-radius":"5px",
+			"border-color":"grey"
+		}).fadeIn("slow");
+		$(".terminalWindow").hide().css({
+			"border-radius":"5px",
+			"border-style":"double",
+			"border-color":"black"
+		}).fadeIn("slow");
+		$(".taskBtn").hide().css({
+			"border-color":"black",
+			"border-radius":"5px",
+			"border":"1px solid"
+		}).fadeIn("slow");
+	}else if(level==2){
+		
+	}
 }
 
 
