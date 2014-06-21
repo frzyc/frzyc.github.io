@@ -166,7 +166,6 @@ function run(){
 	setTimeout(function(){
 		if(!debugBtnIni){//initiate the debug button after first code
 			setTimeout(function(){
-				stat.programsWritten++;
 				runCode();
 				codeTermWin.hideCloseBtn();
 				codeTermWin.hideMaxBtn();
@@ -303,9 +302,11 @@ function enableButton(){
 }
 function runCode(){
 	var programLineIndex=-1;
-	for(var ind in programs.programLineList){
-		if(stat.codeLine>=programs.programLineList[ind])
-			programLineIndex = programs.programLineList[ind];
+	for(var i=0;i<programs.programLineList.length;i++){
+		if(stat.codeLine>=programs.programLineList[i]){
+			programLineIndex = programs.programLineList[i];
+			stat.programsWritten=i+1;
+		}
 		else
 			break;
 	}//once break out of the loop, the program would be the one the code can run
