@@ -3,7 +3,7 @@ var stat = {
 	
 	codeLine:0,
 	programsWritten:0,
-	money:0.0,
+	money:0.00,
 	bitCoin:0,
 	codeSpeed:5,
 	codeExp:5,
@@ -59,7 +59,7 @@ var stat = {
 			});
 		}else
 			$("#statTitle").text(this.titles[this.titles.length-1]);		
-		$("#statMoney").text("Money: "+stat.money);
+		$("#statMoney").text("Money: "+stat.money.toFixed(2));
 		$("#statBitCoin").text("BitCoins: "+stat.bitCoin);
 		if($("#skills li").length==0){
 			for(s in stat.skill)

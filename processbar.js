@@ -15,5 +15,5 @@ function progressBarDown(totalTime,operation,id){
 	},totalTime*1000);
 }
 function createProgressbar(name){
-	return $("<div id='"+name+"progress'><div class='progressBar' id='"+name+"ProgressBar'></div><p class='progressbarStatus' id='"+name+"ProgressBarStatus'></p></div>");
+	return $("<div class='progress' id='"+name+"Progress'><div class='progressBar' id='"+name+"ProgressBar'></div><p class='progressbarStatus' id='"+name+"ProgressBarStatus'></p></div>");
 }

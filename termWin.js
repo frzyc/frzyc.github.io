@@ -66,7 +66,7 @@ function TermWin(id, taskBarId, titleId, title, minBtnId, maxBtnId, closeBtnId, 
 		}
 		$("#"+eve+"Terminal").append(this.$acceptBtn);
 		if(events[eve].declineBtn)
-		$("#"+eve+"Terminal").append(this.$declineBtn);
+			$("#"+eve+"Terminal").append(this.$declineBtn);
 		$reward.hide().appendTo("#"+eve+"Terminal");
 		if(events[eve].declineBtn)
 			$penalty.hide().appendTo("#"+eve+"Terminal");

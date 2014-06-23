@@ -15,7 +15,7 @@ $(document).ready(function(){
 	//console.log("typeof stat.titles: "+ typeof stat.titles);
 	//testingTime();//testing only
 	//runProgramIndex(1); //testing only
-	//runEventIndex(0); //testing only
+	//runEventIndex(3); //testing only
 	setInterval(function(){
 		gameTick();
 	},
@@ -48,6 +48,7 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 		eventsList.push(newTermWin);
 		events[eve].active=true;
 		newTermWin.create("#events");
+		newTermWin.hideCloseBtn();
 		newTermWin.eventContent(eve);
 	}
 	stat.update();
@@ -92,7 +93,9 @@ function code() {
 				document.getElementById("codeBtn").disabled = true;//disable code button
 				compileBtnIni=true;
 				printCode();
-				$("#progress").hide().css({"border":"1px solid grey"}).fadeIn("slow");
+				$(".progress").css({"border":"1px solid grey"});
+				$("#progress").hide().fadeIn("slow");
+				
 			},
 			transTime);
 			return;	
@@ -176,7 +179,7 @@ function run(){
 				document.getElementById("compileBtn").disabled = true;//disable compile button
 				document.getElementById("runBtn").disabled = true;//disable run button
 				debugBtnIni=true;
-				$("#status").css("border-bottom","1px solid black");
+				$(".status").css("border-bottom","1px solid black");
 			},
 			transTime);	
 			return;
@@ -206,8 +209,8 @@ function debug(){
 					$(this).addClass("terminalWindow").fadeIn("slow");
 					$("#mainTitle").addClass("taskBar");
 					$("#printCode").addClass("taskBarTitle");
-					$("mainTerm").addClass("terminal");
-					$("#status li").css("border-bottom","1px solid #CCCCCC");
+					$("#mainTerm").addClass("terminal");
+					$(".status li").css("border-bottom","1px solid #CCCCCC");
 				});
               	
 			},
@@ -252,9 +255,12 @@ function debug(){
 	},
 	debugTime*1000);
 }
-function status(strStatus, importance,id){
+function status(strStatus, importance,id,size){
 	if(!id)
 		id="status";
+	if(!size)
+		size = statusSize;
+	console.log("STATUS FOR: "+id);
 	var list = document.getElementById(id);
 	if(list.firstChild && list.firstChild.innerHTML.search(strStatus)!=-1){
 		if(list.firstChild.innerHTML==strStatus){
@@ -270,16 +276,16 @@ function status(strStatus, importance,id){
 	}else{
 		if(!importance)
 			importance=0;
-		$("<li>"+strStatus+"</li>").css("color","rgb("+importance*51+",0,0)").prependTo("#status");
+		$("<li>"+strStatus+"</li>").css("color","rgb("+importance*51+",0,0)").prependTo("#"+id);
 		
-		if($("#status li:nth-child("+(statusSize+1)+")")){
-			$("#status li:nth-child("+(statusSize+1)+")").remove();
+		if($("#"+id+" li:nth-child("+(size+1)+")")){
+			$("#"+id+" li:nth-child("+(size+1)+")").remove();
 		}
-		for(var i =0, grad=1; i<statusSize;i++,grad-=0.8/statusSize){
+		for(var i =0, grad=1; i<size;i++,grad-=0.8/size){
 			if(grad<0)
 				grad=0;
-			if($("#status li:nth-child("+i+")"))
-				$("#status li:nth-child("+i+")").css({opacity:grad});
+			if($("#"+id+" li:nth-child("+i+")"))
+				$("#"+id+" li:nth-child("+i+")").css({opacity:grad});
 		}
 	}
 }
@@ -335,6 +341,7 @@ function runEventIndex(eventid){//testing only
 	eventsList.push(newTermWin);
 	events[eventname].active=true;
 	newTermWin.create("#events");
+	newTermWin.hideCloseBtn();
 	newTermWin.eventContent(eventname);
 	stat.update();
 }
