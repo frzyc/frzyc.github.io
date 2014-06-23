@@ -5,6 +5,7 @@ var events = {
 		risk:"None.",
 		reward:"$50 and a cupcake",
 		penalty:"Passive-aggressively reminded that you should probably have moved out by now...",
+		declineBtn:true,
 		condition:function(){
 			 return stat.codeLine>5;
 		},
@@ -86,6 +87,7 @@ var events = {
 		risk:"Future game patch that breaks your program, and potential banhammer--Say goodbye to your lvl 78 paladin.",
 		reward:"10 bitcoins, 3% share of gold farmed, and some very infrequent donations on the game forums",
 		penalty:"\"duude, you are such a noob...\"",
+		declineBtn:true,
 		condition:function(){
 			 return stat.codeLine>16;
 		},
