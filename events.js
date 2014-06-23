@@ -117,7 +117,7 @@ var events = {
 		reward:"Maybe you can work up the corporate ladder...",
 		penalty:"NONE",
 		condition:function(){
-			 return stat.codeLine>5;
+			 return stat.codeLine>8;
 		},
 		chance:function(){ 
 			return (Math.random()*100+1)<90;
