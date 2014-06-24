@@ -15,7 +15,7 @@ $(document).ready(function(){
 	//console.log("typeof stat.titles: "+ typeof stat.titles);
 	//testingTime();//testing only
 	//runProgramIndex(1); //testing only
-	//runEventIndex(3); //testing only
+	//runEventIndex(0); //testing only
 	setInterval(function(){
 		gameTick();
 	},

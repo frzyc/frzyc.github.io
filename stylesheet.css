@@ -13,6 +13,14 @@
 	/*box-sizing: border-box;*/
 	font-family:"Courier New", Courier, monospace;	
 }
+html {
+	height: 100%;
+	
+	/*LVL3
+	background: white;
+	background: radial-gradient(circle, #fff 20%, #ccc);
+	background-size: cover;*/
+}
 button{
 	padding-left:10px;
 	padding-right:10px;	
@@ -46,13 +54,20 @@ button{
 }
 .status li{
 	list-style-type: none;
+	width:100%;
+	float:left;
+	list-style-position: inside;
+	/*LVL0
+	border-bottom:1px solid #CCCCCC;
+	*/
 }
 .status{
 	height:100px;
-	width:98%;
-    list-style-type: none;
-	display:compact;	
+	width:400px;
+    list-style-type: none;	
 	overflow:auto;
+	display:block;
+	
 	/*LVL0
 	border-bottom:1px solid black;
 	*/
@@ -61,13 +76,12 @@ button{
 /*PROGRESSBARS*/
 .progress{
 	height:20px;
-	width:390px;
-	margin-top:3px;
-	margin-left:auto;
+	width:400px;
 	margin-right:auto;
 	display:block;
 	margin-bottom:5px;
 	margin-top:5px;
+	
 	/*LVL0
 	border:1px solid grey;
 	*/
@@ -78,7 +92,7 @@ button{
 }
 .progressBar{
 	height:20px;
-	width:390px;
+	width:400px;
 	display:none;
 	position:absolute;
 	z-index:1;
@@ -98,6 +112,7 @@ button{
 
 /*CODE BUTTONS*/
 .codeBtns{
+	cursor: pointer;
 	margin:0px 3px 5px 3px;
 	display:inline-block;
 	display:none;
@@ -116,17 +131,27 @@ button{
 .terminalWindow{
 	background-color:white;
 	margin-bottom:10px;
-	width:400px;
-	
+	width:410px;
 	border:1px black solid;
+	
 	/* LVL1
 	border-radius:5px;
-	border-style: double;
+	border-style: double;z
 	border-color: black;
+	*/
+	/*LVL3
+	background: #9dd2ea;
+	background: linear-gradient(#9dd2ea, #8bceec);
+	border-radius: 5px;
+	box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
 	*/
 }
 .terminal{
-	padding:5px;	
+	width:400px;
+	padding:5px;
+	background:white;
+	border-bottom-left-radius:5px;	
+	border-bottom-right-radius:5px;
 }
 .taskBar{
 	width:100%;	
@@ -145,6 +170,7 @@ button{
 	margin:2px;
 	display:inline-block;
 	float:right;
+	cursor: pointer;
 	
 	border:1px black solid;
 	/*LVL1

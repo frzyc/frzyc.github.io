@@ -164,7 +164,7 @@ var events = {
 						status("$"+cash.toFixed(2)+"",0,"event3status",10);
 					stat.money+=cash;
 				}
-				$("#event3ProgressBar").width(eve.currentJobClick/eve.jobClick*390+"px");
+				$("#event3ProgressBar").width(eve.currentJobClick/eve.jobClick*400+"px");
 				$("#event3ProgressBarStatus").text((eve.currentJobClick/eve.jobClick*100).toFixed(1)+"%");
 				console.log("KEYDOWN:"+event.which);	
 			});
