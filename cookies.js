@@ -1,3 +1,9 @@
+function saveGame(){
+	saveCookie(stat,"stat");
+}
+function loadGame(){
+	loadCookie(stat,"stat");
+}
 function saveCookie(ob,obname){	
 	for(prop in ob){
 		if(typeof ob[prop]==="object"){

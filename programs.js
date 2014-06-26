@@ -1,6 +1,6 @@
 var programs = {
 	currentProgram:0,
-	programLineList:[1,4,9,16],
+	programLineList:[1,4,9,16,24,36],
 	programz:{
 		/*TEMPLATE
 		p[numoflines]:{
@@ -39,7 +39,6 @@ var programs = {
 		},
 		p9:{
 			title:"Magic8Ball",
-			
 			elements: function(){
 				var $ele = $("<div id='questionForm'><div>Question:<input type='text'><button type='button'>Ask the Magic 8 Ball</button></div>");
 				$("#codeTerminal").append($ele);	
@@ -259,13 +258,210 @@ var programs = {
 				}
 			}
 		},
-		p25:{
+		p24:{
+			title:"Game of pigs",
+			turnTot:0,
+			playerPoint:0,
+			compPoint:0,
+			playerWin:0,
+			compWin:0,
+			playerTurn:true,
+			elements:function(){
+				var THIS=this;
+				$("<div id='player1'></div>").appendTo("#codeTerminal");
+				$("<p id='p1Status'><strong>"+stat.name+"</strong> turn total:0</p>").hide().appendTo("#player1").fadeIn(1000);
+				createProgressbar("pig1").appendTo("#player1");
+				$("#pig1ProgressBarStatus").text("0");
+				$("#pig1ProgressBar").css('width','0px').show("slow");
+				$("<button class='codeBtns' id='p1BtnRoll' type='button' >ROLL</button>").hide().appendTo("#player1").fadeIn(2000);
+				$("<button class='codeBtns' id='p1BtnHold' type='button' >HOLD</button>").hide().appendTo("#player1").fadeIn(3000);
+				$("<div id='diceContent'><div id='pigdie'>?</div></div>").appendTo("#codeTerminal");
+				$("#pigdie").css({
+					"width":"40px",
+					"height":"40px",
+					"text-align":"center",
+					"font-size":"40px",
+					"border":"3px solid grey",
+					"margin-left":"auto",
+ 					"margin-right":"auto",
+					"border-radius":"5px"
+				});
+				$("<div id='player2'></div>").appendTo("#codeTerminal");
+				$("<p id='p2Status'><strong>Computer</strong> turn total:0</p>").hide().appendTo("#player2").fadeIn(1000);
+				createProgressbar("pig2").appendTo("#player2");
+				$("#pig2ProgressBarStatus").text("0");
+				$("#pig2ProgressBar").css('width','0px').show("slow");
+				$("<p id='pigHowTo'>How to play</p>").appendTo("#codeTerminal");
+				$("<div id='pigInstructions'><p>Two players race to reach 100 points.<p><strong>ROLL</strong> - If the player rolls a<p>1: the player scores nothing and it becomes the opponent's turn.</p><p>2-6: the number is added to the player's turn total and the player's turn continues.</p><p><strong>HOLD</strong> - The turn total is added to the player's score and it becomes the opponent's turn.</p></div>").hide().appendTo("#codeTerminal");
+				$("#pigHowTo").hover(function(){$("#pigInstructions").show("slow");}, function(){$("#pigInstructions").hide("slow");});
+				$("#p1BtnHold").attr("disabled",true);
+				$("#p1Status").css("color","red");
+				$("#p1BtnRoll").click(function(){
+					$("#p1BtnRoll").attr("disabled",true);
+					var dierolling = setInterval(function(){
+						$("#pigdie").text(Math.floor(Math.random()*6+1));
+					},75);
+					setTimeout(function(){
+						clearInterval(dierolling);
+						if($("#pigdie").text()==1){
+							THIS.playerTurn=false;
+							THIS.turnTot=0;
+							$("#p1Status").html("<strong>"+stat.name+"</strong> turn total:"+THIS.turnTot);
+							$("#p1BtnRoll").attr("disabled",true);
+							$("#p1BtnHold").attr("disabled",true);
+							THIS.compTurn();
+						}else{
+							THIS.turnTot+=parseInt($("#pigdie").text());
+							$("#p1Status").html("<strong>"+stat.name+"</strong> turn total:"+THIS.turnTot);
+							$("#p1BtnHold").attr("disabled",false);
+							$("#p1BtnRoll").attr("disabled",false);	
+						}
+					},Math.floor(Math.random()*500+500));
+				});
+				$("#p1BtnHold").click(function(){
+					THIS.playerPoint+=THIS.turnTot;
+					THIS.turnTot=0;
+					$("#p1Status").html("<strong>"+stat.name+"</strong> turn total:"+THIS.turnTot);
+					$("#pig1ProgressBar").animate({width:THIS.playerPoint*4+'px'},1000);
+					$("#pig1ProgressBarStatus").text(THIS.playerPoint);
+					$("#p1BtnRoll").attr("disabled",true);
+					$("#p1BtnHold").attr("disabled",true);
+					if(THIS.playerPoint>=100){//100
+						THIS.gameEnd(1);
+						return;	
+					}
+					THIS.compTurn();
+				});
+			},
+			compTurn:function(){
+				console.log("COMP TURN");
+				var THIS=this;
+				$("#p1Status").css("color","black");
+				$("#p2Status").css("color","red");
+				setTimeout(function(){
+					var dierolling = setInterval(function(){
+						$("#pigdie").text(Math.floor(Math.random()*6+1));
+					},75);
+					setTimeout(function(){
+						clearInterval(dierolling);
+						var compHold=((Math.random()*100+1)<(THIS.turnTot*5));
+						if($("#pigdie").text()==1||compHold){
+							if(compHold && $("#pigdie").text()!=1){
+								THIS.compPoint+=THIS.turnTot;
+								$("#pig2ProgressBar").animate({width:THIS.compPoint*4+'px'},1000);
+								$("#pig2ProgressBarStatus").text(THIS.compPoint);	
+								if(THIS.compPoint>=100){//100
+									THIS.gameEnd(0);
+									return;	
+								}
+							}
+							THIS.turnTot=0;
+							THIS.playerTurn=true;
+							$("#p2Status").html("<strong>Computer</strong> turn total:"+THIS.turnTot);
+							$("#p1BtnRoll").attr("disabled",false);
+							$("#p1Status").css("color","red");
+							$("#p2Status").css("color","black");
+						}else{
+							THIS.turnTot+=parseInt($("#pigdie").text());
+							$("#p2Status").html("<strong>Computer</strong> turn total:"+THIS.turnTot);
+							THIS.compTurn();
+						}
+					},Math.floor(Math.random()*500+500));
+				},Math.floor(Math.random()*1000));
+			},
+			gameEnd:function(win){
+				var THIS=this;
+				$("#p1BtnRoll").attr("disabled",true);
+				$("#p1BtnHold").attr("disabled",true);
+				$("#pigdie").fadeOut("slow",function(){
+					$(this).css({
+					"width":"300px",
+					"font-size":"16px",
+					}).fadeIn("slow");
+					if(win){
+						THIS.playerWin++;	
+						$("#pigdie").text("YOU WIN! Wins:"+THIS.playerWin+" Click this to play again.");
+					}else{
+						THIS.compWin++;	
+						$("#pigdie").text("YOU LOSE! Loses:"+THIS.compWin+" Click this to play again.");
+					}
+					$("#pigdie").click(function(){
+						$("#pigdie").fadeOut("slow",function(){
+							$(this).css({
+								"width":"40",
+								"font-size":"40px",
+							}).text("?").fadeIn("slow");
+							$("#p1BtnRoll").attr("disabled",false);
+						});						
+					});
+				});
+			}
+		},
+		p37:{
 			title:"Calculator",
 			elements:function(){
-				$("<div id='calcKeys'></div>")
-			},
-			extrafunctions:function(){
-				
+				$("<div id='calculator'><div class='calcTop'><span id='calcClear'>C</span><div id='calcScreen'></div></div><div class='calckeys'><span>7</span><span>8</span><span>9</span><span class='calcOperator'>+</span><br><span>4</span><span>5</span><span>6</span><span class='calcOperator'>-</span><br><span>1</span><span>2</span><span>3</span><span class='calcOperator'>/</span><br><span>0</span><span>.</span><span class='calcEval'>=</span><span class='calcOperator'>*</span></div></div>").appendTo("#codeTerminal");
+				$(".calckeys span, #calcClear").css({
+					"width":"80px",
+					"height":"20px",
+					"text-align":"center",
+					"margin":"5px",
+					"display":"inline-block",
+					"cursor":"pointer",					
+					"border":"1px black solid"	
+				}).hover(function(){
+					$(this).css("background-color","rgb(220,220,220)");
+					},function(){
+					$(this).css("background-color","white");
+				});
+				$("#calcScreen").css({
+					"width":"250px",
+					"height":"20px",
+					"margin":"5px",
+					"display":"inline-block",
+					"text-align":"right",
+					"float":"left",
+					"border":"1px black solid",
+					"background-color":"rgb(240,240,240)"
+				});
+				$("#calculator").css({
+					"padding":"5px",
+					"border":"1px solid black"
+				});
+				var operators = ['+', '-', '*', '/'];
+				var decimalAdded = false;
+				$("#calculator span").click(function(){
+					if($(this).text() == 'C') {
+						$('#calcScreen').text('');
+						decimalAdded = false;
+					}else if($(this).text() == '=') {
+						var equation = $('#calcScreen').text();
+						var lastChar = equation[equation.length - 1];
+						if(operators.indexOf(lastChar) > -1 || lastChar == '.')
+							equation = equation.replace(/.$/, '');
+						if(equation)
+							$('#calcScreen').text(eval(equation));
+						decimalAdded = false;
+					}else if(operators.indexOf($(this).text()) > -1) {
+						var lastChar = $('#calcScreen').text()[$('#calcScreen').text().length - 1];
+						if($('#calcScreen').text() != '' && operators.indexOf(lastChar) == -1) 
+							$('#calcScreen').text($('#calcScreen').text()+$(this).text());
+						else if($('#calcScreen').text() == '' && $(this).text() == '-') 
+							$('#calcScreen').text($('#calcScreen').text()+$(this).text());
+						if(operators.indexOf(lastChar) > -1 && $('#calcScreen').text().length > 1) {
+							$('#calcScreen').text($('#calcScreen').text().replace(/.$/, btnVal));
+						}
+						decimalAdded =false;
+					}else if($(this).text() == '.') {
+						if(!decimalAdded) {
+							$('#calcScreen').text($('#calcScreen').text()+$(this).text());
+							decimalAdded = true;
+						}
+					}
+					else {
+						$('#calcScreen').text($('#calcScreen').text()+$(this).text());
+					}
+				});
 			}
 		}
 		/*TEMPLATE
