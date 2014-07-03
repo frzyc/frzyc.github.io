@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-	<html>
+<html>
 	<!-- HIPSTER PANDA
 ......................        .    .     .::,.:$~...   ..  .. . .   ............
 ...................... .      .       .$=:=~7$~~.Z.    ..  . ..  ..  ...........
@@ -88,64 +88,63 @@
  . . ................................,......   .    ... ..  ..  .   .      ..   
 .. . ....................................... . .     ......  .  ...     .. ..   
 There. now doesn't this HTML page looks a lot more full?-->
-		<head>
-			<link type="text/css" rel="stylesheet" href="stylesheet.css"/>	<!--link the css file-->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
-			<script src="script.js"></script>
-            <script src="code.js"></script>
-            <script src="graphics.js"></script>
-            <script src="processbar.js"></script>
-            <script src="termWin.js"></script>
-            <script src="programs.js"></script>
-            <script src="events.js"></script>
-            <script src="stat.js"></script>
-            <script src="cookies.js"></script>
-            <script src="os.js"></script>
-            
-			<title>
-				(WIP)Hello, world!
-			</title>
-		</head>
-		<body>
-      <div id="wrapper">
-        <div id="right">
-        	<div id="rightWin">
-                <div id="rightBar">
-                	<p id="statName" style="display: none;">Player(M)</p>
-                </div>
-                <div id="rightTerminal">
-                    <p id="statTitle" style="display: none;">PlayerTitle</p>
-                    <p id="statMoney" style="display: none;">Money: -1</p>
-                    <p id="statBitCoin" style="display: none;">BitCoins: -1</p>
-                    <button id="skillsBtn" style="display: none;">Skills</button>
-                    <ul id="skills" style="display: none;"></ul>
-            	</div>
+    <head>
+        <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="script.js"></script>
+        <script src="code.js"></script>
+        <script src="graphics.js"></script>
+        <script src="processbar.js"></script>
+        <script src="termWin.js"></script>
+        <script src="programs.js"></script>
+        <script src="events.js"></script>
+        <script src="stat.js"></script>
+        <script src="cookies.js"></script>
+        <script src="computer.js"></script>
+        
+        <title>
+            (WIP)Hello, world!
+        </title>
+    </head>
+    <body>
+  <div id="wrapper">
+    <div id="right">
+        <div id="rightWin">
+            <div id="rightBar">
+                <p id="statName" style="display: none;">Player(M)</p>
+            </div>
+            <div id="rightTerminal">
+                <p id="statTitle" style="display: none;">PlayerTitle</p>
+                <p id="statMoney" style="display: none;">Money: -1</p>
+                <p id="statBitCoin" style="display: none;">BitCoins: -1</p>
+                <button id="skillsBtn" style="display: none;">Skills</button>
+                <ul id="skills" style="display: none;"></ul>
             </div>
         </div>
-        <div id="mainCode" >
-              <div id="mainTitle" >
-              	<p id="printCode" >Just an empty terminal window...</p>
+    </div>
+    <div id="mainCode" >
+          <div id="mainTitle" >
+            <p id="printCode" >Just an empty terminal window...</p>
+          </div>
+          <div id="mainTerm" >
+              <ul class="status" id="codeStatus"></ul>
+              <div class='progress' id="codeProgress">
+                  <div class="progressBar" id="codeProgressBar" ></div>
+                  <p class="progressbarStatus" id="codeProgressBarStatus"></p>
               </div>
-              <div id="mainTerm" >
-                  <ul class="status" id="status"></ul>
-                  <div class='progress' id="progress">
-                      <div class="progressBar" id="codeProgressBar" ></div>
-                      <p class="progressbarStatus" id="codeProgressBarStatus"></p>
-                  </div>
-                  <div id="codeBtns">
-                      <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
-                      <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
-                      <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
-                      <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
-                  </div>
-		</div> 
-      </div>
-      <div id="codeProgram"></div>
-      <div id="events"></div>
-            
-      </div>
-		</body>
-	</html>
+              <div id="codeBtns">
+                  <button class="codeBtns" id="codeBtn" type="button" onclick="code()">Code</button>
+                  <button class="codeBtns" id="compileBtn" type="button" onclick="compile()">Compile</button>
+                  <button class="codeBtns" id="runBtn" type="button" onclick="run()">Run</button>
+                  <button class="codeBtns" id="debugBtn" type="button" onclick="debug()">Debug</button>
+              </div>
+    </div> 
+  </div>
+  <div id="codeProgram"></div>
+  <div id="events"></div>
+        
+  </div>
+    </body>
+</html>
 	
 	

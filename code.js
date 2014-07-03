@@ -32,8 +32,6 @@ function code() {
 				document.getElementById("codeBtn").disabled = true;//disable code button
 				compileBtnIni=true;
 				printCode();
-				
-				
 			},
 			transTime);
 			return;	
@@ -62,7 +60,6 @@ function compile(){
 		status("You compiled your code!");
 		if(!runBtnIni){//initiate the run button after first code
 			setTimeout(function(){
-				//document.getElementById("status").innerHTML = "Maybe try running this code?";
 				status("Maybe try running this code?");
 				$("#runBtn").fadeIn("slow");
 				document.getElementById("runBtn").disabled = false;//enable compile button

@@ -9,7 +9,7 @@ var events = {
 			 return stat.codeLine>5;
 		},
 		chance:function(){ 
-			if(!available)
+			if(!this.available)
 				return false;
 			return (Math.random()*100+1)<5;
 		},
@@ -34,7 +34,7 @@ var events = {
 				$("#event0ProgressBarStatus").text((eve.triggered/eve.keys*100).toFixed()+"%");
 				if(eve.triggered==eve.keys){
 					$("#event0Terminal").empty();
-					$("<p>Nice mashing! Here's your cupcake, and $25</p>").appendTo("#event0Terminal");
+					$("<p>Nice mashing! Here's your cupcake, and $15</p>").appendTo("#event0Terminal");
 					$('<button/>', {
 						type: 'button',
 						'class': 'codeBtns',
@@ -76,9 +76,8 @@ var events = {
 		accept:function(){ 
 			console.log("ACCEPT EVENT1");
 			$("#event1").remove();
-			stat.computer.computerCase++;
+			computer.computerCase=0;
 			stat.money+=1.87;
-			graphics(1);
 			this.available=false;//not repeatable
 			this.active=false;
 		},

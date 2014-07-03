@@ -15,10 +15,11 @@ $(document).ready(function(){
 	//console.log("EVAL TEST:"+eval("4-+5"));
 	//console.log("typeof stat.titles: "+ typeof stat.titles);
 	//testingTime();//testing only
-	//runProgramIndex(4); //testing only
-	//runEventIndex(3); //testing only
+	//runProgramIndex(6); //testing only
+	//runEventIndex(1); //testing only
 	setInterval(function(){
-		gameTick();
+		if(compileBtnIni && runBtnIni && debugBtnIni && firstCodeIni)
+			gameTick();
 	},
 	100);
 	setTimeout(function(){
@@ -40,7 +41,7 @@ function gameTick(){
 		gameTick10Sec();
 }
 function gameTickSec(){//triggers ever 10 ticks= 1 second
-
+	console.log("1s");
 	for(var eve in events){//going through events to trigger them
 		if(events[eve].active||!events[eve].condition()||!events[eve].chance())//check against active bool, event pre-conditions, and pass the pass the chance evaluation
 			continue;
@@ -55,17 +56,37 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 	stat.update();
 }
 function gameTick10Sec(){//triggers ever 10 ticks= 1 second
-	console.log("SAVEEEEEEEE");
-	if(compileBtnIni && runBtnIni && debugBtnIni && firstCodeIni){
-		//save();
+	console.log("10s");
+	
+	if(computer.computerCase>=0 && !$("#compWin").length){
+		console.log("GENERATE COMP WINDOW");
+		compTermWin = new TermWin("compWin","compTaskBar","compTaskBarTitle","computer","compBtn_","compBtnMx","compBtnx","compTerminal");
+		compTermWin.hideCloseBtn();	
+		compTermWin.create("#right");
+		$("#compWin").appendTo("#right");
+		computer.start();
 	}
+
+	//save();
+	
+	
+	
+	if(computer.graphics==0){
+		graphic0();	
+	}else if(computer.graphics==1){
+		graphic1();	
+	}else if(computer.graphics==2){
+		graphic2();	
+	}else if(computer.graphics==3){
+		graphic3();	
+	}
+	
 }
 function status(strStatus, importance,id,size){
 	if(!id)
-		id="status";
+		id="codeStatus";
 	if(!size)
 		size = statusSize;
-	console.log("STATUS FOR: "+id);
 	var list = document.getElementById(id);
 	if(list.firstChild && list.firstChild.innerHTML.search(strStatus)!=-1){
 		if(list.firstChild.innerHTML==strStatus){
@@ -93,6 +114,8 @@ function status(strStatus, importance,id,size){
 				$("#"+id+" li:nth-child("+i+")").css({opacity:grad});
 		}
 	}
+	if(!compileBtnIni||!runBtnIni||!debugBtnIni||!firstCodeIni)//white out the first few status
+		$(".status li").css({"border-bottom":"0px"});	
 }
 function runCode(){
 	var programLineIndex=-1;

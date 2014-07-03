@@ -7,7 +7,6 @@
 	-ms-user-select: none;
 	user-select: none;
 	*/
-	
 	margin: 0;
 	padding: 0;
 	/*box-sizing: border-box;*/
@@ -52,15 +51,6 @@ button{
 #printCode{
 	margin:0;	
 }
-.status li{
-	list-style-type: none;
-	width:100%;
-	float:left;
-	list-style-position: inside;
-	/*LVL0
-	border-bottom:1px solid #CCCCCC;
-	*/
-}
 .status{
 	height:100px;
 	width:400px;
@@ -71,6 +61,12 @@ button{
 	/*LVL0
 	border-bottom:1px solid black;
 	*/
+}
+.status li{
+	list-style-type: none;
+	width:100%;
+	float:left;
+	border-bottom:1px solid #CCCCCC;
 }
 
 /*PROGRESSBARS*/
@@ -130,7 +126,7 @@ button{
 /*TERMINAL*/
 .terminalWindow{
 	background-color:white;
-	margin-bottom:10px;
+	margin-top:10px;
 	width:410px;
 	border:1px black solid;
 	
@@ -182,4 +178,3 @@ button{
 .taskBtn:hover{
 	background-color:rgb(220,220,220);	
 }
-

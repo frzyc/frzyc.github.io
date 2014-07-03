@@ -28,17 +28,6 @@ var stat = {
 		userInterface:0,
 		graphics:0	
 	},
-	computer:{
-		computerCase:0,
-		computerCaseArr:["CRAP","Heavy metal box with duct-tape","Second-hand rusty case","BrickBox40X","codeMaster-C00L"],
-		computerCaseArrDesciption:["CRAP","40 pounds of rusty, dented metal, it may be bulletproof, but it rattles and overheats like crazy.","The fan doesn't work, so we duct-taped an electric fan to the side","Its just a brick-shaped box. Kind of boring, really.","A professional computer case that incorporates a mini-fridge as cooling and food storage."],
-		cpu:1,	
-		storage:1,
-		graphics:0,
-		api:1,
-		ram:1,
-		keyboard:1
-	},
 	update: function(){
 		//update values
 		if(this.gender==="male")
