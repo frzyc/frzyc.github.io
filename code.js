@@ -24,13 +24,11 @@ function code() {
 	setTimeout(function(){
 		status("You wrote one line of code!");
 		stat.codeLine++;
-		if(!compileBtnIni){//initiate the compile button after first code
+		if(!codeIni){//initiate the compile button after first code
 			setTimeout(function(){
 				status("Maybe try compiling this code?");
 				$("#compileBtn").fadeIn("slow");
-				document.getElementById("compileBtn").disabled = false;//enable compile button
-				document.getElementById("codeBtn").disabled = true;//disable code button
-				compileBtnIni=true;
+				$("#compileBtn").attr("disabled",false);//enable compile button
 				printCode();
 			},
 			transTime);
@@ -58,14 +56,11 @@ function compile(){
 	progressBarDown(stat.compileSpeed*stat.codeLine,"Compiling...","code");
 	setTimeout(function(){
 		status("You compiled your code!");
-		if(!runBtnIni){//initiate the run button after first code
+		if(!codeIni){//initiate the run button after first code
 			setTimeout(function(){
 				status("Maybe try running this code?");
 				$("#runBtn").fadeIn("slow");
-				document.getElementById("runBtn").disabled = false;//enable compile button
-				document.getElementById("codeBtn").disabled = true;//disable code button
-				document.getElementById("compileBtn").disabled = true;//disable compile button
-				runBtnIni=true;
+				$("#runBtn").attr("disabled",false);//enable compile button
 				stat.compiled=true;
 				printCode();
 			},
@@ -102,18 +97,14 @@ function run(){
 	disableButton();
 	progressBarDown(stat.runSpeed*stat.codeLine,"Running...","code");
 	setTimeout(function(){
-		if(!debugBtnIni){//initiate the debug button after first code
+		if(!codeIni){//initiate the debug button after first code
 			setTimeout(function(){
 				runCode();
 				codeTermWin.hideCloseBtn();
 				codeTermWin.hideMaxBtn();
 				status("Hmph... may needs some tweaking...");
 				$("#debugBtn").fadeIn("slow");
-				document.getElementById("debugBtn").disabled = false;//enable debug button
-				document.getElementById("codeBtn").disabled = true;//disable code button
-				document.getElementById("compileBtn").disabled = true;//disable compile button
-				document.getElementById("runBtn").disabled = true;//disable run button
-				debugBtnIni=true;
+				$("#debugBtn").attr("disabled",false);//enable debug button
 			},
 			transTime);	
 			return;
@@ -132,13 +123,13 @@ function debug(){
 	disableButton();
 	progressBarDown(debugTime,"Debugging...","code");
 	setTimeout(function(){
-		if(!firstCodeIni){//initiate the debug button after first code
+		if(!codeIni){//initiate the debug button after first code
 			setTimeout(function(){
 				status("Some quick spell-checking...");
 				$("#codeTerminal").text("Hello, World!");
 				codeTermWin.showCloseBtn();
-				firstCodeIni=true;
-				document.getElementById("codeBtn").disabled = false;//enable code butto
+				codeIni=true;
+				$("#codeBtn").attr("disabled",false);//enable code butto
 				graphics(0);              	
 			},
 			transTime);	
@@ -148,7 +139,7 @@ function debug(){
 			status("RUNTIME ERROR");//to be implemented	
 			return;
 		}
-		var debugChance=50+stat.bugsSquashed;
+		var debugChance=50+Math.sqrt(stat.bugsSquashed);
 		if((Math.random()*100+1)<=debugChance){
 			var debugPower = Math.random()*100+1;
 			if(debugPower<=5){
@@ -183,19 +174,19 @@ function debug(){
 	debugTime*1000);
 }
 function disableButton(){
-	document.getElementById("debugBtn").disabled = true;//disable debug button
-	document.getElementById("codeBtn").disabled = true;//disable code button
-	document.getElementById("compileBtn").disabled = true;//disable compile button
-	document.getElementById("runBtn").disabled = true;//disable run button
+	$("#debugBtn").attr("disabled",true);//disable debug button
+	$("#codeBtn").attr("disabled",true);//disable code button
+	$("#compileBtn").attr("disabled",true);//disable compile button
+	$("#runBtn").attr("disabled",true);//disable run button
 }
 function enableButton(){
 	if(!(stat.codeLine>=programs.programLineList[stat.programsWritten])){
-		document.getElementById("codeBtn").disabled = false;//enable code button
+		$("#codeBtn").attr("disabled",false);//enable code button
 	}
 	if(!stat.compiled&&stat.bugs==0)
-		document.getElementById("compileBtn").disabled = false;//enable compile button
-	if(stat.bugs>0||runtimeErr||!firstCodeIni)
-		document.getElementById("debugBtn").disabled = false;//enable debug button
+		$("#compileBtn").attr("disabled",false);//enable compile button
+	if(stat.bugs>0||runtimeErr||!codeIni)
+		$("#debugBtn").attr("disabled",false);//enable debug button
 	if(stat.bugs==0 && stat.compiled)
-		document.getElementById("runBtn").disabled = false;//enable run button
+		$("#runBtn").attr("disabled",false);//enable run button
 }

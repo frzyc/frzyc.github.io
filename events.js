@@ -62,7 +62,7 @@ var events = {
 	},
 	event1:{
 		title:"Package delivery",
-		description:"A slightly wet box covered in duct tape arrived at your door. The note: \"ah heard fum yer parents yo' been in thet basement makin' them programs doohikies, so gotcha one of them calculato' computers off a yardsale. Hope this done make up fo' a dozen o' so missed birthdates. --Yer uncle & cousin Billy Bob Jo'\"",
+		description:"A slightly wet box covered in duct tape arrived at your door. The note: \"ah heard fum yer parents yo' been in thet basement makin' them programs doohikies, so gotcha one of them calculato' computers off a yardsale. Hope this done make up fo' a dozen o' missed birthdates. --Yer uncle & cousin Billy Bob Jo'\"",
 		risk:"Box cutters.",
 		reward:"A less-crappy computer than you have right here, FREE UPGRADE! Also, a bag of loose change.",
 		condition:function(){

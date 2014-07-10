@@ -5,20 +5,15 @@ var statusSize=20;//lines of status to save
 var eventsList=[];
 var codeTermWin;
 var compTermWin;
-//initiation bools
-var compileBtnIni=false;//bool to initiate the button at beginning
-var runBtnIni=false;//bool to initiate the button at beginning
-var debugBtnIni=false;//bool to initiate the button at beginning
-var firstCodeIni=false;//bool to go through the first code
+
+var codeIni=false;//initiation bool
 
 $(document).ready(function(){
-	//console.log("EVAL TEST:"+eval("4-+5"));
-	//console.log("typeof stat.titles: "+ typeof stat.titles);
 	//testingTime();//testing only
-	//runProgramIndex(6); //testing only
+	//runProgramIndex(5); //testing only
 	//runEventIndex(1); //testing only
 	setInterval(function(){
-		if(compileBtnIni && runBtnIni && debugBtnIni && firstCodeIni)
+		if(codeIni)
 			gameTick();
 	},
 	100);
@@ -29,7 +24,6 @@ $(document).ready(function(){
 	setTimeout(function(){
 		status("Comon, just try it..."); 
 		$("#codeBtn").fadeIn("slow");
-		
 	},
 	transTime*2);
 });
@@ -58,7 +52,7 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 function gameTick10Sec(){//triggers ever 10 ticks= 1 second
 	console.log("10s");
 	
-	if(computer.computerCase>=0 && !$("#compWin").length){
+	if(computer.computerCase>=0 && !$("#compWin").length){//generates the computer terminal
 		console.log("GENERATE COMP WINDOW");
 		compTermWin = new TermWin("compWin","compTaskBar","compTaskBarTitle","computer","compBtn_","compBtnMx","compBtnx","compTerminal");
 		compTermWin.hideCloseBtn();	
@@ -68,8 +62,6 @@ function gameTick10Sec(){//triggers ever 10 ticks= 1 second
 	}
 
 	//save();
-	
-	
 	
 	if(computer.graphics==0){
 		graphic0();	
@@ -114,7 +106,7 @@ function status(strStatus, importance,id,size){
 				$("#"+id+" li:nth-child("+i+")").css({opacity:grad});
 		}
 	}
-	if(!compileBtnIni||!runBtnIni||!debugBtnIni||!firstCodeIni)//white out the first few status
+	if(!codeIni)//white out the first few status
 		$(".status li").css({"border-bottom":"0px"});	
 }
 function runCode(){

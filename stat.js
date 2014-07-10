@@ -22,9 +22,8 @@ var stat = {
 	gender:"male",
 	titles:["Basement Dweller"],
 	skill:{
+		Logic:0,
 		game:0,
-		software:0,
-		web:0,
 		userInterface:0,
 		graphics:0	
 	},
@@ -34,28 +33,25 @@ var stat = {
 			$("#statName").text(this.name+"(M)");
 		else if(this.gender==="female")
 			$("#statName").text(this.name+"(F)");
-		if(this.titles.length>10){//manual title selecter, click on current title to change to a dropdown menu
+		if(this.titles.length>5){//manual title selecter, click on current title to change to a dropdown menu
 			$("#statTitle").unbind().click(function(){//only allow it to be clicked once
 				$(this).replaceWith($("<select id = 'titleSel' name='titles'></select>"));
-				for(t in stat.titles){
-					$("<option value="+stat.titles[t]+">"+stat.titles[t]+"</option>").appendTo("#titleSel");
-				}
+				$("<option value='titleSel'>Select a Title</option>").appendTo("#titleSel");
+				for(t in stat.titles)
+					$("<option value="+t+">"+stat.titles[t]+"</option>").appendTo("#titleSel");
 				$("#titleSel").change(function(event){//Click event on Select has occurred
-					$("option:selected", $(this)).each(function(){
-						var obj = document.getElementById('titleSel').value;
-						$("#titleSel").replaceWith("<p id='statTitle' >"+obj+"</p>");
-					});
+					var ind = parseInt($(this).val());
+					console.log("SELECTED ind: "+ind);
+					$("#titleSel").replaceWith("<p id='statTitle' >"+stat.titles[ind]+"</p>");
           		});
 			});
 		}else
 			$("#statTitle").text(this.titles[this.titles.length-1]);		
 		$("#statMoney").text("Money: "+stat.money.toFixed(2));
 		$("#statBitCoin").text("BitCoins: "+stat.bitCoin);
-		if($("#skills li").length==0){
+		if($("#skills li").length==0)
 			for(s in stat.skill)
 				$("<li id='skill"+s+"'>"+s+": "+stat.skill[s]+"</li>").hide().appendTo("#skills");
-			console.log("skills list generated");
-		}
 		
 		//show as values change		
 		if(this.name!="Player" && $("#statName").is(":hidden")){
@@ -93,6 +89,5 @@ var stat = {
 				return;	
 		}
 		stat.titles.push(str);
-	}
-	
+	},
 };

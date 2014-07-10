@@ -476,7 +476,7 @@ p50:{
 			if(event.which==13)//ENTER
 		   		event.preventDefault();
 		  	else if(event.which==37)//LEFT
-				endGame();//moveLeft();
+				moveLeft();
 			else if(event.which==38)//UP
 				moveUp();
 			else if(event.which==39)//RIGHT
