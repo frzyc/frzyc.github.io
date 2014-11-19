@@ -1,4 +1,5 @@
 <?php
+	mail('fredzyc@gmail.com', 'PHP TEST', 'THIS IS A PHP TEST');
 	$errors = '';
 	if(empty($_POST['name'])  || 
 	   empty($_POST['email']) || 
