@@ -11,6 +11,13 @@ var stat = {
 	debugSpeed:5,
 	runSpeed:0.5,
 	
+	hunger:100,//0-150, where 100 is optimal
+	sleep:100,
+	social:0,
+	alcohol:1337,
+	ateHunger:true,//false
+	exactStat:false,//false
+	
 	lastCompiledLines:0,
 	bugs:0,
 	debugged:false,
@@ -46,9 +53,22 @@ var stat = {
           		});
 			});
 		}else
-			$("#statTitle").text(this.titles[this.titles.length-1]);		
-		$("#statMoney").text("Money: "+stat.money.toFixed(2));
-		$("#statBitCoin").text("BitCoins: "+stat.bitCoin);
+			$("#statTitle").text(this.titles[this.titles.length-1]);	
+		if(this.exactStat){	
+			$("#statHunger span").text(this.hunger);
+			$("#statSleep span").text(this.sleep);
+			$("#statSocial span").text(this.social);
+			$("#statAlcohol span").text((this.alcohol/10000).toFixed(4));
+		}else{
+			var text="";
+			for(var i=0;i<15;i++)
+				if(((i+1)*10)<=this.hunger)
+					text=this.statText.hunger[i];
+			$("#statHunger span").text(text);
+			//USE TEXT DESCRIPTION INSTEAD OF NUMBERS	
+		}
+		$("#statMoney span").text("Money: "+stat.money.toFixed(2));
+		$("#statBitCoin span").text("BitCoins: "+stat.bitCoin);
 		if($("#skills li").length==0)
 			for(s in stat.skill)
 				$("<li id='skill"+s+"'>"+s+": "+stat.skill[s]+"</li>").hide().appendTo("#skills");
@@ -58,6 +78,16 @@ var stat = {
 			$("#statName").fadeIn("Slow");
 			$("#statTitle").fadeIn("Slow");
 		}	
+		if(this.ateHunger && $("#statHunger").is(":hidden"))
+			$("#statHunger").fadeIn("Slow");
+		if(this.sleep<30 && $("#statSleep").is(":hidden"))
+			$("#statSleep").fadeIn("Slow");
+		if(this.social!=0 && $("#statSocial").is(":hidden"))
+			$("#statSocial").fadeIn("Slow");
+		if(this.alcohol!=0 && $("#statAlcohol").is(":hidden"))
+			$("#statAlcohol").fadeIn("Slow");
+		else if(this.alcohol==0 && $("#statAlcohol").is(":hidden"))
+			$("#statAlcohol").fadeOut("Slow");
 		if(this.money>0 && $("#statMoney").is(":hidden"))
 			$("#statMoney").fadeIn("Slow");
 		if(this.bitCoin>0 && $("#statBitCoin").is(":hidden"))
@@ -90,4 +120,23 @@ var stat = {
 		}
 		stat.titles.push(str);
 	},
+	statText:{
+		hunger:[
+			"Minutes from death...",//1
+			"I heard shoe leather taste good...",//2
+			"My belly think my throat is dead.",//3
+			"I could eat an ox between two bread vans.",//4
+			"I\'m terribly hunger.",//5
+			"I should eat some food.",//6
+			"I\'m all rumbly in my tumbly.",//7
+			"I\'m slighty peckish.",//8													
+			"I could eat I guess.",//9
+			"I'm good, thanks.",//10
+			"I\' ",//11
+			"I\'m really full.",//12
+			"BUUUUUUURRRRP.",//13
+			"BLURRGH IM SO FULL!",//14
+			"I think I ruptured my organs..."//15
+		]
+	}
 };

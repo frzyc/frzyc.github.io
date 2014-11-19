@@ -1,5 +1,6 @@
 function graphics(level){
-	computer.graphics=level;
+	if(!level)
+		computer.graphics=level;
 	if(level==0){
 		$("#mainCode").fadeOut("fast",function(){
 			graphic0();

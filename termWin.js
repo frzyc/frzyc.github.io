@@ -1,15 +1,44 @@
-function TermWin(id, taskBarId, titleId, title, minBtnId, maxBtnId, closeBtnId, terminalId){
-	this.id=id;
-	this.taskBarId=taskBarId;
-	this.titleId=titleId;
+function TermWin(id, title){
+	this.id=id+"TermWin";
 	this.title=title;
-	this.minBtnId=minBtnId;
-	this.maxBtnId=maxBtnId;
-	this.closeBtnId=closeBtnId;
-	this.terminalId=terminalId;
+	this.taskBarId=id+"TaskBar";
+	this.titleId=id+"Title";
+	this.minBtnId=id+"BtnMin";
+	this.maxBtnId=id+"BtnMax";
+	this.closeBtnId=id+"BtnClose";
+	this.terminalId=id+"Terminal";
 	this.create = function(parent){
-		var term = $("<div class='terminalWindow' id="+this.id+"><div class='taskBar' id="+this.taskBarId+"><p class='taskBarTitle' id="+this.titleId+">"+this.title+"</p><div class='taskBtn' id="+this.closeBtnId+" type='button' onclick='closeTerm(\""+this.id+"\")'>x</div><div class='taskBtn' id="+this.maxBtnId+" type='button' onclick='maximizeTerm(\""+this.maxBtnId+"\",\""+this.id+"\")'>[]</div><div class='taskBtn' id="+this.minBtnId+" type='button' onclick='minimizeTerm(\""+this.minBtnId+"\",\""+this.terminalId+"\")'>_</div></div><div class='terminal' id="+this.terminalId+"></div></div>");
+		var term = $(
+		"<div class='terminalWindow' id="+this.id+">"+
+			"<div class='taskBar' id="+this.taskBarId+">"+
+				"<p class='taskBarTitle' id="+this.titleId+">"+this.title+"</p>"+//title
+			"</div>"+
+			"<div class='terminal' id="+this.terminalId+"></div>"+
+		"</div>"
+		);
 		term.hide().prependTo(parent).fadeIn("slow");
+		var THIS=this;
+		$('<div/>', {
+			type: 'button',
+			'class': 'taskBtn',
+			id: THIS.closeBtnId,
+			text: 'x',
+			click: function(){closeTerm(THIS.id);},
+		}).appendTo("#"+THIS.taskBarId);
+		$('<div/>', {
+			type: 'button',
+			'class': 'taskBtn',
+			id: THIS.maxBtnId,
+			text: '[]',
+			click: function(){maximizeTerm(THIS.maxBtnId,THIS.id);},
+		}).appendTo("#"+THIS.taskBarId);
+		$('<div/>', {
+			type: 'button',
+			'class': 'taskBtn',
+			id: THIS.minBtnId,
+			text: '_',
+			click: function(){minimizeTerm(THIS.minBtnId,THIS.terminalId);},
+		}).appendTo("#"+THIS.taskBarId);
 	}
 	this.eventContent=function(eve){
 		var content = $("<p><strong>Description: </strong>"+events[eve].description+"</p><p><strong>Risk: </strong>"+events[eve].risk+"</p>");

@@ -9,23 +9,29 @@ var compTermWin;
 var codeIni=false;//initiation bool
 
 $(document).ready(function(){
-	//testingTime();//testing only
-	//runProgramIndex(5); //testing only
-	//runEventIndex(1); //testing only
+	testingTime();//testing only
+	runProgramIndex(5); //testing only
+	runEventIndex(1); //testing only
 	setInterval(function(){
 		if(codeIni)
 			gameTick();
 	},
 	100);
-	setTimeout(function(){
-		$("#printCode").text("...Maybe write some code?");
-	},
-	transTime);
-	setTimeout(function(){
-		status("Comon, just try it..."); 
-		$("#codeBtn").fadeIn("slow");
-	},
-	transTime*2);
+	if(loadGame()){
+		graphics();
+	}else{
+		$(".status").css("border-bottom","1px solid white");
+		$(".progress").css({"border":"1px solid white"});
+		setTimeout(function(){
+			$("#printCode").text("...Maybe write some code?");
+		},
+		transTime);
+		setTimeout(function(){
+			status("Comon, just try it..."); 
+			$("#codeBtn").fadeIn("slow");
+		},
+		transTime*2);
+	}
 });
 function gameTick(){
 	stat.gameTickCount++;
@@ -34,13 +40,13 @@ function gameTick(){
 	if(stat.gameTickCount%100==0)
 		gameTick10Sec();
 }
-function gameTickSec(){//triggers ever 10 ticks= 1 second
+function gameTickSec(){//triggers every 10 ticks= 1 second
 	console.log("1s");
 	for(var eve in events){//going through events to trigger them
 		if(events[eve].active||!events[eve].condition()||!events[eve].chance())//check against active bool, event pre-conditions, and pass the pass the chance evaluation
 			continue;
 		status("Event: "+events[eve].title,5);//status alert
-		var newTermWin = new TermWin(eve,eve+"TaskBar",eve+"TaskBarTitle",events[eve].title,eve+"Btn_",eve+"BtnMx",eve+"Btnx",eve+"Terminal");
+		var newTermWin = new TermWin(eve,events[eve].title);
 		eventsList.push(newTermWin);
 		events[eve].active=true;
 		newTermWin.create("#events");
@@ -48,19 +54,19 @@ function gameTickSec(){//triggers ever 10 ticks= 1 second
 		newTermWin.eventContent(eve);
 	}
 	stat.update();
+	//$("*").eq(Math.floor(Math.random()*($("*").length))).rotate(Math.random()*360-180);//random rotation test
 }
-function gameTick10Sec(){//triggers ever 10 ticks= 1 second
+function gameTick10Sec(){//triggers every 100 ticks= 10 second
 	console.log("10s");
 	
 	if(computer.computerCase>=0 && !$("#compWin").length){//generates the computer terminal
 		console.log("GENERATE COMP WINDOW");
-		compTermWin = new TermWin("compWin","compTaskBar","compTaskBarTitle","computer","compBtn_","compBtnMx","compBtnx","compTerminal");
+		compTermWin = new TermWin("compWin","Computer");
 		compTermWin.hideCloseBtn();	
 		compTermWin.create("#right");
 		$("#compWin").appendTo("#right");
 		computer.start();
 	}
-
 	//save();
 	
 	if(computer.graphics==0){
@@ -125,14 +131,14 @@ function runCode(){
 	}//close the old program first
 	console.log("running program index:"+programLineIndex);
 	console.log("running program:"+programs.programz["p"+programLineIndex].title);
-	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+programLineIndex].title,"codeBtn_","codeBtnMx","codeBtnx","codeTerminal");
+	codeTermWin= new TermWin("code",programs.programz["p"+programLineIndex].title);
 	codeTermWin.create("#codeProgram");
 	programs.programz["p"+programLineIndex].elements();
 	status("Running code...");
 }
 function runProgramIndex(programIndex){//used for testing only
 	var pline = programs.programLineList[programIndex];
-	codeTermWin= new TermWin("codeTermWin","codeTaskBar","codeTaskBarTitle",programs.programz["p"+pline].title,"codeBtn_","codeBtnMx","codeBtnx","codeTerminal");
+	codeTermWin= new TermWin("code",programs.programz["p"+pline].title);
 	codeTermWin.create("#codeProgram");
 	programs.programz["p"+pline].elements();
 	status("Running code...");
@@ -140,7 +146,7 @@ function runProgramIndex(programIndex){//used for testing only
 function runEventIndex(eventid){//testing only
 	var eventname = "event"+eventid;
 	status("Event: "+events[eventname].title,5);//status alert
-	var newTermWin = new TermWin(eventname,eventname+"TaskBar",eventname+"TaskBarTitle",events[eventname].title,eventname+"Btn_",eventname+"BtnMx",eventname+"Btnx",eventname+"Terminal");
+	var newTermWin = new TermWin(eventname,events[eventname].title);
 	eventsList.push(newTermWin);
 	events[eventname].active=true;
 	newTermWin.create("#events");
@@ -160,6 +166,32 @@ function testingTime(){
 	stat.runSpeed=0.1;
 	transTime=100;
 }
+jQuery.fn.rotate = function(degrees) {//this defines a jquery function, so that you can use it like jquery functions
+	console.log("ROTATE: "+degrees);
+    $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)', /* Safari and Chrome */
+                 '-moz-transform' : 'rotate('+ degrees +'deg)', /* Firefox */
+                 '-o-transform' : 'rotate('+ degrees +'deg)', /* Opera */
+				 '-ms-transform' : 'rotate('+ degrees +'deg)', /* IE 9 */
+                 'transform' : 'rotate('+ degrees +'deg)'});
+};
+/* code example for rotate
+var rotation = 0;
+$('.rotate').click(function() {
+    rotation += 5;
+    $(this).rotate(rotation);
+});
+*/
+
+/*
+$('#printCode').bind('DOMMouseScroll mousewheel', function(e){
+	if(e.originalEvent.wheelDelta /120 > 0) {
+		$(this).text('scrolling up !');
+	}
+	else{
+		$(this).text('scrolling down !');
+	}
+});
+*/
 
 
 

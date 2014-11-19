@@ -1,8 +1,10 @@
 function saveGame(){
-	saveCookie(stat,"stat");
+	return false;
+	//saveCookie(stat,"stat");
 }
 function loadGame(){
-	loadCookie(stat,"stat");
+	return false;
+	//loadCookie(stat,"stat");
 }
 function saveCookie(ob,obname){	
 	for(prop in ob){

@@ -2,16 +2,16 @@ function printCode(){
 	var line="ERROR";//error by default
 	var tit="ERROR";
 	if(stat.compiled){
-		line="You have "+stat.codeLine+" lines of COMPILED code.";
+		line=stat.codeLine+" lines of COMPILED code.";
 		tit="Feel free to RUN code!";
 	}else if(stat.bugs!=0){
-		line="You have " + stat.codeLine + " lines of code, with "+ stat.bugs + " compilation errors.";
+		line=stat.codeLine + " lines, with "+ stat.bugs + " errors.";
 		tit="DEBUG to squash bugs!";
 	}else if(stat.debugged){
-		line="You have "+stat.codeLine+" lines of DEBUGGED code.";
+		line=stat.codeLine+" lines of DEBUGGED code.";
 		tit="Needs to be reCOMPILED.";
 	}else{
-		line="You have written " + stat.codeLine + " lines of code.";
+		line=stat.codeLine + " written lines of code.";
 		tit="Write more code or compile for errors.";
 	}
 	$("#printCode").text(line);
