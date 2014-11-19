@@ -16,7 +16,7 @@
 	$headers = 'From: ' . $_POST['email'] . "\r\n" .
 	    'X-Mailer: PHP/' . phpversion();
 
-	mail($to, $subject, $message, $headers);
+	@mail($to, $subject, $message, $headers);
 	//header('location: /thank');
 	}else{
 		$errors .= "\n Error: Invalid email address";
