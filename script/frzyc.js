@@ -18,7 +18,7 @@ frzyc = function(){
     function showmain(selector){
         console.log("showmain");
         console.log(selector);
-        $("#navbtns div").removeClass("active");
+        $("#navbtns div, #home_navbtn").removeClass("active");
         $("#footernav div").removeClass("active");
         $(selector+"_navbtn").addClass("active");
         console.log(selector+"_navbtn"+"+.active")
@@ -29,8 +29,13 @@ frzyc = function(){
             $(selector).delay(500).fadeIn(500);
         }
     }
+    function toTop(){//animated scrolling to the top of the page
+        console.log("TOTOP");
+        $("html, body").animate({ scrollTop: 0 }, 500);
+    }
     return{
         projects:projectlist,
-        showmain:showmain
+        showmain:showmain,
+        toTop:toTop
     }
 }();

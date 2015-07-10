@@ -55,6 +55,7 @@
                         }
                         #projects_wrapper{
                             max-width: 1000px;
+                            width:100%;
                             display: inline-block;
                             border: 1px solid blue;
                         }
@@ -138,7 +139,7 @@
         
         </div>
         <div id="footerwrapper">
-            <img src="images/footer_arrow.png" id="footertop"/>
+            <img src="images/footer_arrow.png" id="footertop" onclick="frzyc.toTop()"/>
             <div id="footernav">
                 <div id="home_footernavbtn" class="link" onclick="frzyc.showmain('#home')">&copy; <script>document.write(new Date().getFullYear());</script> Fred Zhao</div>
                 <div id="portfolio_footernavbtn" class="link" onclick="frzyc.showmain('#portfolio')">Portfolio</div>

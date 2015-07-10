@@ -106,6 +106,7 @@ html,body{
     z-index: 10;
 }
     #footertop{
+        cursor: pointer;
         position: absolute;
         width: 100px;
         height: 100px;
@@ -124,23 +125,19 @@ html,body{
     #footernav{
         text-align: center;
     }
-    #footernav div{
+    #footernav .link{
         font-size: 1.3em;
         color: rgb(220,220,220);
         padding: 1em;
         display: inline-block;
     }
-    #footernav div{
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
-    }
-        #footernav div:hover{
+        #footernav .link:hover{/*duplicated from .link because of bug*/
             color: rgb(250,150,100);/*HOVER COLOR*/
         }
-        #footernav div.active{ /*same as hover*/
+        #footernav .link.active{/*duplicated from .link because of bug*/
             color: rgb(150,150,255);/*HOVER COLOR*/
         }
+
 /*mainwrapper. contains main*/
 .mainwrapper{
     z-index: 0;
@@ -173,7 +170,7 @@ html,body{
 
 /*general styles*/
 /*links*/
-a,.link{
+a, .link{
     text-decoration: none;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -182,5 +179,5 @@ a,.link{
         color: rgb(250,150,100);/*HOVER COLOR*/
     }
     a.active, .link.active{ /*same as hover*/
-        color: rgb(250,150,100);/*HOVER COLOR*/
+        color: rgb(150,150,255);/*HOVER COLOR*/
     }
