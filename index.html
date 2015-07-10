@@ -8,7 +8,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="script/frzyc.js" ></script>
         <script src="script/main.js" ></script>
-        <!--<link rel="icon" type="image/png" href="images/favicon.png" />-->
+        <link rel="icon" type="image/png" href="images/logo.png"/>
     </head>
     <body>  
         <div id="wrap">
@@ -41,15 +41,60 @@
                     </style>
                 </div>
                 <div id="portfolio" class="main">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin vitae odio quis dignissim. Vivamus scelerisque diam sed odio porttitor semper. Vestibulum non eros venenatis, consectetur sapien at, sagittis leo. Curabitur lacinia mi nec velit pulvinar bibendum. Nunc sagittis orci mattis, mollis lacus sit amet, gravida orci. Nulla laoreet, arcu quis imperdiet dapibus, felis diam accumsan ante, sed venenatis sem quam nec arcu. Cras eu tellus porta augue consectetur iaculis a vel nunc. Aliquam eros tortor, elementum non porta quis, viverra quis velit. Cras orci augue, finibus ac ante gravida, pretium ultrices dui.
-
-                    Maecenas sit amet scelerisque purus, at vehicula ipsum. Proin ac nunc quis dolor scelerisque sagittis. Curabitur feugiat velit pulvinar sem condimentum rutrum. Quisque vehicula libero et justo molestie semper. Quisque euismod porttitor nunc, a dictum nunc convallis ac. Donec ac augue arcu. Quisque ut iaculis tellus. Curabitur at porta enim, id luctus est. Ut ac convallis nisi.
-
-                    Nunc auctor est et urna accumsan venenatis. Vestibulum neque eros, sollicitudin ut pulvinar vel, vulputate ut tellus. Integer quis commodo nisi. Nunc tortor metus, condimentum id quam eget, porta consectetur magna. Nulla vel sem sit amet arcu porta pulvinar. Phasellus consectetur malesuada consectetur. In purus tellus, sagittis nec commodo quis, condimentum sed lectus.
-
-                    Nam aliquet dui risus, quis elementum leo eleifend quis. Aliquam enim dolor, sodales sit amet libero vel, bibendum suscipit nulla. Sed imperdiet justo mi, eget posuere quam hendrerit quis. Fusce mattis varius libero accumsan gravida. Morbi tincidunt at orci eu vulputate. Curabitur nibh purus, pulvinar non venenatis vel, ornare venenatis lacus. Nam cursus malesuada dolor a posuere. Vivamus vulputate, nisl ac lobortis tincidunt, est purus dictum libero, sit amet commodo mi nisl eu magna. Donec malesuada ante eu luctus facilisis. Ut ullamcorper maximus auctor. Aenean sagittis vitae lorem ac semper. Mauris ac neque mattis, hendrerit massa vitae, rhoncus nulla. Donec volutpat dui elit, id pretium tortor semper eget. Mauris luctus felis dui, quis volutpat ipsum auctor a. Proin elementum nibh et elit faucibus fringilla eget ac diam. Phasellus ut laoreet metus, et mattis ligula.
-
-                    Donec iaculis lacus justo, nec congue libero volutpat eget. Maecenas a felis quis dui mollis elementum. Curabitur a eros libero. Curabitur quam felis, rhoncus vitae fringilla sit amet, pretium semper nulla. Vivamus fermentum mattis mi, ultrices sagittis odio ornare quis. Maecenas elementum justo at urna elementum dictum. Maecenas risus velit, tempor at odio quis, euismod luctus lacus. In nec laoreet mauris, a porta nibh. In et lectus mauris. Maecenas id lacus lacus. Cras euismod, nisi ac lobortis ultricies, felis risus facilisis magna, vitae sollicitudin est nibh a eros. Donec at feugiat lacus. Nam magna odio, tristique in nibh vel, cursus aliquam erat. Morbi lorem felis, maximus non nisl eu, commodo ultrices urna. Etiam venenatis nulla vitae arcu aliquet feugiat.
+                    <div id="projects_wrapper">
+                        <div class="project_frame">
+                            <div><div class="vignette"></div><img src="images/dylanmoran.png"/></div>
+                            <p class="project_thumb_title">Dylan Moran</p>
+                            <p class="project_thumb_category">Artwork</p>
+                        </div>
+                    
+                    </div>
+                    <style>
+                        #portfolio{
+                            text-align: center;
+                        }
+                        #projects_wrapper{
+                            max-width: 1000px;
+                            display: inline-block;
+                            border: 1px solid blue;
+                        }
+                        .project_frame{
+                            border-radius: 5%;/*correlate to element width*/
+                            padding: 1%;/*correlate to parent width*/
+                            margin: 1%;/*correlate to parent width*/
+                            background-color: white;
+                            box-sizing: border-box;
+                            width: 30%;
+                            display: inline-block;
+                            position: relative;
+                            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                            
+                        }
+                        .project_frame > div{
+                            position: relative;
+                            margin-bottom: 10px;
+                        }
+                        .project_frame img{
+                            display: block;
+                            position: relative;
+                            border-radius: 5px;
+                            width: 100%;
+                            opacity: 0.9;
+                        }
+                        .vignette{
+                            box-shadow: inset 0 0 10px rgba(0,0,0,1);
+                            border-radius: 6px;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            content: "";
+                        }
+                        .project_thumb_title{
+                            font-weight: bold;
+                        }
+                    </style>
                 </div>
                 <div id="projectDisplay" class="main"></div>
                 <div id="about" class="main">
