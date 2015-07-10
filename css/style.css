@@ -89,7 +89,7 @@ html,body{
 }
     #footertop{
         position: absolute;
-        width: 110px;
+        width: 100px;
         height: 100px;
         margin-left: 50%;
         transform: translate(-50%,-50%);
