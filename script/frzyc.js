@@ -15,19 +15,16 @@ frzyc = function(){
             content: "Projects/ALP/content.html"
         }
     ];
-    function showmain(selector,btn){
+    function showmain(selector){
         console.log("showmain");
         console.log(selector);
-        console.log(btn);
         $("#navbtns div").removeClass("active");
-        if(typeof btn === "string"){
-            btn=$(btn);
-        }
-        if(btn){
-            console.log("setclass active");
-            $(btn).addClass("active");
-        }
-        if(selector){
+        $("#footernav div").removeClass("active");
+        $(selector+"_navbtn").addClass("active");
+        console.log(selector+"_navbtn"+"+.active")
+        $(selector+"_footernavbtn").addClass("active");
+        console.log(selector+"_footernavbtn"+"+.active");
+        if(selector && !$(selector).is(":visible")){
             $(".main").fadeOut(500);
             $(selector).delay(500).fadeIn(500);
         }

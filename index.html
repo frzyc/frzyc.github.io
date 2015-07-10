@@ -13,12 +13,12 @@
     <body>  
         <div id="wrap">
             <div id="nav">
-                <img id="navlogo" src="images/logo.png" onclick="frzyc.showmain('#home')" />
+                <img id="home_navbtn" src="images/logo.png" onclick="frzyc.showmain('#home')" />
                 <div id="navbtns">
-                    <div onclick="frzyc.showmain('#portfolio',this)">Portfolio</div>
-                    <div onclick="frzyc.showmain('#about',this)">About</div>
-                    <div onclick="frzyc.showmain('#blog',this)">Blog</div>
-                    <div onclick="frzyc.showmain('#contact',this)">Contact</div> 
+                    <div id="portfolio_navbtn" onclick="frzyc.showmain('#portfolio')">Portfolio</div>
+                    <div id="about_navbtn" onclick="frzyc.showmain('#about')">About</div>
+                    <div id="blog_navbtn" onclick="frzyc.showmain('#blog')">Blog</div>
+                    <div id="contact_navbtn" onclick="frzyc.showmain('#contact')">Contact</div> 
                 </div>
             </div>
 
@@ -80,9 +80,10 @@
                             border-radius: 5px;
                             width: 100%;
                             opacity: 0.9;
+                            overflow: hidden;
                         }
                         .vignette{
-                            box-shadow: inset 0 0 10px rgba(0,0,0,1);
+                            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
                             border-radius: 6px;
                             position: absolute;
                             top: 0;
@@ -138,6 +139,13 @@
         </div>
         <div id="footerwrapper">
             <img src="images/footer_arrow.png" id="footertop"/>
+            <div id="footernav">
+                <div id="home_footernavbtn" class="link" onclick="frzyc.showmain('#home')">&copy; <script>document.write(new Date().getFullYear());</script> Fred Zhao</div>
+                <div id="portfolio_footernavbtn" class="link" onclick="frzyc.showmain('#portfolio')">Portfolio</div>
+                <div id="about_footernavbtn" class="link" onclick="frzyc.showmain('#about')">About</div>
+                <div id="blog_footernavbtn" class="link" onclick="frzyc.showmain('#blog')">Blog</div>
+                <div id="contact_footernavbtn" class="link" onclick="frzyc.showmain('#contact')">Contact</div> 
+            </div>
         </div>
         
     </body>

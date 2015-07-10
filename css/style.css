@@ -14,6 +14,7 @@ html,body{
     height: 100%;
     background-color: rgb(240,240,240);
 }
+/*navigation*/
 #nav{
     position: relative;
     width: 100%;
@@ -24,7 +25,7 @@ html,body{
     box-shadow: 0px 5px 0px 0px rgb(70, 70, 110), 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
     margin-bottom: 5px;
 }
-    #navlogo{
+    #home_navbtn{
         width: 60px;
         height: 60px;
         margin: 15px;
@@ -34,10 +35,18 @@ html,body{
         border-radius: 5px;
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0,0.5)
     }
-    #navlogo:hover{
-        opacity: 0.7;
+    #home_navbtn:hover{
+        opacity: 0.9;
+        background-color: rgb(255,230,230);
         box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0,0.4)
     }
+    #home_navbtn.active{
+        background-color: rgb(255,255,255);
+    }
+    #home_navbtn.active:hover{
+        background-color: rgb(220,220,255);
+    }
+
     #navbtns{
         margin: 10px;
         float: right;
@@ -63,8 +72,12 @@ html,body{
 	transition: all 0.3s ease;
     }
         #navbtns div:hover{
-            background: #9c89f6;
-            box-shadow: 0px 4px #6b54d3;
+            /*
+            background: rgb(160,140,250);
+            box-shadow: 0px 4px rgb(100,90,210);
+            */
+            background: rgb(250,140,140);
+            box-shadow: 0px 4px rgb(200,40,40);
             color: white;
         }
         #navbtns div:active, #navbtns .active{
@@ -76,18 +89,21 @@ html,body{
             color: white;
             box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
         }
+/*wapper, mostly for making sure footer is always at screen bottom. contains top navigation and main*/
 #wrap{
     min-height: 100%;
     box-sizing: border-box;
     padding-bottom: 100px;/*footer height*/
     position: relative;
 }
+/*footer*/
 #footerwrapper{
     position: relative;
     margin-top: -100px;/*footer height*/
     height: 100px;/*footer height*/
-    background-color: grey;
+    background-color: rgb(100,100,140);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
     #footertop{
         position: absolute;
@@ -97,13 +113,35 @@ html,body{
         transform: translate(-50%,-50%);
         border-top-left-radius:50px;
         border-top-right-radius:50px;
-        background-color: grey;
-        box-shadow: 0px -10px 10px -7px rgba(0, 0, 0, 0.2);
+        background-color: rgb(100,100,140);
+        box-shadow: 0px -7px 10px -5px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
+        z-index: -1;
     }
     #footertop:hover{
         transform: translate(-50%,-60%);
     }
+    #footernav{
+        text-align: center;
+    }
+    #footernav div{
+        font-size: 1.3em;
+        color: rgb(220,220,220);
+        padding: 1em;
+        display: inline-block;
+    }
+    #footernav div{
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+        #footernav div:hover{
+            color: rgb(250,150,100);/*HOVER COLOR*/
+        }
+        #footernav div.active{ /*same as hover*/
+            color: rgb(150,150,255);/*HOVER COLOR*/
+        }
+/*mainwrapper. contains main*/
 .mainwrapper{
     z-index: 0;
     padding-bottom: 70px;
@@ -111,6 +149,7 @@ html,body{
 .main{
     display: none;
 }
+/*dark and light segments. cannot have a dark element before footer*/
 .dark{
     background-color: rgb(240,240,240);
     box-shadow: inset 0px 6px 5px -5px rgba(0, 0, 0, 0.1);
@@ -130,3 +169,18 @@ html,body{
     padding-left: 1em;
     padding-right: 1em;
 }
+
+
+/*general styles*/
+/*links*/
+a,.link{
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+    a:hover, .link:hover{
+        color: rgb(250,150,100);/*HOVER COLOR*/
+    }
+    a.active, .link.active{ /*same as hover*/
+        color: rgb(250,150,100);/*HOVER COLOR*/
+    }
