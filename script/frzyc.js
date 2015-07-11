@@ -15,6 +15,33 @@ frzyc = function(){
             content: "Projects/ALP/content.html"
         }
     ];
+    function loadProjects(){
+        projectlist.forEach(function(proj,i){
+            if(proj){
+                var $projframe =$(
+                    '<div class="project_frame">'+
+                        '<div><div class="vignette"></div><img src="'+proj.thumbnail+'"/></div>'+
+                        '<p class="project_thumb_title">'+proj.name+'</p>'+
+                        '<p class="project_thumb_category">'+proj.category+'</p>'+
+                    '</div>'
+                );
+                $projframe.click(function(){
+                    console.log(proj.name);
+                    displayProject(i);
+                });
+                $projframe.prependTo("#projects_wrapper");
+            }
+        });
+    }
+    function displayProject(i){
+        if(projectlist[i]&&projectlist[i].content){
+            $("#projectDisplay").load(projectlist[i].content,function(){
+                console.log("load complete");
+                $(".main").fadeOut(500);
+                $("#projectDisplay").delay(500).fadeIn(500);
+            });
+        }
+    }
     function showmain(selector){
         console.log("showmain");
         console.log(selector);
@@ -36,6 +63,7 @@ frzyc = function(){
     return{
         projects:projectlist,
         showmain:showmain,
-        toTop:toTop
+        toTop:toTop,
+        loadProjects:loadProjects
     }
 }();
