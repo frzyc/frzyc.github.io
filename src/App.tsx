@@ -28,7 +28,7 @@ function ScrollTop({ children }: { children: React.ReactElement }) {
     if (anchor) {
       anchor.scrollIntoView({
         behavior: 'smooth',
-        block: 'center',
+        block: 'start',
       })
     }
   }
