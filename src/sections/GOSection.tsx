@@ -116,10 +116,10 @@ export default function GOSection() {
             height="315"
             src="https://www.youtube.com/embed/D7fKDlop-7w?si=Wr1jQ_m-IiwX8Vgd"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
         </Box>
       </CardContent>
