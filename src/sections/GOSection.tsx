@@ -10,12 +10,12 @@ import {
   Chip,
   Divider,
   Link,
+  Stack,
   SvgIcon,
   Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
 import goimg from './go.png'
-import { TextSectionDisplayCollapse } from '../components/TextSectionCollapse'
 
 export default function GOSection() {
   return (
@@ -74,7 +74,115 @@ export default function GOSection() {
         <Chip label="Material UI" />
       </CardActions>
       <Divider />
+
       <CardContent>
+        <Stack spacing={1}>
+          <Typography variant="h5">
+            🚀 From Passion Project to Community Hub 🎮
+          </Typography>
+          <Typography>
+            In late 2020, driven by an engineering itch 🛠️ and a desire to
+            tackle the some unforgiving RNG challenges of Genshin Impact, I
+            started Genshin Optimizer(GO). What began as a personal project
+            quickly resonated with many players facing similar frustrations.
+            Within just a few months, the tool attracted a dedicated user base.
+          </Typography>
+          <Typography>
+            Over time, GO has grown significantly. Within a year or two, it
+            became the go-to resource for players aiming to maximize their
+            Genshin Impact accounts. This growth fostered a tight-knit community
+            of theory-crafters and programmers, all united by a shared passion
+            for the game.
+          </Typography>
+          <Typography>
+            Today, GO boasts nearly <strong>1 million monthly views</strong> and
+            around <strong>30,000 daily active users</strong>. Our Discord
+            community has expanded to <strong>over 14,000 members</strong>📈.
+            Additionally, I established a broader community of developers
+            focused on creating tools and websites for Genshin Impact and other
+            related games, now numbering in the hundreds.
+          </Typography>
+          <Typography>
+            What started as a solo endeavor has evolved into a collaborative
+            project, requiring me to grow into the roles of Project Manager and
+            Lead Developer. I now oversee a diverse team of developers across
+            various disciplines and time zones. This expansion has enabled us to
+            extend our reach and apply our solutions to other games.
+          </Typography>
+          <Typography>
+            <Box
+              component="ul"
+              sx={{ display: 'flex', flexDirection: 'column', gap: 1, ml: -2 }}
+            >
+              <li>
+                <strong>💡Team Management</strong>: Coordinating a global team
+                of developers to continuously enhance Genshin Optimizer and
+                explore new gaming tools.
+              </li>
+              <li>
+                <strong>🎨UI/UX Design Collaboration</strong>: Working with
+                community designers on Figma to refine and iterate on user
+                interface and user experience designs .
+              </li>
+              <li>
+                <strong>👨‍💻Developer Onboarding</strong>: Creating a welcoming
+                environment for amateur developers to contribute through
+                self-contained open-source projects, fostering growth and
+                learning.
+              </li>
+              <li>
+                <strong>🫂Community Partnerships</strong>: Establishing
+                relationships with game research communities to gather feedback
+                and scope new features, thereby enhancing the theory-crafting
+                workflow.
+              </li>
+              <li>
+                <strong>📹Content Creation</strong>: Producing YouTube tutorials
+                and feature showcases for Genshin Optimizer, scripting, voicing,
+                and editing videos to guide users and highlight new
+                functionalities.
+              </li>
+              <li>
+                <strong>🎙️Podcast Hosting</strong>: Running a Twitch podcast
+                with other community developers to promote collaboration and
+                inspire others to start coding.
+              </li>
+            </Box>
+          </Typography>
+          <Typography>
+            Genshin Optimizer has truly become a cornerstone of the Genshin
+            Impact community, and I am excited to see where we can take it next.
+            Our journey is far from over, and with the continued support and
+            creativity of our community, the possibilities are endless
+          </Typography>
+        </Stack>
+      </CardContent>
+      <Divider />
+      <CardContent>
+        <Typography variant="h5">
+          🎥 TL;DR: The Story of Genshin Optimizer
+        </Typography>
+
+        <Typography>
+          I made a video detailing the history and development of the project.
+          Check it out below!
+        </Typography>
+        <Box>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/D7fKDlop-7w?si=Wr1jQ_m-IiwX8Vgd"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </Box>
+      </CardContent>
+      <Divider />
+      <CardContent>
+        <Typography variant="h5">🛠️ Features of Genshin Optimizer</Typography>
         <Typography>
           The most over-engineered utility website for{' '}
           <Link
@@ -104,25 +212,7 @@ export default function GOSection() {
         </Typography>
       </CardContent>
       <Divider />
-      <CardContent>
-        <Typography variant="h5">The story of Genshin Optimizer</Typography>
 
-        <Typography>
-          A Video detailing of the history and development of the project:
-        </Typography>
-        <Box>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/D7fKDlop-7w?si=Wr1jQ_m-IiwX8Vgd"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
-        </Box>
-      </CardContent>
       <Divider />
     </Card>
   )

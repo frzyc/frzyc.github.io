@@ -1,6 +1,8 @@
 import {
+  Box,
   Card,
   CardActions,
+  CardContent,
   CardHeader,
   Chip,
   Divider,
@@ -25,29 +27,50 @@ export default function BBSection() {
         action={<Chip label="2017 May - 2022 Dec" />}
       />
       <Divider />
-      <Typography sx={{ mr: 2 }}>
-        <ul>
+      <CardContent>
+        <Typography>
+          During my time at BlackBerry (formerly RIM), I played a key role in
+          several cutting-edge projects, contributing to the advancement of
+          mobile technology and vehicle software platforms:
+        </Typography>
+      </CardContent>
+      <Typography sx={{ mr: 2, mt: -2 }}>
+        <Box
+          component="ul"
+          sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}
+        >
           <li>
-            Contributed to the design and implementation process of the IVY
-            vehicle software platform (C++, QNX)
+            <strong>🚗IVY Vehicle Software Platform</strong>: Contributed to the
+            design and implementation process of the IVY vehicle software
+            platform using C++ on QNX, enhancing the performance and
+            functionality of automotive systems.
           </li>
           <li>
-            Designed the test suite for end-to-end automated testing of the IVY
-            software. (Python, Pytest)
+            <strong>🧪End-to-End Automated Testing</strong>: Designed the test
+            suite for end-to-end automated testing of the IVY software,
+            utilizing Python and Pytest to ensure robust software quality and
+            reliability.
           </li>
           <li>
-            Designed & implemented tech stack solution for a cloud-based vehicle
-            fleet management console. (React, elasticSearch, express, docker)
+            <strong>🌐Cloud-Based Vehicle Fleet Management Console</strong>:
+            Designed and implemented the tech stack solution for a cloud-based
+            vehicle fleet management console. Technologies included React for
+            the frontend, elasticSearch for data indexing, express for backend
+            APIs, and Docker for containerization.
           </li>
           <li>
-            Wrote IPC benchmarks and analyzed results towards QNX performance
-            testing. (C/C++)
+            <strong>📊QNX Performance Testing</strong>: Wrote IPC benchmarks and
+            analyzed results to optimize performance testing on the QNX
+            platform, leveraging C/C++ for precise performance evaluations.
           </li>
           <li>
-            Instrumented AOSP platform for device diagnostics; maintained
-            telemetry Android App. (Java, Kotlin, C++)
+            <strong>📲Instrumentation and Telemetry Android App</strong>:
+            Instrumented the AOSP platform for device diagnostics and maintained
+            a telemetry Android application. Technologies used included Java,
+            Kotlin, and C++, ensuring seamless monitoring and diagnostics for
+            mobile devices.
           </li>
-        </ul>
+        </Box>
       </Typography>
       <Divider />
       <CardActions>

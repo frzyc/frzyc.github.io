@@ -1,6 +1,8 @@
 import {
+  Box,
   Card,
   CardActions,
+  CardContent,
   CardHeader,
   Chip,
   Divider,
@@ -26,33 +28,54 @@ export default function YelpSection() {
       />
       <Divider />
       {/* <CardContent> */}
-      <Typography sx={{ mr: 2 }}>
-        <ul>
+      <CardContent>
+        During my tenure at Yelp, I contributed significantly to technical
+        initiatives aimed at enhancing SEO and backend/frontend development:
+      </CardContent>
+      <Typography sx={{ mr: 2, mt: -2 }}>
+        <Box
+          component="ul"
+          sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}
+        >
           <li>
+            <strong>🔍 SEO Experiments and Metadata Frameworks</strong>:
             Conducted SEO experiments and implemented metadata frameworks,
             resulting in measurable improvements in organic traffic and enhanced
             online visibility in search results.
           </li>
           <li>
+            <strong>📦Backend Microservices and Frontend Monorepo</strong>:
             Developed and maintained backend microservices and frontend monorepo
-            using React, TypeScript, and Python, and implemented data pipelines
-            with GraphQL.
+            using React, TypeScript, and Python, enhancing system stability and
+            performance.
           </li>
           <li>
-            Engineered solutions to optimize structured data and internal links,
-            leading to verified enhancements in site traffic.
+            <strong>📊Data Pipelines with GraphQL</strong>: Implemented data
+            pipelines with GraphQL to streamline data retrieval and processing
+            for metadata and structured content, improving overall platform
+            efficiency.
           </li>
           <li>
-            Utilized experimentation logging pipeline to dark launch complex
-            code refactors of SEO systems, ensuring logic parity and verifying
+            <strong>
+              🔗Optimization of Structured Data and Internal Links
+            </strong>
+            : Engineered solutions to optimize structured data and internal
+            links, leading to verified enhancements in site traffic and user
+            engagement.
+          </li>
+          <li>
+            <strong>🧪Experimentation and Dark Launching</strong>: Utilized
+            experimentation logging pipeline to dark launch complex code
+            refactors of SEO systems, ensuring logic parity and verifying
             performance improvements.
           </li>
           <li>
-            Led the design of a logging system to gather data from search-engine
-            crawled pages, aiding in the optimization of the SEO graph for
-            internal links.
+            <strong>📝Logging System Design</strong>: Led the design of a
+            logging system to gather data from search-engine crawled pages,
+            aiding in the optimization of the SEO graph for internal links and
+            further improving site performance.
           </li>
-        </ul>
+        </Box>
       </Typography>
       {/* </CardContent> */}
       <Divider />
