@@ -1,6 +1,7 @@
 import { GitHub, LinkedIn, Twitter, YouTube } from '@mui/icons-material'
 import { Button, Link, SvgIcon, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { useEffect, useRef, useState } from 'react'
 
 const links = [
   {
@@ -37,7 +38,12 @@ export default function HeaderSection() {
   return (
     <Box>
       <Box>
-        <Typography variant="h2">Hi, I'm Fred</Typography>
+        <Typography variant="h1" sx={{ my: 2 }}>
+          Hi, I'm{' '}
+          <strong>
+            <Name />
+          </strong>
+        </Typography>
         <Typography variant="h5">
           🛠️Software Engineer, 💻Full-stack Developer,{' '}
           <Tooltip arrow title="According to my mother">
@@ -62,4 +68,43 @@ export default function HeaderSection() {
       </Box>
     </Box>
   )
+}
+const backspaceSpeed = 200
+const typingSpeed = 300
+const initialText = 'frzyc'
+const newText = 'Fred'
+function Name() {
+  const [displayText, setDisplayText] = useState(initialText)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    let timer = 0
+
+    if (isDeleting) {
+      if (displayText.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayText((prev) => prev.slice(0, -1))
+        }, backspaceSpeed)
+      } else {
+        setIsDeleting(false)
+      }
+    } else {
+      if (displayText.length < newText.length) {
+        timer = setTimeout(() => {
+          setDisplayText((prev) => prev + newText[displayText.length])
+        }, typingSpeed)
+      }
+    }
+
+    return () => clearTimeout(timer)
+  }, [displayText, isDeleting, newText, typingSpeed, backspaceSpeed])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsDeleting(true)
+    }, 3000)
+    return () => clearTimeout(timer)
+  }, [initialText])
+
+  return <span>{displayText}</span>
 }
