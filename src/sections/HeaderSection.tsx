@@ -37,11 +37,11 @@ export default function HeaderSection() {
   return (
     <Box>
       <Box>
-        <Typography variant="h1">Hi, I'm Fred</Typography>
-        <Typography variant="h4">
-          Software Engineer, Full-stack Dev,{' '}
+        <Typography variant="h2">Hi, I'm Fred</Typography>
+        <Typography variant="h5">
+          🛠️Software Engineer, 💻Full-stack Developer,{' '}
           <Tooltip arrow title="According to my mother">
-            <span>pretty okay person</span>
+            <span>👍pretty okay person</span>
           </Tooltip>
           .
         </Typography>
