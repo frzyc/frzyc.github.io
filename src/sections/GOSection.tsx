@@ -6,7 +6,6 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
   Chip,
   Divider,
   Link,
@@ -15,8 +14,53 @@ import {
   Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
-import goimg from './go.png'
+import { useEffect, useRef, useState } from 'react'
+import home from './goimg/home.png'
+import stats from './goimg/stats.png'
+import up from './goimg/up.png'
 
+function Gallery() {
+  const [scrollX, setScrollX] = useState(0)
+  const scrollTimer = useRef(0)
+  useEffect(() => {
+    scrollTimer.current = setInterval(() => {
+      handleScroll()
+    }, 3000)
+    return () => clearInterval(scrollTimer.current)
+  }, [])
+
+  const handleScroll = () => {
+    const container = document.getElementById('galleryContainer')
+    if (!container) return
+    const imgWidth = container.clientWidth
+    const width = container.scrollWidth - imgWidth
+    const newPosition = Math.min(scrollX + imgWidth, width)
+    if (newPosition === scrollX) setScrollX(0)
+    else setScrollX(newPosition)
+  }
+
+  return (
+    <CardActionArea
+      onClick={() => {
+        handleScroll()
+        clearInterval(scrollTimer.current)
+      }}
+    >
+      <Box
+        id="galleryContainer"
+        sx={{
+          display: 'flex',
+          transform: `translateX(-${scrollX}px)`,
+          transition: 'transform 0.5s ease',
+        }}
+      >
+        <Box component="img" src={home} sx={{ width: '100%' }} />
+        <Box component="img" src={stats} sx={{ width: '100%' }} />
+        <Box component="img" src={up} sx={{ width: '100%' }} />
+      </Box>
+    </CardActionArea>
+  )
+}
 export default function GOSection() {
   return (
     <Card elevation={6}>
@@ -24,14 +68,7 @@ export default function GOSection() {
         title="Creator and Lead Dev of Genshin Optimizer"
         action={<Chip label="2024 Dec - present" />}
       />
-      <CardActionArea
-        component={Link}
-        href="https://frzyc.github.io/genshin-optimizer/"
-        target="_blank"
-        rel="noopener"
-      >
-        <CardMedia component="img" image={goimg} />
-      </CardActionArea>
+      <Gallery />
       <CardActions>
         <Button
           size="small"

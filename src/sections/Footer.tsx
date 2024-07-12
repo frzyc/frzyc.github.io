@@ -2,7 +2,6 @@ import { Box, CardContent, Link, Typography } from '@mui/material'
 import { blue, grey } from '@mui/material/colors'
 
 export default function Footer() {
-  console.log(blue)
   return (
     <Box sx={{ color: grey[500], textAlign: 'right' }}>
       <Typography>
