@@ -1,13 +1,10 @@
 import { School } from '@mui/icons-material'
 import {
-  Box,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   Chip,
   Divider,
-  SvgIcon,
   Typography,
 } from '@mui/material'
 
