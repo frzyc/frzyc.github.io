@@ -3,8 +3,10 @@ import { ReactNode, useContext, useState } from 'react'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 export function TextSectionDisplayCollapse({
   children,
+  disableCollapse = false,
 }: {
   children: ReactNode
+  disableCollapse?: boolean
 }) {
   const [expanded, setExpanded] = useState(false)
   const [hover, setHover] = useState(false)
@@ -33,10 +35,10 @@ export function TextSectionDisplayCollapse({
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         collapsedSize={300}
-        onClick={() => setExpanded((e) => !e)}
+        onClick={() => setExpanded((e) => (disableCollapse ? true : !e))}
         in={expanded}
         sx={{
-          cursor: 'pointer',
+          cursor: disableCollapse && expanded ? undefined : 'pointer',
           position: 'relative',
           maskImage: expanded
             ? undefined
