@@ -1,5 +1,12 @@
 import { GitHub, LinkedIn, Twitter, YouTube } from '@mui/icons-material'
-import { Button, Link, SvgIcon, Tooltip, Typography } from '@mui/material'
+import {
+  Button,
+  keyframes,
+  Link,
+  SvgIcon,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { Box } from '@mui/system'
 import { useEffect, useRef, useState } from 'react'
 
@@ -39,10 +46,7 @@ export default function HeaderSection() {
     <Box>
       <Box>
         <Typography variant="h1" sx={{ my: 2 }}>
-          Hi, I'm{' '}
-          <strong>
-            <Name />
-          </strong>
+          Hi, I'm <Name />
         </Typography>
         <Typography variant="h5">
           🛠️Software Engineer, 💻Full-stack Developer,{' '}
@@ -69,6 +73,7 @@ export default function HeaderSection() {
     </Box>
   )
 }
+
 const backspaceSpeed = 200
 const typingSpeed = 300
 const initialText = 'frzyc'
@@ -76,6 +81,7 @@ const newText = 'Fred'
 function Name() {
   const [displayText, setDisplayText] = useState(initialText)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [showCursor, setShowCursor] = useState(false)
 
   useEffect(() => {
     let timer = 0
@@ -93,6 +99,10 @@ function Name() {
         timer = setTimeout(() => {
           setDisplayText((prev) => prev + newText[displayText.length])
         }, typingSpeed)
+      } else {
+        timer = setTimeout(() => {
+          setShowCursor(false)
+        }, 1500)
       }
     }
 
@@ -100,11 +110,40 @@ function Name() {
   }, [displayText, isDeleting, newText, typingSpeed, backspaceSpeed])
 
   useEffect(() => {
+    const cursorTimer = setTimeout(() => {
+      setShowCursor(true)
+    }, 1500)
     const timer = setTimeout(() => {
       setIsDeleting(true)
     }, 3000)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      clearTimeout(cursorTimer)
+    }
   }, [initialText])
 
-  return <span>{displayText}</span>
+  return (
+    <>
+      <strong>{displayText}</strong>
+      {showCursor && <TextCursor />}
+    </>
+  )
+}
+
+function TextCursor() {
+  return (
+    <Box
+      component="span"
+      sx={{
+        ml: 1,
+        borderRight: '2px solid white',
+        animation: 'blinking 1s steps(1, end) infinite',
+        '@keyframes blinking': {
+          '0%': { borderColor: 'transparent' },
+          '50%': { borderColor: 'white' },
+          '100%': { borderColor: 'transparent' },
+        },
+      }}
+    />
+  )
 }
