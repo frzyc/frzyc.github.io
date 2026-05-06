@@ -6,6 +6,7 @@ import HeaderSection from './sections/HeaderSection'
 import YelpSection from './sections/YelpSection'
 import BBSection from './sections/BBSection'
 import UoTSection from './sections/UoTSection'
+import SolinkSection from './sections/SolinkSection'
 
 export default function Content() {
   return (
@@ -13,6 +14,7 @@ export default function Content() {
       <Stack spacing={2}>
         <HeaderSection />
         <GOSection />
+        <SolinkSection />
         <YelpSection />
         <BBSection />
         <UoTSection />
