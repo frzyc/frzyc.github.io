@@ -1,5 +1,5 @@
 import { Box, Collapse } from '@mui/material'
-import { ReactNode, useContext, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 export function TextSectionDisplayCollapse({
   children,

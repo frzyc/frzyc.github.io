@@ -1,7 +1,12 @@
 #root {
   background-color: #121212; /* Dark background */
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.01) 10%, transparent 1%),
-                    radial-gradient(circle, rgba(255, 255, 255, 0.005) 75%, transparent 1%);
-  background-size: 80px 80px, 40px 40px;
-  background-position: 0 0, 20px 20px;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.01) 10%, transparent 1%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.005) 75%, transparent 1%);
+  background-size:
+    80px 80px,
+    40px 40px;
+  background-position:
+    0 0,
+    20px 20px;
 }

@@ -1,14 +1,7 @@
 import { GitHub, LinkedIn, Twitter, YouTube } from '@mui/icons-material'
-import {
-  Button,
-  keyframes,
-  Link,
-  SvgIcon,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Button, Link, SvgIcon, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const links = [
   {

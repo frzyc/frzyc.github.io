@@ -1,5 +1,5 @@
-import { Box, CardContent, Link, Typography } from '@mui/material'
-import { blue, grey } from '@mui/material/colors'
+import { Box, Link, Typography } from '@mui/material'
+import { grey } from '@mui/material/colors'
 
 export default function Footer() {
   return (
