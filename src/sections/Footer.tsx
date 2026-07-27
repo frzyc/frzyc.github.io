@@ -1,24 +1,19 @@
-import { Box, Link, Typography } from '@mui/material'
-import { grey } from '@mui/material/colors'
-
 export default function Footer() {
   return (
-    <Box sx={{ color: grey[500], textAlign: 'right' }}>
-      <Typography>
-        Designed with ❤️ and{' '}
-        <Link href="https://mui.com" target="_blank" rel="noopener">
-          MUI
-        </Link>
-      </Typography>
-      <Typography>Implemented with lot of 🩹</Typography>
-      <Typography
-        component={Link}
+    <footer className="pt-4 font-mono text-sm text-foreground/65">
+      <p>
+        <span className="text-syntax-comment">//</span> built with{' '}
+        <span className="text-syntax-keyword">vite</span>, with{' '}
+        <span className="text-syntax-keyword">shadcn</span>
+      </p>
+      <a
         href="https://github.com/frzyc/frzyc.github.io"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
+        className="text-primary hover:underline underline-offset-4"
       >
-        Built with Vite, deployed on Github Pages
-      </Typography>
-    </Box>
+        source
+      </a>
+    </footer>
   )
 }

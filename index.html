@@ -1,18 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
+    <script>
+      ;(function () {
+        const stored = localStorage.getItem('theme')
+        const dark = stored !== 'light'
+        document.documentElement.classList.toggle('dark', dark)
+      })()
+    </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#1a1816" />
     <meta name="description" content="Fred Zhao | Portfolio" />
     <meta
       name="google-site-verification"
       content="AInWU3FgtA6HYWfW9GGR0MfkyUMkvA-EG0JjhsnTwbA"
     />
     <meta name="google-adsense-account" content="ca-pub-2443965532085844" />
-    <link rel="apple-touch-icon" href="/logo192.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <title>Fred Zhao</title>
   </head>
   <body>
